@@ -193,7 +193,7 @@
   </div>
 </template>
 <script>
-import {getList,getList2} from 'api/request'
+import {getList} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -228,7 +228,7 @@ export default {
     return {
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
-//      banner下面tab切换
+// banner下面tab切换
       prodlist: [
         {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
         {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
@@ -291,17 +291,13 @@ export default {
     }
   },
   methods: {
-    handleClick(tab, event) {
+    handleClick (tab, event) {
       console.log(tab, event)
     }
   },
   // 获取数据
   mounted () {
-    getList({},(res) => {
-      console.log(res.data)
-      //      this.goodsList = data.lists
-    }),
-    getList2({},(res) => {
+    getList({}, (res) => {
       console.log(res.data)
       //      this.goodsList = data.lists
     })

@@ -62,7 +62,7 @@
               <div class="fonts-14 float-l">选择规格: </div>
               <div class="fonts-12 float-l choose">
                 <ul >
-                  <li @click="changeBorder1(index)" v-for="(i,index) in selectorList" id="ac">
+                  <li @click="changeBorder1(index)" v-for="(i,index) in selectorList">
                     <a :class="{change:index == current2}" class=" a-hover-pink" href="javascript:void(0);">{{i.name}}</a>
                   </li>
                 </ul>
@@ -163,7 +163,7 @@
         <ul>
           <li v-for="i in list">
             <a href="#"><img :src="i.img" :alt="i.name"/></a>
-            <div class="love-money fontw fonts-12 red2">￥{{i.monery}}</div>
+            <div class="love-money fontw fonts-12 red2">￥{{i.money}}</div>
             <div class="love-name gray">{{i.name}}</div>
           </li>
         </ul>
@@ -174,15 +174,13 @@
   </div>
 </template>
 <script>
-  import img1 from "../public/img/100000027_M.jpg"
-  import img2 from "../public/img/100001236_M.jpg"
-  import img3 from "../public/img/100001239_M.jpg"
-  import img4 from "../public/img/100000027_M.jpg"
-  import img5 from "../public/img/100001236_M.jpg"
-  import img6 from "../public/img/100001239_M.jpg"
-  import iagms1 from "./img/100000805_1.jpg"
-  import iagms2 from "./img/100000805_L.jpg"
-  import iagms3 from "./img/100000805_L2.jpg"
+  import {getList} from 'api/request_yms'
+  import img1 from '../public/img/100000027_M.jpg'
+  import img2 from '../public/img/100001236_M.jpg'
+  import img3 from '../public/img/100001239_M.jpg'
+  import iagms1 from './img/100000805_1.jpg'
+  import iagms2 from './img/100000805_L.jpg'
+  import iagms3 from './img/100000805_L2.jpg'
   import TopNavigation from '../public/TopNavigation.vue'
   import TopBanner from '../public/TopBanner.vue'
   import search from '../public/search.vue'
@@ -196,38 +194,33 @@
       ClassNav,
       BottomNav
     },
-//  name: "guessLike",
-    name: "DetaiBanner",
+    name: 'DetaiBanner',
     data () {
       return {
         //   handleMove: true,
         imgList: [
-          {img:iagms1},
-          {img:iagms2},
-          {img:iagms3}
+          {img: iagms1},
+          {img: iagms2},
+          {img: iagms3}
         ],
         min_img: iagms1,
-//      minImg: img6,
-        num8:1,
+        num8: 1,
         dialogVisible: false,
         activeName: 'first',
         value1: null,
         value2: null,
         current2: 0,
-        menu: ['蓝莓味', '草莓味', '芒果味'],
+//        menu: ['蓝莓味', '草莓味', '芒果味'],
         index: 0,
         list: [
-          {name: "甜蜜如心鲜奶蛋糕", img: img1, monery: "258.00"},
-          {name: "朵朵咖啡鲜奶蛋糕", img: img2, monery: "268.00"},
-          {name: "8号桃花扇鲜奶蛋糕", img: img3, monery: "278.00"},
-          {name: "甜蜜如心鲜奶蛋糕", img: img4, monery: "258.00"},
-          {name: "朵朵咖啡鲜奶蛋糕", img: img5, monery: "268.00"},
-          {name: "8号桃花扇鲜奶蛋糕", img: img6, monery: "278.00"}
+          {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
+          {name: '朵朵咖啡鲜奶蛋糕', img: img2, money: '258.00'},
+          {name: '8号桃花扇鲜奶蛋糕', img: img3, money: '778.00'}
         ],
-        selectorList:[
-          {name: "款式1"},
-          {name: "款式2"},
-          {name: "款式3"},
+        selectorList: [
+          {name: '巧克力'},
+          {name: '奶油味'},
+          {name: '仙女味'}
         ]
       }
     },
@@ -237,39 +230,46 @@
 //        console.log(tab, event)
       },
       son (item, idx) {
-        this.index = idx;
+        this.index = idx
       },
       handleChange (value) {
 //        console.log(value);
       },
       sas: function () {
-        let fontw = document.querySelector("#fontw")
-        let rr = document.querySelector("#rr")
-        let aa = document.querySelector("#aa")
-        let disn = document.querySelector("#disn")
-        fontw.style.display = "block"
-        aa.style.display = "none"
-        rr.style.display = "block"
-        disn.style.display = "none"
+        let fontw = document.querySelector('#fontw')
+        let rr = document.querySelector('#rr')
+        let aa = document.querySelector('#aa')
+        let disn = document.querySelector('#disn')
+        fontw.style.display = 'block'
+        aa.style.display = 'none'
+        rr.style.display = 'block'
+        disn.style.display = 'none'
       },
       ee: function () {
-        let fontw = document.querySelector("#fontw")
-        let rr = document.querySelector("#rr")
-        let aa = document.querySelector("#aa")
-        let disn = document.querySelector("#disn")
-        disn.style.display = "block"
-        fontw.style.display = "none"
-        rr.style.display = "none"
-        aa.style.display = "block"
+        let fontw = document.querySelector('#fontw')
+        let rr = document.querySelector('#rr')
+        let aa = document.querySelector('#aa')
+        let disn = document.querySelector('#disn')
+        disn.style.display = 'block'
+        fontw.style.display = 'none'
+        rr.style.display = 'none'
+        aa.style.display = 'block'
       },
-      lev:function (i,index) {
+      lev: function (i, index) {
         this.curren = index
         this.min_img = i.img
       },
-      changeBorder1:function (index) {
+      changeBorder1: function (index) {
         this.current2 = index
         console.log(this.current2)
       }
+    },
+    // 获取数据
+    mounted () {
+      getList({}, (res) => {
+        console.log(res.data)
+        //      this.goodsList = data.lists
+      })
     }
   }
 </script>
