@@ -143,7 +143,7 @@
                     </div>
                   </div>
                   <div class="content2-submit">
-                    <button>提交评论</button>
+                    <button><router-link to="#" >提交评论</router-link></button>
                   </div>
                   <div class="content2-return">
                     <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l padding-T-5">
@@ -622,6 +622,9 @@
                 text-align: center;
                 border: inherit;
                 font-weight: bold;
+                a{
+                  color: white;
+                }
               }
             }
             .content2-return{
