@@ -172,7 +172,7 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {

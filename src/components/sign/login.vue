@@ -19,6 +19,7 @@
 </template>
 <script>
 import axios from "axios"
+import {loginList} from "api/request_wyl"
 export default {
   data () {
     var phone = (rule, value, callback) => {
@@ -61,12 +62,19 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
+    },
+    // 获取数据
+  mounted () {
+    loginList({},(res) => {
+      // console.log(res.data)
+      //      this.goodsList = data.lists
+    })  
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post("/dizhi",{
+          axios.post("http://user_userLoginAction",{
             phone: this.ruleForm.phone,
             pass: this.ruleForm.pass
           }).then((res)=>{
@@ -84,6 +92,7 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+      console.log(this.$refs.ruleForm)
     }
   }
 }
