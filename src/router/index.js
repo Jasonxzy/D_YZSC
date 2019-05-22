@@ -217,8 +217,14 @@ export default new Router({
       children: [{
         path: '',
         component: emalpassword
-      }
+      },
       ]
+    },
+    {
+      path: '/clickAddress',
+      components:{
+        default: clickAddress
+      }
     }
-  ]
+]
 })
