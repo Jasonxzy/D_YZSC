@@ -193,7 +193,7 @@
   </div>
 </template>
 <script>
-import {getList,getList2} from 'api/request'
+import {getList} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -297,12 +297,9 @@ export default {
   },
   // 获取数据
   mounted () {
-    getList({},(res) => {
-      console.log(res.data)
-      //      this.goodsList = data.lists
-    }),
-    getList2({},(res) => {
-      console.log(res.data)
+    getList((res) => {
+      console.log("111111")
+      console.log(res)
       //      this.goodsList = data.lists
     })
   }
