@@ -1,5 +1,4 @@
-<template xmlns="http://www.w3.org/1999/html">
-
+<template>
     <div class="register">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" label-width="100px">
         <el-form-item prop="phone" label="手机">

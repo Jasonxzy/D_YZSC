@@ -25,42 +25,42 @@
                 <span class="icon1 wizard0" style="background-position: 0px 0px;"></span>
                 <router-link to="/SearchList">{{goneName1}}</router-link>
               </strong>
-              <em v-for="i in CcnList1"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList1" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
               </li>
             <li>
               <strong>
                 <span class="icon1 wizard1" style="background-position: 0px 0px;"></span>
                 <router-link to="/SearchList">{{goneName2}}</router-link>
               </strong>
-              <em v-for="i in CcnList2"><router-link to="/SearchList">{{i.Ccn}}</router-link></em>
+              <em v-for="i in CcnList2" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
             </li>
             <li class="hui_bg">
               <strong>
                 <span class="icon1 wizard2" style="background-position: 0px 0px;"></span>
                 <router-link to="/SearchList">{{goneName3}}</router-link>
               </strong>
-              <em v-for="i in CcnList3"><router-link to="/SearchList">{{i.Ccn}}</router-link></em>
+              <em v-for="i in CcnList3" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
             </li>
             <li>
               <strong>
                 <span class="icon1 wizard3" style="background-position: 0px 0px;"></span>
                 <router-link to="/SearchList">{{goneName4}}</router-link>
               </strong>
-              <em v-for="i in CcnList4"><router-link to="/SearchList">{{i.Ccn}}</router-link></em>
+              <em v-for="i in CcnList4" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
             </li>
             <li class="hui_bg">
               <strong>
                 <span class="icon1 wizard4" style="background-position: 0px 0px;"></span>
                 <router-link to="/SearchList">{{goneName5}}</router-link>
               </strong>
-              <em v-for="i in CcnList5"><router-link to="/SearchList">{{i.Ccn}}</router-link></em>
+              <em v-for="i in CcnList5" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
             </li>
             <li>
               <strong>
                 <span class="icon1 wizard5" style="background-position: 0px 0px;"></span>
                 <router-link to="/SearchList">{{goneName6}}</router-link>
               </strong>
-              <em v-for="i in CcnList6"><router-link to="/SearchList">{{i.Ccn}}</router-link></em>
+              <em v-for="i in CcnList6" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
             </li>
           </ul>
         </div>
@@ -73,64 +73,63 @@ import {getList} from 'api/request'
 export default {
   data () {
     return {
-      CommodityList: [
-        {ActivityTitle: "元祖端午季"},
-        {ActivityTitle: "元祖梦蛋糕"},
-        {ActivityTitle: "冰品季"},
-        {ActivityTitle: "元祖礼盒"},
-        {ActivityTitle: "精致西点"},
-        {ActivityTitle: "元祖卡卷"}
-      ],
-      //全部商品分类商品大标题
-      goneName1:[],goneName2:[],goneName3:[],goneName4:[],goneName5:[],goneName6:[],
-      CcnList1:[],
-      CcnList2:[
-        {Ccn:"母亲节专款"},
-        {Ccn:"鲜奶蛋糕"},
-        {Ccn:"巧克力蛋糕"},
-        {Ccn:"慕思蛋糕"},
-        {Ccn:"多层蛋糕"}
-      ],
-      CcnList3:[
-        {Ccn:"冰淇淋蛋糕"},
-        {Ccn:"冰品点心"}
-      ],
-      CcnList4:[
-        {Ccn:"水果礼盒"},
-        {Ccn:"糕点礼盒"}
-      ],
-      CcnList5:[
-        {Ccn:"小慕思类"},
-        {Ccn:"西点卷类"},
-        {Ccn:"麻糬类"},
-        {Ccn:"其他"}
-      ],
-      CcnList6:[
-        {Ccn:"礼卡"},
-        {Ccn:"水果券"},
-        {Ccn:"西点券"},
-        {Ccn:"蛋糕券"},
-        {Ccn:"电子券"}
-      ]
+      // 全部商品分类商品大标题
+      goneName1: [],
+      goneName2: [],
+      goneName3: [],
+      goneName4: [],
+      goneName5: [],
+      goneName6: [],
+      // 全部商品分类商品大标题下面小标题循环
+      CcnList1: [],
+      CcnList2: [],
+      CcnList3: [],
+      CcnList4: [],
+      CcnList5: [],
+      CcnList6: []
     }
   },
-//   获取数据
+  //   获取数据
   mounted () {
     // 全部商品分类下悬浮列表数据
     getList((res) => {
-      console.log("111111")
-//      console.log( res.goodsinfolist[0].goodstypetwos[0].gtwoName)
+      //      console.log( res.goodsinfolist[0].goodstypetwos[0].gtwoName)
       this.goneName1 = res.goodsinfolist[0].goneName
       this.goneName2 = res.goodsinfolist[1].goneName
       this.goneName3 = res.goodsinfolist[2].goneName
       this.goneName4 = res.goodsinfolist[3].goneName
       this.goneName5 = res.goodsinfolist[4].goneName
       this.goneName6 = res.goodsinfolist[5].goneName
-      for ( var i = 0; i < res.goodsinfolist[0].goodstypetwos.length;i++) {
+      // 第一个
+      for (var i = 0; i < res.goodsinfolist[0].goodstypetwos.length; i++) {
         this.CcnList1.push(res.goodsinfolist[0].goodstypetwos[i].gtwoName)
-//        console.log(this.CcnList1)
       }
       console.log(this.CcnList1)
+      // 第二个
+      for (var a = 0; a < res.goodsinfolist[1].goodstypetwos.length; a++) {
+        this.CcnList2.push(res.goodsinfolist[1].goodstypetwos[a].gtwoName)
+      }
+      console.log(this.CcnList2)
+      // 第三个
+      for (var b = 0; b < res.goodsinfolist[2].goodstypetwos.length; b++) {
+        this.CcnList3.push(res.goodsinfolist[2].goodstypetwos[b].gtwoName)
+      }
+      console.log(this.CcnList3)
+      // 第四个
+      for (var c = 0; c < res.goodsinfolist[3].goodstypetwos.length; c++) {
+        this.CcnList4.push(res.goodsinfolist[3].goodstypetwos[c].gtwoName)
+      }
+      console.log(this.CcnList4)
+      // 第五个
+      for (var d = 0; d < res.goodsinfolist[4].goodstypetwos.length; d++) {
+        this.CcnList5.push(res.goodsinfolist[4].goodstypetwos[d].gtwoName)
+      }
+      console.log(this.CcnList5)
+      // 第六个
+      for (var e = 0; e < res.goodsinfolist[5].goodstypetwos.length; e++) {
+        this.CcnList6.push(res.goodsinfolist[5].goodstypetwos[e].gtwoName)
+      }
+      console.log(this.CcnList6)
     })
   }
 }
