@@ -12,41 +12,45 @@
         </div>
         <div class="examine">
             <el-steps :active="1" align-center>
-                <el-step title="" v-for="i in orderel" :key="i"></el-step>
-                <el-step title="付款成功" ></el-step>
-                <el-step title="订单审核" ></el-step>
-                <el-step title="自提、配送"></el-step>
-                <el-step title="订单完成"></el-step>
+                <el-step :title="i.name" v-for="i in orderel" :key="i"></el-step>
+                <!--<el-step title="订单审核" ></el-step>-->
+                <!--<el-step title="自提、配送"></el-step>-->
+                <!--<el-step title="订单完成"></el-step>-->
             </el-steps>
         </div>
         <div class="lists">
             <ul>
                 <li>
-                    <p class="list-p">收货地址</p>
-                    <p><span>MOKJO</span><span>中国</span>, <span>河北省</span>,
-                     <span>秦皇岛市</span>, <span>卢龙县</span>,
-                     <span>0JIJ0OIJOPI OJPOIU </span><span>14729623123</span>
+                    <p class="list-p">{{orderli1.name}}</p>
+                    <p>
+                      <!--<span>MOKJO</span><span>中国</span>, <span>河北省</span>,-->
+                     <!--<span>秦皇岛市</span>, <span>卢龙县</span>,-->
+                     <!--<span>0JIJ0OIJOPI OJPOIU </span><span>14729623123</span>-->
+                      <span v-for="i in orderspan1" :key="i">
+                        {{i.name}}
+                      </span>
                     </p>
                 </li>
                 <li>
                     <p class="list-p">备注信息</p>
-                    <p>暂无备注信息</p>
+                    <p>{{orderli2.name}}</p>
                 </li>
                 <li>
                    <p class="list-p">预计到货时间</p>
-                   <span>19961210 16:40</span><span>(* 温馨提示：快递类商品以实际到货时间为准，实际到货时间可能有0.5~1小时的偏差哦~)</span>
+                   <span v-for="i in orderspan2" :key="i">{{i.name}}</span>
+                  <span>(* 温馨提示：快递类商品以实际到货时间为准，实际到货时间可能有0.5~1小时的偏差哦~)</span>
                 </li>
                 <li>
                     <p class="list-p">支付方式</p>
-                    <p>支付宝</p>
+                    <p>{{orderli3.name}}</p>
                 </li>
                 <li>
                     <p class="list-p">电子劵使用情况</p>
-                    <p>该订单未使用电子劵</p>
+                    <p>{{orderli4.name}}</p>
                 </li>
                 <li>
                     <p class="list-p">发票信息</p>
-                    <p>不需要发票</p>
+                    <p>{{orderli5.name}}</p>
                 </li>
             </ul>
         </div>
@@ -120,7 +124,38 @@ export default {
         {name: '订单提交'}
       ],
       orderel: [
-        {name: '订单提交'}
+        {name: '订单提交'},
+        {name: '付款成功'},
+        {name: '订单审核'},
+        {name: '自提、配送'},
+        {name: '订单完成'}
+      ],
+      orderli1: {
+        name: '收货地址'
+      },
+      orderli2: {
+        name: '暂无备注信息'
+      },
+      orderli3: {
+        name: '支付宝'
+      },
+      orderli4: {
+        name: '该订单未使用电子劵'
+      },
+      orderli5: {
+        name: '不需要发票'
+      },
+      orderspan1: [
+        {name: 'MOKJO,'},
+        {name: '中国,'},
+        {name: '河北省,'},
+        {name: '秦皇岛市,'},
+        {name: '卢龙县,'},
+        {name: '0JIJ0OIJOPI  OJPOIU'},
+        {name: '14729623123'}
+      ],
+      orderspan2: [
+        {name: '19961210 16:40'}
       ]
     }
   },
