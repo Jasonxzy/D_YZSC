@@ -158,7 +158,7 @@ export default new Router({
       }
     },
     {
-      path: '/Notice',
+      path: '/Notice/:id',
       components: {
         default: Notice
       }
@@ -176,7 +176,7 @@ export default new Router({
     {
       path: '/Agreement',
       components: {
-        default: Notice,
+        default: Notice
       }
     },
     {
@@ -217,12 +217,11 @@ export default new Router({
       children: [{
         path: '',
         component: emalpassword
-      },
-      ]
+      }]
     },
     {
       path: '/clickAddress',
-      components:{
+      components: {
         default: clickAddress
       }
     }

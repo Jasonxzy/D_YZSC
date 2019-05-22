@@ -5,14 +5,14 @@
     </div>
     <div class="details-box">
         <div class="details-list">
-            <span>订单号</span>
-            <span>15454515415</span>
-            <span>订单状态：</span>
-            <span>订单提交</span>
+            <span v-for="i in orderspan" :key="i">{{i.name}}</span>
+            <!--<span></span>-->
+            <!--<span></span>-->
+            <!--<span></span>-->
         </div>
         <div class="examine">
             <el-steps :active="1" align-center>
-                <el-step title="订单提交" ></el-step>
+                <el-step title="" v-for="i in orderel" :key="i"></el-step>
                 <el-step title="付款成功" ></el-step>
                 <el-step title="订单审核" ></el-step>
                 <el-step title="自提、配送"></el-step>
@@ -109,7 +109,27 @@
   </div>
 </template>
 <script>
+import {orderLL} from 'api/request_ll'
 export default {
+  data () {
+    return {
+      orderspan: [
+        {name: '订单号'},
+        {name: '15454515415'},
+        {name: '订单状态：'},
+        {name: '订单提交'}
+      ],
+      orderel: [
+        {name: '订单提交'}
+      ]
+    }
+  },
+  mouted () {
+    orderLL((res) => {
+      console.log('5454')
+      console.log(res)
+    })
+  }
 }
 </script>
 <style scoped>
