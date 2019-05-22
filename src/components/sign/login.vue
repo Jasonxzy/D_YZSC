@@ -18,6 +18,7 @@
           </div>
 </template>
 <script>
+import axios from "axios"
 export default {
   data () {
     var phone = (rule, value, callback) => {
@@ -65,7 +66,16 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          axios.post("/dizhi",{
+            phone: this.ruleForm.phone,
+            pass: this.ruleForm.pass
+          }).then((res)=>{
+            // 请求成功返回用户名 token
+            console.log(res)
+            // 返回来的东西要存到localstorage里面
+            window.localStorage.setItem("token",res.token);
+            window.localStorage.setItem('userinfo',JSON.stringify(res.userinfo))
+          })
         } else {
           console.log('error submit!!')
           return false

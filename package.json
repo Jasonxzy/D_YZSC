@@ -11,8 +11,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element": "^0.1.4",
     "element-ui": "^2.8.2",
+    "mysql": "^2.17.1",
     "v-distpicker": "^1.2.1",
     "vue": "^2.5.2",
     "vue-magnify": "^1.0.1",
