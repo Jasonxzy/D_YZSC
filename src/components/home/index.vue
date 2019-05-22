@@ -24,7 +24,7 @@
           <em>元祖公告</em>
         </div>
         <ul class="NewsList">
-          <li v-for="i in NoticeList">
+          <li v-for="i in NoticeList" :key="i">
             <router-link to="/Notice" :title="i.title">{{i.name}}</router-link>
           </li>
         </ul>
