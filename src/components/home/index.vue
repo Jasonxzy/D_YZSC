@@ -297,11 +297,13 @@ export default {
   },
   // 获取数据
   mounted () {
-    getList({}, (res) => {
-      console.log(res.data)
+    getList((res) => {
+      console.log("111111")
+      console.log(res)
       //      this.goodsList = data.lists
     })
   }
+
 }
 </script>
 <style>

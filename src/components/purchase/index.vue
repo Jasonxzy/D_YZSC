@@ -42,7 +42,7 @@
               <div class="puchase-carousel-content float-l">
                 <ul>
                   <li @mouseenter="lev(i,index)" v-for="(i,index) in imgList">
-                    <img :src="i.img" />
+                    <img :src="i.img"/>
                   </li>
                 </ul>
               </div>

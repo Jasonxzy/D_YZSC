@@ -11,7 +11,7 @@ function sendAxios (methods, url, data = {}) {
       url: api + url,
       data: data
     }).then((res) => {
-      if (res.data.message === 'success') {
+      if (res.data.success === true) {
         resolve(res.data)
       } else {
         console.log('请求失败')
