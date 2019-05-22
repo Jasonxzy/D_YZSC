@@ -6,7 +6,6 @@ let getList = function (fn) {
   })
 }
 
-
 export {
   getList
 }

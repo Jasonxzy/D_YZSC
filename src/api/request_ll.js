@@ -1,10 +1,12 @@
 // 专门存放发送请求的方法
 
-// import sendAxios from './axios'
+import sendAxios from './axios'
 
-// let getList = function (data,callback) {
-//   sendAxios('post', '/address_queryAllProvinceAddress.action').then((res) => {
-//     callback(res)
-//   })
-// }
-export {}
+let orderLL = function (data, callback) {
+  sendAxios('post', '/Canso/getordertb').then((res) => {
+    callback(res)
+  })
+}
+export {
+  orderLL
+}
