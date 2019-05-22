@@ -228,7 +228,7 @@ export default {
     return {
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
-//      banner下面tab切换
+// banner下面tab切换
       prodlist: [
         {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
         {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
@@ -303,6 +303,7 @@ export default {
       //      this.goodsList = data.lists
     })
   }
+
 }
 </script>
 <style>

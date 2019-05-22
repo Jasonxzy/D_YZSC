@@ -18,6 +18,8 @@
           </div>
 </template>
 <script>
+import axios from "axios"
+import {loginList} from "api/request_wyl"
 export default {
   data () {
     var phone = (rule, value, callback) => {
@@ -60,12 +62,28 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
+    },
+    // 获取数据
+  mounted () {
+    loginList({},(res) => {
+      // console.log(res.data)
+      //      this.goodsList = data.lists
+    })  
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          axios.post("http://user_userLoginAction",{
+            phone: this.ruleForm.phone,
+            pass: this.ruleForm.pass
+          }).then((res)=>{
+            // 请求成功返回用户名 token
+            console.log(res)
+            // 返回来的东西要存到localstorage里面
+            window.localStorage.setItem("token",res.token);
+            window.localStorage.setItem('userinfo',JSON.stringify(res.userinfo))
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -74,6 +92,7 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+      console.log(this.$refs.ruleForm)
     }
   }
 }

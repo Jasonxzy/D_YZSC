@@ -5,15 +5,15 @@ import login from '@/components/sign/index.vue'// 登录注册
 import register from '@/components/sign/register.vue' // 注册
 import password from '@/components/sign/login.vue' // 登录
 import Member from '@/components/Member/index.vue'// 会员中心公共组件
-import ShoppingCart from '@/components/ShoppingCart/index.vue'
-import purchase from '@/components/purchase/index.vue'
+import ShoppingCart from '@/components/ShoppingCart/index.vue' // 购物车页面
+import purchase from '@/components/purchase/index.vue' // 商品详情页
 import BrandStory from '@/components/BrandStory/index.vue'// 品牌故事
 import TopNavigation from '@/components/public/TopNavigation.vue' // 顶部
 import TopBanner from '@/components/public/TopBanner.vue' // 顶部导航
 import search from '@/components/public/search.vue' // 搜索
 import ClassNav from '@/components/public/ClassNav.vue' // banner导航
 import HelpCenter from '@/components/HelpCenter/index.vue' // 帮助中心
-import Notice from '@/components/Notice/index.vue'
+import Notice from '@/components/Notice/index.vue' // 公告页详情
 import BottomNav from '@/components/public/BottomNavigation.vue' // 公共底部
 import ReceivingAddress from '@/components/ReceivingAddress/index.vue'// 添加地址
 import ChangePassword from '@/components/ChangePassword/index.vue'// 修改密码
@@ -217,8 +217,13 @@ export default new Router({
       children: [{
         path: '',
         component: emalpassword
+      }]
+    },
+    {
+      path: '/clickAddress',
+      components: {
+        default: clickAddress
       }
-      ]
     }
-  ]
+]
 })

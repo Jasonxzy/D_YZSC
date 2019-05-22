@@ -7,16 +7,16 @@ import {api} from './index'
 function sendAxios (methods, url, data = {}) {
   return new Promise((resolve, reject) => {
     axios({
-      method:methods,
-      url:api + url,
-      data:data
+      method: methods,
+      url: api + url,
+      data: data
     }).then((res) => {
-      if (res.data.success == true) {
+      if (res.data.success === true) {
         resolve(res.data)
-      }else {
+      } else {
         console.log('请求失败')
       }
-    }).catch ((err) => {
+    }).catch((err) => {
       console.log('网络错误')
     })
   })

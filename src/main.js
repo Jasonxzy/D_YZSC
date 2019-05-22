@@ -5,15 +5,13 @@ import router from './router'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/public-css/public.less'
 import VDistpicker from 'v-distpicker'
-Vue.component('v-distpicker', VDistpicker)
 import vueMagnify from 'vue-magnify'
+Vue.component('v-distpicker', VDistpicker)
 Vue.use(vueMagnify)
 Vue.use(ElementUi)
 new Vue({
   el: '#app',
   router,
-  components: {
-    App
-  },
+  components: { App },
   template: '<App />'
 })
