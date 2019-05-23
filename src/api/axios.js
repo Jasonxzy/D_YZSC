@@ -1,4 +1,6 @@
 //     封装axios请求
+
+
 import axios from 'axios'
 import {api} from './index'
 
@@ -11,7 +13,7 @@ function sendAxios (methods, url, data = {}) {
       url: api + url,
       data: data
     }).then((res) => {
-      if (res.data.success == true) {
+      if (res.data.success === true) {
         resolve(res.data)
       } else {
         console.log('请求失败')

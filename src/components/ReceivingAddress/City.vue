@@ -7,31 +7,31 @@
   </div> -->
 </template>
 <script>
-  import VDistpicker from 'v-distpicker'
-  export default {
-    name: 'getAddress',
-    components: { VDistpicker },
-    data() {
-      return {
-        show:false,
-      }
+import VDistpicker from 'v-distpicker'
+export default {
+  name: 'getAddress',
+  components: {VDistpicker},
+  data () {
+    return {
+      show: false
+    }
+  },
+  methods: {
+    choose () {
+      this.show = !this.show
     },
-    methods: {
-      choose(){
-        this.show=!this.show
-      },
-      onChangeProvince(a){
-        console.log(a)        
-      },
-      onChangeCity(a){
-        console.log(a)        
-      },
-      onChangeArea(a){
-        console.log(a)  
-        this.show=false
-      }      
+    onChangeProvince (a) {
+      console.log(a)
     },
+    onChangeCity (a) {
+      console.log(a)
+    },
+    onChangeArea (a) {
+      console.log(a)
+      this.show = false
+    }
+  }
 }
-
-
-
+</script>
+<style>
+</style>

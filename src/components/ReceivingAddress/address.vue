@@ -51,12 +51,12 @@
 import City from '@/components/ReceivingAddress/City.vue'
 export default {
   data () {
-   var address = (rule, value, callback) => {
+    var address = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('地址不能为空'))
       } else {
         var reg = /[\u4e00-\u9fa5]/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入正确的地址'))
         } else {
           callback()
@@ -75,12 +75,12 @@ export default {
         }
       }
     }
-      var Postal = (rule, value, callback) => {
+    var Postal = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('邮政编码不能为空'))
       } else {
         var reg = /\d{6}/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入真确的邮政编码'))
         } else {
           callback()
@@ -92,7 +92,7 @@ export default {
         return callback(new Error('手机不能为空'))
       } else {
         var reg = /0?(13|14|15|18)[0-9]{9}/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入正确的手机号'))
         } else {
           callback()
@@ -104,7 +104,7 @@ export default {
         return callback(new Error('邮箱不能为空'))
       } else {
         var reg = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入正确的邮箱'))
         } else {
           callback()
@@ -112,7 +112,7 @@ export default {
       }
     }
     return {
-     ruleForm: {
+      ruleForm: {
         name: '',
         date1: '',
         delivery: false,
@@ -132,7 +132,7 @@ export default {
         ],
         Postal: [
           { required: true, validator: Postal, trigger: 'blur' },
-          {  max: 6, message: '长度为 6 个字符', trigger: 'blur' }
+          { max: 6, message: '长度为 6 个字符', trigger: 'blur' }
         ],
         date1: [
           { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
@@ -141,8 +141,8 @@ export default {
           { required: true, validator: phone, trigger: 'blur' },
           { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
         ],
-        mailbox:[
-          { required: true, validator: mailbox, trigger: 'blur' },
+        mailbox: [
+          { required: true, validator: mailbox, trigger: 'blur' }
           // { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
         ]
       }
@@ -164,7 +164,7 @@ export default {
     }
   },
   components: {
-    City 
+    City
   }
 }
 </script>
