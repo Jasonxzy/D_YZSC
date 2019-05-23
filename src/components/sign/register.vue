@@ -154,12 +154,13 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      // console.log(tab, event)
+      console.log(tab, event)
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!')
+          //  return(this.$refs[formName].email.value)
         } else {
           console.log('error submit!!')
           return false

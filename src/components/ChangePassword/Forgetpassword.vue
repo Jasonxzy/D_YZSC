@@ -53,7 +53,7 @@ import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
   export default {
-    data () {
+    data() {
       var phone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('手机号不能为空'))
@@ -143,7 +143,7 @@ import ClassNav from '../public/ClassNav.vue'
   width: 200px;
   background: #e93d6d;
   border: none;
-}
+} 
 >>>.el-button--primary:hover{
   background:red;
 }
@@ -176,6 +176,6 @@ import ClassNav from '../public/ClassNav.vue'
  .nav-top-span{
     display: inline-block;
     margin-bottom: 14px;
-}
+} 
 </style>
 

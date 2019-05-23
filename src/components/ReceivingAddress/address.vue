@@ -132,7 +132,7 @@ export default {
         ],
         Postal: [
           { required: true, validator: Postal, trigger: 'blur' },
-          {  max: 6, message: '长度为 6 个字符', trigger: 'blur' }
+          { max: 6, message: '长度为 6 个字符', trigger: 'blur' }
         ],
         date1: [
           { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
@@ -141,7 +141,7 @@ export default {
           { required: true, validator: phone, trigger: 'blur' },
           { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
         ],
-        mailbox:[
+        mailbox: [
           { required: true, validator: mailbox, trigger: 'blur' },
           // { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
         ]
@@ -164,20 +164,20 @@ export default {
     }
   },
   components: {
-    City 
+    City
   }
 }
 </script>
 <style scoped>
 .address-box{
-  width: 1000px;
+  width: 940px;
    margin:0 auto;
 }
 .address{
   border: 1px solid #cccccc;
 }
 .Management{
-  width: 900px;
+  width: 800px;
   border-bottom:1px solid #cccccc;
   font-size: 14px;
   height: 30px;

@@ -29,12 +29,12 @@ export default {
 </script>
 <style scoped>
 .information{
-  width: 1000px;
-  height: 400px;
+  width: 940px;
+  min-height: 500px;
   border: 1px solid #cccccc;
 }
 .information-box{
-  width: 900px;
+  width: 800px;
   margin: auto;
   border-bottom:1px solid #cccccc;
   margin-top: 30px;
@@ -52,7 +52,7 @@ export default {
   line-height: 30px;
 }
 .information-list{
-  width: 900px;
+  width: 800px;
   margin: auto;
   line-height: 30px;
 }
@@ -60,7 +60,7 @@ export default {
   font-weight: 300
 }
 .information-list li:first-child{
-  margin-top: 10  px;
+  margin-top: 10px;
 }
 .information-menu{
   width: 900px;
@@ -69,7 +69,7 @@ export default {
 }
 .information-menu span{
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 100;
   width: 120px;
   background: #cccccc;
@@ -77,6 +77,9 @@ export default {
   line-height: 30px;
   height: 30px;
   margin: 0;
+}
+.information-menu span:first-child{
+  margin-left: 56px;
 }
 .information-menu span:hover{
   background: red;

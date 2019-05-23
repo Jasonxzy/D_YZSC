@@ -84,6 +84,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!')
+
         } else {
           console.log('error submit!!')
           return false
@@ -98,8 +99,8 @@ export default {
 </script>
 <style scoped>
 .Change-Password{
-  width: 1000px;
-  height: 400px;
+  width: 940px;
+  min-height: 500px;
   border: 1px solid #cccccc;
   margin: auto;
 }

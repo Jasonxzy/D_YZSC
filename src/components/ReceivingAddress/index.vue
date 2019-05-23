@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-     ruleForm: {
+      ruleForm: {
         name: '',
         date1: '',
         delivery: false,
@@ -48,16 +48,16 @@ export default {
 </script>
 <style scoped>
 .address-box{
-  width: 1000px;
+  width: 940px;
    margin:0 auto;
    border: 1px solid #cccccc;
 }
 .address{
-  width: 900px;
+  width: 800px;
   margin: auto;
 }
 .Management{
-  width: 900px;
+  width: 800px;
   border-bottom:1px solid #cccccc;
   font-size: 14px;
   height: 30px;

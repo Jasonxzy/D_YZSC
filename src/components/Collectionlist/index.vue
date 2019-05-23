@@ -43,18 +43,30 @@
   </div>
 </template>
 <script>
+import {collectionlist} from 'api/request_wyl.js'
 export default {
+   // 获取数据
+  //  data(){
+  //    collectionlist [{}]
+  //  },
+  mounted () {
+    collectionlist((res) => {
+      console.log("111111")
+      console.log(res)
+          //  this.collectionlist = data.lists
+    })
+  }
 }
 </script>
 <style scoped>
 .Collectionlist{
-  width: 1000px;
-  height: 400px;
+  width: 940px;
+  min-height: 500px;
   border: 1px solid #cccccc;
   margin: auto;
 }
 .Collectionlist-box{
-  width: 900px;
+  width: 800px;
   margin: auto;
   border-bottom:1px solid #cccccc;
   margin-top: 30PX;
@@ -91,7 +103,7 @@ table
   font-weight: bold;
 }
 .Collectionlist-list{
-  width: 900px;
+  width: 800px;
   margin: auto;
 }
 .table{

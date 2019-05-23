@@ -39,7 +39,8 @@
     </div>
   </div>
 </template>
-<script>
+// <script>
+import {picturec} from 'api/request_wyl.js'
 export default {
   data () {
     return {
@@ -54,6 +55,13 @@ export default {
         })
         .catch(_ => {})
     }
+  },
+ mounted () {
+   picturec((res) => {
+      console.log("111111")
+      console.log(res)
+      //      this.goodsList = data.lists
+    })
   }
 }
 </script>
