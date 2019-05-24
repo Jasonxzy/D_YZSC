@@ -121,14 +121,23 @@
           <el-tab-pane label="商品评价" name="second">
             <div class="ProductShow2">
               <div  class="productshow-tabbody2">
-                <div class="productshow-tabbody-content2" style="display: block">
+                <div id="fontw1" class="productshow-tabbody-content2" style="display: block">
                   <div class="borderbottom">
-                    <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l" id="disn"></i>
-                    <router-link to="#" @click.native="sas" id="aa">欢迎您第一个发表评论</router-link>
+                    <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l"></i>
+                    <router-link to="#" @click.native="sas">欢迎您发表评论</router-link>
                     <div class="float-r">0/0评论</div>
                   </div>
+                  <div class="borderbottom-content padding-T-20">
+                    <ul>
+                      <li v-for="(first, index) in evaluation" :key="index">
+                        <p><a href="#" >用户ID:{{first.CId}}</a></p>
+                        <p ><span >用户评论：{{first.CContent}}</span> </p>
+                        <p><span>评论星级：{{first.CState}}</span></p>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div id="fontw" class="productshow-tabbody-content2 " style="display: none">
+                <div id="fontw2" class="productshow-tabbody-content2 " style="display: none">
                   <div class="content2-title fonts-12 fontw">发表评论</div>
                   <div class="content2-published fonts-12 lightgrey">
                     <div class="float-l">请输入您的评论</div>
@@ -143,11 +152,11 @@
                     </div>
                   </div>
                   <div class="content2-submit">
-                    <button><router-link to="#" >提交评论</router-link></button>
+                    <button><router-link to="#" @click.native="ee">提交评论</router-link></button>
                   </div>
                   <div class="content2-return">
                     <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l padding-T-5">
-                      <router-link to="#" @click.native="ee" id="rr" class="float-r">返回评论</router-link>
+                      <router-link to="#" @click.native="ee" class="float-r">返回评论</router-link>
                     </i>
                   </div>
                 </div>
@@ -161,7 +170,7 @@
       <div class="Maylove float-r allcolor">
         <div class="Maylove-nav white deeppinkred margin-B-10 fonts-14 fontw">猜你喜欢</div>
         <ul>
-          <li v-for="i in list">
+          <li v-for="i in list" :key="i">
             <a href="#"><img :src="i.img" :alt="i.name"/></a>
             <div class="love-money fontw fonts-12 red2">￥{{i.money}}</div>
             <div class="love-name gray">{{i.name}}</div>
@@ -174,104 +183,98 @@
   </div>
 </template>
 <script>
-  import {getList} from 'api/request_yms'
-  import img1 from '../public/img/100000027_M.jpg'
-  import img2 from '../public/img/100001236_M.jpg'
-  import img3 from '../public/img/100001239_M.jpg'
-  import iagms1 from './img/100000805_1.jpg'
-  import iagms2 from './img/100000805_L.jpg'
-  import iagms3 from './img/100000805_L2.jpg'
-  import TopNavigation from '../public/TopNavigation.vue'
-  import TopBanner from '../public/TopBanner.vue'
-  import search from '../public/search.vue'
-  import ClassNav from '../public/ClassNav.vue'
-  import BottomNav from '../public/BottomNavigation.vue'
-  export default {
-    components: {
-      TopNavigation,
-      TopBanner,
-      search,
-      ClassNav,
-      BottomNav
-    },
-    name: 'DetaiBanner',
-    data () {
-      return {
-        //   handleMove: true,
-        imgList: [
-          {img: iagms1},
-          {img: iagms2},
-          {img: iagms3}
-        ],
-        min_img: iagms1,
-        num8: 1,
-        dialogVisible: false,
-        activeName: 'first',
-        value1: null,
-        value2: null,
-        current2: 0,
-//        menu: ['蓝莓味', '草莓味', '芒果味'],
-        index: 0,
-        list: [
-          {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
-          {name: '朵朵咖啡鲜奶蛋糕', img: img2, money: '258.00'},
-          {name: '8号桃花扇鲜奶蛋糕', img: img3, money: '778.00'}
-        ],
-        selectorList: [
-          {name: '巧克力'},
-          {name: '奶油味'},
-          {name: '仙女味'}
-        ]
-      }
-    },
-    methods: {
-      handleClick (tab, event) {
-        console.log(tab, event)
-//        console.log(tab, event)
-      },
-      son (item, idx) {
-        this.index = idx
-      },
-      handleChange (value) {
-//        console.log(value);
-      },
-      sas: function () {
-        let fontw = document.querySelector('#fontw')
-        let rr = document.querySelector('#rr')
-        let aa = document.querySelector('#aa')
-        let disn = document.querySelector('#disn')
-        fontw.style.display = 'block'
-        aa.style.display = 'none'
-        rr.style.display = 'block'
-        disn.style.display = 'none'
-      },
-      ee: function () {
-        let fontw = document.querySelector('#fontw')
-        let rr = document.querySelector('#rr')
-        let aa = document.querySelector('#aa')
-        let disn = document.querySelector('#disn')
-        disn.style.display = 'block'
-        fontw.style.display = 'none'
-        rr.style.display = 'none'
-        aa.style.display = 'block'
-      },
-      lev: function (i, index) {
-        this.curren = index
-        this.min_img = i.img
-      },
-      changeBorder1: function (index) {
-        this.current2 = index
-        console.log(this.current2)
-      }
-    },
-    // 获取数据
-    mounted () {
-      getList({}, (res) => {
-        console.log(res.data)
-        //      this.goodsList = data.lists
-      })
+import {getLists} from 'api/request_yms'
+import img1 from '../public/img/100000027_M.jpg'
+import img2 from '../public/img/100001236_M.jpg'
+import img3 from '../public/img/100001239_M.jpg'
+import iagms1 from './img/100000805_1.jpg'
+import iagms2 from './img/100000805_L.jpg'
+import iagms3 from './img/100000805_L2.jpg'
+import TopNavigation from '../public/TopNavigation.vue'
+import TopBanner from '../public/TopBanner.vue'
+import search from '../public/search.vue'
+import ClassNav from '../public/ClassNav.vue'
+import BottomNav from '../public/BottomNavigation.vue'
+export default {
+  components: {
+    TopNavigation,
+    TopBanner,
+    search,
+    ClassNav,
+    BottomNav
+  },
+  name: 'DetaiBanner',
+  data () {
+    return {
+      //   handleMove: true,
+      imgList: [
+        {img: iagms1},
+        {img: iagms2},
+        {img: iagms3}
+      ],
+      min_img: iagms1,
+      num8: 1,
+      dialogVisible: false,
+      activeName: 'first',
+      value1: 3,
+      value2: null,
+      current2: 0,
+      index: 0,
+      list: [
+        {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
+        {name: '朵朵咖啡鲜奶蛋糕', img: img2, money: '258.00'},
+        {name: '8号桃花扇鲜奶蛋糕', img: img3, money: '778.00'}
+      ],
+      selectorList: [
+        {name: '巧克力'},
+        {name: '奶油味'},
+        {name: '仙女味'}
+      ],
+      evaluation: []
     }
+  },
+  methods: {
+    handleClick (tab, event) {
+      console.log(tab, event)
+    },
+    son (item, idx) {
+      this.index = idx
+    },
+    handleChange (value) {
+//        console.log(value);
+    },
+    sas: function () {
+      let fontw1 = document.querySelector('#fontw1')
+      let fontw2 = document.querySelector('#fontw2')
+      fontw1.style.display = 'none'
+      fontw2.style.display = 'block'
+    },
+    ee: function () {
+      let fontw1 = document.querySelector('#fontw1')
+      let fontw2 = document.querySelector('#fontw2')
+      fontw1.style.display = 'block'
+      fontw2.style.display = 'none'
+    },
+    lev: function (i, index) {
+      this.curren = index
+      this.min_img = i.img
+    },
+    changeBorder1: function (index) {
+      this.current2 = index
+      console.log(this.current2)
+    }
+  },
+  // 获取数据
+  mounted () {
+    getLists((res) => {
+      console.log('63232')
+      console.log(res)
+      // 用户评论
+      this.evaluation = res.comment
+    })
   }
+
+}
 </script>
 <style lang="less"  scoped>
   .change{
@@ -561,18 +564,32 @@
             padding: 20px 0 20px 0;
             display: block;
 
-            .productshow-tabbody2-content2 {
+            .productshow-tabbody-content2 {
               position: relative;
               padding: 10px 0 20px 0;
               text-align: left;
               .borderbottom{
                 width: 920px;
-                height: 15px;
+                height: 20px;
                 border-bottom: 1px solid #a5a5a5;
+                a{
+                  float: left;
+                }
                 #disn{
                   width: 15px;
                 }
 
+              }
+              .borderbottom-content{
+                li{
+                  padding-bottom: 20px;
+                  p{
+                    padding: 5px 0;
+                    span{
+                      padding-left: 20px;
+                    }
+                  }
+                }
               }
             }
             /*隐藏部分*/

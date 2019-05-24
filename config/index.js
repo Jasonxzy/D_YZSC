@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target:'http://goods_getJsonUserinfoType', //目标请求域名
+        // 目标请求域名:
+        target:'http://rvaetr.natappfree.cc',
         changeOrigin:true,//是否允许跨域
         pathRewrite:{
           '^/api':'' // 将请求发送的/api替换
