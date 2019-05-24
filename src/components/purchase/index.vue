@@ -1,13 +1,13 @@
 <template>
   <div>
     <!--顶部导航-->
-    <TopNavigation/>
+    <!--<TopNavigation/>-->
     <!--导航banner-->
-    <TopBanner/>
+    <!--<TopBanner/>-->
     <!--搜索部分-->
-    <search/>
+    <!--<search/>-->
     <!--分类导航部分-->
-    <ClassNav/>
+    <!--<ClassNav/>-->
     <!--内容页头部-->
     <div class="YZ-top fonts-12 allcolor">
       <router-link to="/" >主页</router-link>
@@ -52,11 +52,11 @@
           </div>
           <!--商品信息-->
           <div class="productright float-r fontf">
-            <div class="shop-title fonts-16 lightgrey">雪麻糬</div>
-            <div class="shop-name fonts-12 lightgray margin-B-15">糯米拥抱冰淇淋</div>
+            <div class="shop-title fonts-16 lightgrey">{{ginfoName}}</div>
+            <div class="shop-name fonts-12 lightgray margin-B-15">{{ginfoSynopsis}}</div>
             <div class="shop-price margin-B-25 ">
               <div class="fonts-14 float-l lightgray">优惠价: </div>
-              <div class="fonts-24 red2 float-l fontw padding-L-10">￥15.00</div>
+              <div class="fonts-24 red2 float-l fontw padding-L-10">￥{{ginfoPrice}}</div>
             </div>
             <div class="shop-specifications margin-B-25 lightgray">
               <div class="fonts-14 float-l">选择规格: </div>
@@ -65,6 +65,18 @@
                   <li @click="changeBorder1(index)" v-for="(i,index) in selectorList" :key="index">
                     <a :class="{change:index == current2}" class=" a-hover-pink" href="javascript:void(0);">{{i.name}}</a>
                   </li>
+                  <!--<li>{{ginfoSpecs}}</li>-->
+                </ul>
+              </div>
+            </div>
+            <div class="shop-specifications margin-B-25 lightgray">
+              <div class="fonts-14 float-l">蛋糕夹层: </div>
+              <div class="fonts-12 float-l choose">
+                <ul >
+                  <li @click="changeBorder2(index)" v-for="(i,index) in species" :key="index">
+                    <a :class="{change:index == current3}" class=" a-hover-pink" href="javascript:void(0);">{{i.name}}</a>
+                  </li>
+                  <!--<li>{{ginfoSpecs}}</li>-->
                 </ul>
               </div>
             </div>
@@ -130,7 +142,7 @@
                   <div class="borderbottom-content padding-T-20">
                     <ul>
                       <li v-for="(first, index) in evaluation" :key="index">
-                        <p><a href="#" >用户ID:{{first.CId}}</a></p>
+                        <p><a href="#" >用户:{{first.userinfo.userName}}</a></p>
                         <p ><span >用户评论：{{first.CContent}}</span> </p>
                         <p><span>评论星级：{{first.CState}}</span></p>
                       </li>
@@ -170,7 +182,7 @@
       <div class="Maylove float-r allcolor">
         <div class="Maylove-nav white deeppinkred margin-B-10 fonts-14 fontw">猜你喜欢</div>
         <ul>
-          <li v-for="i in list" :key="i">
+          <!--<li v-for="i in list" :key="i">-->
           <li v-for="(i,index) in list" :key="index">
             <a href="#"><img :src="i.img" :alt="i.name"/></a>
             <div class="love-money fontw fonts-12 red2">￥{{i.money}}</div>
@@ -184,7 +196,7 @@
   </div>
 </template>
 <script>
-import {getLists} from 'api/request_yms'
+import {shopinformation, Usercomments} from 'api/request_yms'
 import img1 from '../public/img/100000027_M.jpg'
 import img2 from '../public/img/100001236_M.jpg'
 import img3 from '../public/img/100001239_M.jpg'
@@ -219,26 +231,36 @@ export default {
       activeName: 'first',
       value1: 3,
       value2: null,
-      current2: 0,
-      //        menu: ['蓝莓味', '草莓味', '芒果味'],
+      current2: null,
+      current3: null,
       index: 0,
+      selectorList: [
+        {name: '规格1'},
+        {name: '规格2asdasd'},
+        {name: '规格3'}
+      ],
+      species: [
+        {name: '种类123123'},
+        {name: '种类2'},
+        {name: '种类3'}
+      ],
       list: [
         {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
         {name: '朵朵咖啡鲜奶蛋糕', img: img2, money: '258.00'},
         {name: '8号桃花扇鲜奶蛋糕', img: img3, money: '778.00'}
       ],
-      selectorList: [
-        {name: '巧克力'},
-        {name: '奶油味'},
-        {name: '仙女味'}
-      ],
-      evaluation: []
+      // selectorList: [],
+      evaluation: [],
+      // 商品详情数据：
+      ginfoName: [],
+      ginfoPrice: [],
+      ginfoSynopsis: []
+      // ginfoSpecs: []
     }
   },
   methods: {
     handleClick (tab, event) {
       console.log(tab, event)
-      //        console.log(tab, event)
     },
     son (item, idx) {
       this.index = idx
@@ -262,19 +284,31 @@ export default {
       this.curren = index
       this.min_img = i.img
     },
-//        console.log(value);
     changeBorder1: function (index) {
       this.current2 = index
       console.log(this.current2)
+    },
+    changeBorder2: function (index) {
+      this.current3 = index
+      console.log(this.current3)
     }
   },
   // 获取数据
   mounted () {
-    getLists((res) => {
-      console.log('63232')
+    shopinformation((res) => {
       console.log(res)
       // 用户评论
       this.evaluation = res.comment
+    })
+    Usercomments((res) => {
+      console.log(123)
+      console.log(res)
+      // 商品详情：名称 价格 等
+      // this.ginfoSpecs = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoSpecs
+      this.ginfoName = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoName
+      this.ginfoSynopsis = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoSynopsis
+      this.ginfoPrice = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoPrice
+
     })
   }
 }

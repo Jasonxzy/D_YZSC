@@ -93,7 +93,7 @@ export default {
   mounted () {
     // 全部商品分类下悬浮列表数据
     getList((res) => {
-      //      console.log( res.goodsinfolist[0].goodstypetwos[0].gtwoName)
+            console.log( res)
       this.goneName1 = res.goodsinfolist[0].goneName
       this.goneName2 = res.goodsinfolist[1].goneName
       this.goneName3 = res.goodsinfolist[2].goneName
@@ -104,32 +104,32 @@ export default {
       for (var i = 0; i < res.goodsinfolist[0].goodstypetwos.length; i++) {
         this.CcnList1.push(res.goodsinfolist[0].goodstypetwos[i].gtwoName)
       }
-      console.log(this.CcnList1)
+//      console.log(this.CcnList1)
       // 第二个
       for (var a = 0; a < res.goodsinfolist[1].goodstypetwos.length; a++) {
         this.CcnList2.push(res.goodsinfolist[1].goodstypetwos[a].gtwoName)
       }
-      console.log(this.CcnList2)
+//      console.log(this.CcnList2)
       // 第三个
       for (var b = 0; b < res.goodsinfolist[2].goodstypetwos.length; b++) {
         this.CcnList3.push(res.goodsinfolist[2].goodstypetwos[b].gtwoName)
       }
-      console.log(this.CcnList3)
+//      console.log(this.CcnList3)
       // 第四个
       for (var c = 0; c < res.goodsinfolist[3].goodstypetwos.length; c++) {
         this.CcnList4.push(res.goodsinfolist[3].goodstypetwos[c].gtwoName)
       }
-      console.log(this.CcnList4)
+//      console.log(this.CcnList4)
       // 第五个
       for (var d = 0; d < res.goodsinfolist[4].goodstypetwos.length; d++) {
         this.CcnList5.push(res.goodsinfolist[4].goodstypetwos[d].gtwoName)
       }
-      console.log(this.CcnList5)
-      // 第六个
+//      console.log(this.CcnList5)
+//       第六个
       for (var e = 0; e < res.goodsinfolist[5].goodstypetwos.length; e++) {
         this.CcnList6.push(res.goodsinfolist[5].goodstypetwos[e].gtwoName)
       }
-      console.log(this.CcnList6)
+//      console.log(this.CcnList6)
     })
   }
 }
