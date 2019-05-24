@@ -41,7 +41,7 @@
 
               <div class="puchase-carousel-content float-l">
                 <ul>
-                  <li @mouseenter="lev(i,index)" v-for="(i,index) in imgList">
+                  <li @mouseenter="lev(i,index)" v-for="(i,index) in imgList" :key="index">
                     <img :src="i.img"/>
                   </li>
                 </ul>
@@ -62,7 +62,7 @@
               <div class="fonts-14 float-l">选择规格: </div>
               <div class="fonts-12 float-l choose">
                 <ul >
-                  <li @click="changeBorder1(index)" v-for="(i,index) in selectorList">
+                  <li @click="changeBorder1(index)" v-for="(i,index) in selectorList" :key="index">
                     <a :class="{change:index == current2}" class=" a-hover-pink" href="javascript:void(0);">{{i.name}}</a>
                   </li>
                 </ul>
@@ -171,6 +171,7 @@
         <div class="Maylove-nav white deeppinkred margin-B-10 fonts-14 fontw">猜你喜欢</div>
         <ul>
           <li v-for="i in list" :key="i">
+          <li v-for="(i,index) in list" :key="index">
             <a href="#"><img :src="i.img" :alt="i.name"/></a>
             <div class="love-money fontw fonts-12 red2">￥{{i.money}}</div>
             <div class="love-name gray">{{i.name}}</div>
@@ -219,6 +220,7 @@ export default {
       value1: 3,
       value2: null,
       current2: 0,
+      //        menu: ['蓝莓味', '草莓味', '芒果味'],
       index: 0,
       list: [
         {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
@@ -236,6 +238,7 @@ export default {
   methods: {
     handleClick (tab, event) {
       console.log(tab, event)
+      //        console.log(tab, event)
     },
     son (item, idx) {
       this.index = idx
@@ -259,6 +262,7 @@ export default {
       this.curren = index
       this.min_img = i.img
     },
+//        console.log(value);
     changeBorder1: function (index) {
       this.current2 = index
       console.log(this.current2)
@@ -273,7 +277,6 @@ export default {
       this.evaluation = res.comment
     })
   }
-
 }
 </script>
 <style lang="less"  scoped>

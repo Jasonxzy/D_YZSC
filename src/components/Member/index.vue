@@ -60,9 +60,9 @@ export default {
 }
 </script>
 <style scoped>
-html,body{ overflow-y:scroll;} 
-html,body{ overflow:scroll; min-height:101%;} 
-html{ overflow:-moz-scrollbars-vertical;} 
+html,body{ overflow-y:scroll;}
+html,body{ overflow:scroll; min-height:101%;}
+html{ overflow:-moz-scrollbars-vertical;}
 .Member-Center{
   width: 1200px;
   margin: auto;

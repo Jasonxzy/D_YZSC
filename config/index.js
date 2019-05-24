@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       '/api': {
         // 目标请求域名:
-        target:'http://rvaetr.natappfree.cc',
+        target:'http://j8pinz.natappfree.cc', //目标请求域名
         changeOrigin:true,//是否允许跨域
         pathRewrite:{
           '^/api':'' // 将请求发送的/api替换

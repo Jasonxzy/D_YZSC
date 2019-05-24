@@ -222,8 +222,5 @@ export default {
  .nav-top-span{
     display: inline-block;
     margin-bottom: 14px;
-} 
-/* .el-tabs__item{
-  padding: 0 55px;
-} */
+}
 </style>

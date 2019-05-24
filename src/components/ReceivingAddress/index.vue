@@ -12,7 +12,7 @@
 export default {
   data () {
     return {
-     ruleForm: {
+      ruleForm: {
         name: '',
         date1: '',
         delivery: false,

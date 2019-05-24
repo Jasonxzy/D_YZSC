@@ -5,7 +5,6 @@ let getLists = function (fn) {
     fn(res)
   })
 }
-
 export {
   getLists
 }

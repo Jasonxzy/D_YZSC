@@ -52,9 +52,9 @@ import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
-  export default {
-    data () {
-      var phone = (rule, value, callback) => {
+export default {
+  data () {
+    var phone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('手机号不能为空'))
       } else {
@@ -76,8 +76,8 @@ import ClassNav from '../public/ClassNav.vue'
         callback()
       }
     }
-      return {
-        ruleForm: {
+    return {
+      ruleForm: {
         pass: '',
         phone: ''
       },
@@ -89,22 +89,22 @@ import ClassNav from '../public/ClassNav.vue'
           { validator: phone, trigger: 'blur' }
         ]
       },
-        activeName2: 'first'
-      }
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
-    },
-    components: {
-      BottomNav,
-      ClassNav,
-      search,
-      TopBanner,
-      TopNavigation
+      activeName2: 'first'
     }
+  },
+  methods: {
+    handleClick (tab, event) {
+      console.log(tab, event)
+    }
+  },
+  components: {
+    BottomNav,
+    ClassNav,
+    search,
+    TopBanner,
+    TopNavigation
   }
+}
 </script>
 <style scoped>
   .Forgetpassword{
@@ -178,4 +178,3 @@ import ClassNav from '../public/ClassNav.vue'
     margin-bottom: 14px;
 }
 </style>
-
