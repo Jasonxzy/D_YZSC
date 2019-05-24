@@ -37,12 +37,40 @@
         <el-tab-pane label="元祖新品" name="first">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in prodlist" :key="i">
+              <li>
                 <router-link to="/purchase" class="photo">
-                  <img :title="i.title" :alt="i.title" :src="i.img"/>
+                  <img :title="prodlist1.ginfoSynopsis" :alt="prodlist1.ginfoSynopsis" :src="api+'/img/'+prodlist1.ginfoId+'.jpg'"/>
                 </router-link>
-                <strong>{{i.name}}</strong>
-                <em> ¥{{i.monery}}</em>
+                <strong>{{prodlist1.ginfoName}}</strong>
+                <em> ¥ {{prodlist1.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="prodlist2.ginfoSynopsis" :alt="prodlist2.ginfoSynopsis" :src="api+'/img/'+prodlist2.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{prodlist2.ginfoName}}</strong>
+                <em> ¥ {{prodlist2.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="prodlist3.ginfoSynopsis" :alt="prodlist3.ginfoSynopsis" :src="api+'/img/'+prodlist3.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{prodlist3.ginfoName}}</strong>
+                <em> ¥ {{prodlist3.ginfoPrice}}</em>
+              </li>
+              <li>
+              <router-link to="/purchase" class="photo">
+                <img :title="prodlist4.ginfoSynopsis" :alt="prodlist4.ginfoSynopsis" :src="api+'/img/'+prodlist4.ginfoId+'.jpg'"/>
+              </router-link>
+              <strong>{{prodlist4.ginfoName}}</strong>
+              <em> ¥ {{prodlist4.ginfoPrice}}</em>
+            </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="prodlist5.ginfoSynopsis" :alt="prodlist5.ginfoSynopsis" :src="api+'/img/'+prodlist5.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{prodlist5.ginfoName}}</strong>
+                <em> ¥ {{prodlist5.ginfoPrice}}</em>
               </li>
             </ul>
             <span class="clear"></span>
@@ -51,12 +79,40 @@
         <el-tab-pane label="热销商品" name="second">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in Selllist" :key="i">
+              <li>
                 <router-link to="/purchase" class="photo">
-                  <img :title="i.title" :alt="i.title" :src="i.img"/>
+                  <img :title="Selllist1.ginfoSynopsis" :alt="Selllist1.ginfoSynopsis" :src="api+'/img/'+Selllist1.ginfoId+'.jpg'"/>
                 </router-link>
-                <strong>{{i.name}}</strong>
-                <em> ¥{{i.monery}}</em>
+                <strong>{{Selllist1.ginfoName}}</strong>
+                <em> ¥ {{Selllist1.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Selllist2.ginfoSynopsis" :alt="Selllist2.ginfoSynopsis" :src="api+'/img/'+Selllist2.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Selllist2.ginfoName}}</strong>
+                <em> ¥ {{Selllist2.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Selllist3.ginfoSynopsis" :alt="Selllist3.ginfoSynopsis" :src="api+'/img/'+Selllist3.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Selllist3.ginfoName}}</strong>
+                <em> ¥ {{Selllist3.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Selllist4.ginfoSynopsis" :alt="Selllist4.ginfoSynopsis" :src="api+'/img/'+Selllist4.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Selllist4.ginfoName}}</strong>
+                <em> ¥ {{Selllist4.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Selllist5.ginfoSynopsis" :alt="Selllist5.ginfoSynopsis" :src="api+'/img/'+Selllist5.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Selllist5.ginfoName}}</strong>
+                <em> ¥ {{Selllist5.ginfoPrice}}</em>
               </li>
             </ul>
             <span class="clear"></span>
@@ -65,12 +121,40 @@
         <el-tab-pane label="节庆民俗" name="third">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in folklist" :key="i">
+              <li>
                 <router-link to="/purchase" class="photo">
-                  <img :title="i.title" :alt="i.title" :src="i.img"/>
+                  <img :title="folklist1.ginfoSynopsis" :alt="folklist1.ginfoSynopsis" :src="api+'/img/'+folklist1.ginfoId+'.jpg'"/>
                 </router-link>
-                <strong>{{i.name}}</strong>
-                <em> ¥{{i.monery}}</em>
+                <strong>{{folklist1.ginfoName}}</strong>
+                <em> ¥ {{folklist1.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="folklist2.ginfoSynopsis" :alt="folklist2.ginfoSynopsis" :src="api+'/img/'+folklist2.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{folklist2.ginfoName}}</strong>
+                <em> ¥ {{folklist2.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="folklist3.ginfoSynopsis" :alt="folklist3.ginfoSynopsis" :src="api+'/img/'+folklist3.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{folklist3.ginfoName}}</strong>
+                <em> ¥ {{folklist3.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="folklist4.ginfoSynopsis" :alt="folklist4.ginfoSynopsis" :src="api+'/img/'+folklist4.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{folklist4.ginfoName}}</strong>
+                <em> ¥ {{folklist4.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="folklist5.ginfoSynopsis" :alt="folklist5.ginfoSynopsis" :src="api+'/img/'+folklist5.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{folklist5.ginfoName}}</strong>
+                <em> ¥ {{folklist5.ginfoPrice}}</em>
               </li>
             </ul>
             <span class="clear"></span>
@@ -79,12 +163,40 @@
         <el-tab-pane label="元祖卡券" name="fourth">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in Cardlist" :key="i">
+              <li>
                 <router-link to="/purchase" class="photo">
-                  <img :title="i.title" :alt="i.title" :src="i.img"/>
+                  <img :title="Cardlist1.ginfoSynopsis" :alt="Cardlist1.ginfoSynopsis" :src="api+'/img/'+Cardlist1.ginfoId+'.jpg'"/>
                 </router-link>
-                <strong>{{i.name}}</strong>
-                <em> ¥{{i.monery}}</em>
+                <strong>{{Cardlist1.ginfoName}}</strong>
+                <em> ¥ {{Cardlist1.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Cardlist2.ginfoSynopsis" :alt="Cardlist2.ginfoSynopsis" :src="api+'/img/'+Cardlist2.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Cardlist2.ginfoName}}</strong>
+                <em> ¥ {{Cardlist2.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Cardlist3.ginfoSynopsis" :alt="Cardlist3.ginfoSynopsis" :src="api+'/img/'+Cardlist3.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Cardlist3.ginfoName}}</strong>
+                <em> ¥ {{Cardlist3.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Cardlist4.ginfoSynopsis" :alt="Cardlist4.ginfoSynopsis" :src="api+'/img/'+Cardlist4.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Cardlist4.ginfoName}}</strong>
+                <em> ¥ {{Cardlist4.ginfoPrice}}</em>
+              </li>
+              <li>
+                <router-link to="/purchase" class="photo">
+                  <img :title="Cardlist5.ginfoSynopsis" :alt="Cardlist5.ginfoSynopsis" :src="api+'/img/'+Cardlist5.ginfoId+'.jpg'"/>
+                </router-link>
+                <strong>{{Cardlist5.ginfoName}}</strong>
+                <em> ¥ {{Cardlist5.ginfoPrice}}</em>
               </li>
             </ul>
             <span class="clear"></span>
@@ -109,12 +221,28 @@
         </div>
       </div>
       <ul class="ProductList">
-        <li v-for="i in Cakelist" :key="i">
+        <li>
           <router-link to="/purchase" class="photo">
-            <img :title="i.title" :alt="i.title" :src="i.img"/>
-            <strong>{{i.name}}</strong>
-            <span>{{i.describe}}</span>
-            <em>{{i.monery}}</em>
+            <img :title="Cakelist1.ginfoSynopsis" :alt="Cakelist1.ginfoSynopsis" :src="api+'/img/'+Cakelist1.ginfoId+'.jpg'"/>
+            <strong>{{Cakelist1.ginfoName}}</strong>
+            <span>{{Cakelist1.ginfoSynopsis}}</span>
+            <em>¥ {{Cakelist1.ginfoPrice}}</em>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/purchase" class="photo">
+            <img :title="Cakelist2.ginfoSynopsis" :alt="Cakelist2.ginfoSynopsis" :src="api+'/img/'+Cakelist2.ginfoId+'.jpg'"/>
+            <strong>{{Cakelist2.ginfoName}}</strong>
+            <span>{{Cakelist2.ginfoSynopsis}}</span>
+            <em>¥ {{Cakelist2.ginfoPrice}}</em>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/purchase" class="photo">
+            <img :title="Cakelist3.ginfoSynopsis" :alt="Cakelist3.ginfoSynopsis" :src="api+'/img/'+Cakelist3.ginfoId+'.jpg'"/>
+            <strong>{{Cakelist3.ginfoName}}</strong>
+            <span>{{Cakelist3.ginfoSynopsis}}</span>
+            <em>¥ {{Cakelist3.ginfoPrice}}</em>
           </router-link>
         </li>
       </ul>
@@ -136,12 +264,28 @@
         </div>
       </div>
       <ul class="ProductList">
-        <li v-for="i in GiftBoxlist" :key="i">
+        <li>
           <router-link to="/purchase" class="photo">
-            <img :title="i.title" :alt="i.title" :src="i.img"/>
-            <strong>{{i.name}}</strong>
-            <span>{{i.describe}}</span>
-            <em>{{i.monery}}</em>
+            <img :title="GiftBoxlist1.ginfoSynopsis" :alt="GiftBoxlist1.ginfoSynopsis" :src="api+'/img/'+GiftBoxlist1.ginfoId+'.jpg'"/>
+            <strong>{{GiftBoxlist1.ginfoName}}</strong>
+            <span>{{GiftBoxlist1.ginfoSynopsis}}</span>
+            <em>¥ {{GiftBoxlist1.ginfoPrice}}</em>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/purchase" class="photo">
+            <img :title="GiftBoxlist2.ginfoSynopsis" :alt="GiftBoxlist2.ginfoSynopsis" :src="api+'/img/'+GiftBoxlist2.ginfoId+'.jpg'"/>
+            <strong>{{GiftBoxlist2.ginfoName}}</strong>
+            <span>{{GiftBoxlist2.ginfoSynopsis}}</span>
+            <em>¥ {{GiftBoxlist2.ginfoPrice}}</em>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/purchase" class="photo">
+            <img :title="GiftBoxlist3.ginfoSynopsis" :alt="GiftBoxlist3.ginfoSynopsis" :src="api+'/img/'+GiftBoxlist3.ginfoId+'.jpg'"/>
+            <strong>{{GiftBoxlist3.ginfoName}}</strong>
+            <span>{{GiftBoxlist3.ginfoSynopsis}}</span>
+            <em>¥ {{GiftBoxlist3.ginfoPrice}}</em>
           </router-link>
         </li>
       </ul>
@@ -163,12 +307,28 @@
         </div>
       </div>
       <ul class="ProductList">
-        <li v-for="i in westPointlist" :key="i">
+        <li>
           <router-link to="/purchase" class="photo">
-            <img :title="i.title" :alt="i.title" :src="i.img"/>
-            <strong>{{i.name}}</strong>
-            <span>{{i.describe}}</span>
-            <em>{{i.monery}}</em>
+            <img :title="westPointlist1.ginfoSynopsis" :alt="westPointlist1.ginfoSynopsis" :src="api+'/img/'+westPointlist1.ginfoId+'.jpg'"/>
+            <strong>{{westPointlist1.ginfoName}}</strong>
+            <span>{{westPointlist1.ginfoSynopsis}}</span>
+            <em>¥ {{westPointlist1.ginfoPrice}}</em>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/purchase" class="photo">
+            <img :title="westPointlist2.ginfoSynopsis" :alt="westPointlist2.ginfoSynopsis" :src="api+'/img/'+westPointlist2.ginfoId+'.jpg'"/>
+            <strong>{{westPointlist2.ginfoName}}</strong>
+            <span>{{westPointlist2.ginfoSynopsis}}</span>
+            <em>¥ {{westPointlist2.ginfoPrice}}</em>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/purchase" class="photo">
+            <img :title="westPointlist3.ginfoSynopsis" :alt="westPointlist3.ginfoSynopsis" :src="api+'/img/'+westPointlist3.ginfoId+'.jpg'"/>
+            <strong>{{westPointlist3.ginfoName}}</strong>
+            <span>{{westPointlist3.ginfoSynopsis}}</span>
+            <em>¥ {{westPointlist3.ginfoPrice}}</em>
           </router-link>
         </li>
       </ul>
@@ -193,6 +353,13 @@
   </div>
 </template>
 <script>
+import {westPoint} from 'api/request'
+import {GiftBox} from 'api/request'
+import {Cake} from 'api/request'
+import {folkCustom} from 'api/request'
+import {CardRoll} from 'api/request'
+import {HotSelling} from 'api/request'
+import {NewProducts} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -225,67 +392,50 @@ export default {
   },
   data () {
     return {
+      api: 'http://88ja9g.natappfree.cc/Canso',
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
       // banner下面tab切换
-      prodlist: [
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'}
-      ],
-      Selllist: [
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'}
-      ],
-      folklist: [
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'}
-      ],
-      Cardlist: [
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
-        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'}
-      ],
+      prodlist1: [],
+      prodlist2: [],
+      prodlist3: [],
+      prodlist4: [],
+      prodlist5: [],
+      // 元祖新品完
+      Selllist1: [],
+      Selllist2: [],
+      Selllist3: [],
+      Selllist4: [],
+      Selllist5: [],
+      // 元祖热销完
+      folklist1: [],
+      folklist2: [],
+      folklist3: [],
+      folklist4: [],
+      folklist5: [],
+      // 节庆民俗
+      Cardlist1: [],
+      Cardlist2: [],
+      Cardlist3: [],
+      Cardlist4: [],
+      Cardlist5: [],
       //      MUCH蛋糕
-      Cakelist: [
-        {name: '朝羽鲜奶蛋糕', title: '6号朝羽鲜奶蛋糕', describe: '寓意良辰美景， 幸福的时刻', img: img5, monery: '258.00'},
-        {name: '朝羽鲜奶蛋糕', title: '6号朝羽鲜奶蛋糕', describe: '寓意良辰美景， 幸福的时刻', img: img5, monery: '258.00'},
-        {name: '朝羽鲜奶蛋糕', title: '6号朝羽鲜奶蛋糕', describe: '寓意良辰美景， 幸福的时刻', img: img5, monery: '258.00'}
-      ],
+      Cakelist1: [],
+      Cakelist2: [],
+      Cakelist3: [],
       //      元祖礼盒
-      GiftBoxlist: [
-        {name: '藤椒牛肉粽', title: '藤椒牛肉粽竹篮版', describe: '麻辣爽口，料多馅足，优选牛柳', img: img6, monery: '258.00'},
-        {name: '藤椒牛肉粽', title: '藤椒牛肉粽竹篮版', describe: '麻辣爽口，料多馅足，优选牛柳', img: img6, monery: '258.00'},
-        {name: '藤椒牛肉粽', title: '藤椒牛肉粽竹篮版', describe: '麻辣爽口，料多馅足，优选牛柳', img: img6, monery: '258.00'}
-      ],
+      GiftBoxlist1: [],
+      GiftBoxlist2: [],
+      GiftBoxlist3: [],
       //      元祖礼盒
-      westPointlist: [
-        {name: '西点卷', title: '小西点虎皮卷', describe: '卷起来的幸福', img: img7, monery: '258.00'},
-        {name: '西点卷', title: '小西点虎皮卷', describe: '卷起来的幸福', img: img7, monery: '258.00'},
-        {name: '西点卷', title: '小西点虎皮卷', describe: '卷起来的幸福', img: img7, monery: '258.00'}
-      ],
+      westPointlist1: [],
+      westPointlist2: [],
+      westPointlist3: [],
       //    精选活动
       ActivitiesList: [
         {img: img8},
         {img: img9},
         {img: img10}
-      ],
-      //    公告
-      NoticeList: [
-        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'},
-        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'},
-        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'},
-        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'}
       ]
     }
   },
@@ -293,15 +443,74 @@ export default {
     handleClick (tab, event) {
       console.log(tab, event)
     }
+  },
+  //   获取数据
+  mounted () {
+    // 元祖新品
+    NewProducts((res) => {
+      console.log('元祖新品')
+      console.log(res)
+      this.prodlist1 = res.goodsinfo[1]
+      this.prodlist2 = res.goodsinfo[2]
+      this.prodlist3 = res.goodsinfo[3]
+      this.prodlist4 = res.goodsinfo[4]
+      this.prodlist5 = res.goodsinfo[5]
+    })
+    // 元祖热销
+    HotSelling((res) => {
+      console.log('元祖热销')
+      console.log(res)
+      this.Selllist1 = res.goodsinfo[1]
+      this.Selllist2 = res.goodsinfo[2]
+      this.Selllist3 = res.goodsinfo[3]
+      this.Selllist4 = res.goodsinfo[4]
+      this.Selllist5 = res.goodsinfo[5]
+    })
+    // 节庆民俗
+    folkCustom((res) => {
+      console.log('节庆民俗')
+      console.log(res)
+      this.folklist1 = res.goodsinfo[1]
+      this.folklist2 = res.goodsinfo[2]
+      this.folklist3 = res.goodsinfo[3]
+      this.folklist4 = res.goodsinfo[4]
+      this.folklist5 = res.goodsinfo[5]
+    })
+    // 元祖卡卷
+    CardRoll((res) => {
+      console.log('节庆民俗')
+      console.log(res)
+      this.Cardlist1 = res.goodsinfo[1]
+      this.Cardlist2 = res.goodsinfo[2]
+      this.Cardlist3 = res.goodsinfo[3]
+      this.Cardlist4 = res.goodsinfo[4]
+      this.Cardlist5 = res.goodsinfo[5]
+    })
+    // 元祖蛋糕
+    Cake((res) => {
+      console.log('元祖蛋糕')
+      console.log(res)
+      this.Cakelist1 = res.goodsinfo[0]
+      this.Cakelist2 = res.goodsinfo[1]
+      this.Cakelist3 = res.goodsinfo[2]
+    })
+    // 元祖礼盒
+    GiftBox((res) => {
+      console.log('元祖礼盒')
+      console.log(res)
+      this.GiftBoxlist1 = res.goodsinfo[0]
+      this.GiftBoxlist2 = res.goodsinfo[1]
+      this.GiftBoxlist3 = res.goodsinfo[2]
+    })
+    // 元祖西点
+    westPoint((res) => {
+      console.log('元祖西点')
+      console.log(res)
+      this.westPointlist1 = res.goodsinfo[0]
+      this.westPointlist2 = res.goodsinfo[1]
+      this.westPointlist3 = res.goodsinfo[2]
+    })
   }
-  // 获取数据
-//  mounted () {
-//    getList((res) => {
-//      console.log("111111")
-//      console.log(res)
-//      //      this.goodsList = data.lists
-//    })
-//  }
 
 }
 </script>
