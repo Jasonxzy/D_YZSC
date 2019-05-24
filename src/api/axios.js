@@ -3,13 +3,15 @@
 
 import axios from 'axios'
 import {api} from './index'
+import qs from 'qs'
+
 
 function sendAxios (methods, url, data = {}) {
   return new Promise((resolve, reject) => {
     axios({
       method: methods,
       url: api + url,
-      data: data
+      data: qs.stringify(data)
     }).then((res) => {
       if (res.data.success === true) {
         resolve(res.data)

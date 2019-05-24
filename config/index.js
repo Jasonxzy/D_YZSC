@@ -12,9 +12,17 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
+<<<<<<< HEAD
+        target:'http://88ja9g.natappfree.cc', //目标请求域名
+=======
         // 目标请求域名:
+<<<<<<< HEAD
         target:'http://88ja9g.natappfree.cc' +
         '', //目标请求域名
+=======
+        target:'http://j8pinz.natappfree.cc', //目标请求域名
+>>>>>>> 6784da3a4606cf4f5978457ce03530b8141f283e
+>>>>>>> 1db2cc44d3e47760fa94af9bc19f25152019c389
         changeOrigin:true,//是否允许跨域
         pathRewrite:{
           '^/api':'' // 将请求发送的/api替换
