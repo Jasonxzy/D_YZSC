@@ -32,7 +32,7 @@ let HotSelling = function (fn) {
 }
 // 元祖民俗列表分类
 let folkCustom = function (fn) {
-  sendAxios('post', '/Canso/getgoodsone?typeone=5').then((res) => {
+  sendAxios('post', '/Canso/getgoodsone?typeone=1').then((res) => {
     fn(res)
   })
 }
@@ -50,13 +50,13 @@ let Cake = function (fn) {
 }
 // 元祖礼盒分类商品
 let GiftBox = function (fn) {
-  sendAxios('post', '/Canso/getgoodstwo?typetwo=10').then((res) => {
+  sendAxios('post', '/Canso/getgoodstwo?typetwo=11').then((res) => {
     fn(res)
   })
 }
 // 元祖西点分类商品
 let westPoint = function (fn) {
-  sendAxios('post', '/Canso/getgoodstwo?typetwo=11').then((res) => {
+  sendAxios('post', '/Canso/getgoodstwo?typetwo=12').then((res) => {
     fn(res)
   })
 }

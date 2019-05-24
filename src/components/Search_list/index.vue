@@ -117,11 +117,6 @@ export default {
       activeIndex: '1',
       currentPage1: 1,
       commodity: [],
-      Guess: [
-        {id: '1', img: img1, alt: '甜蜜如心鲜奶蛋糕', Price: '258.00', name: '甜蜜如心鲜奶蛋糕'},
-        {id: '1', img: img1, alt: '甜蜜如心鲜奶蛋糕', Price: '258.00', name: '甜蜜如心鲜奶蛋糕'},
-        {id: '1', img: img1, alt: '甜蜜如心鲜奶蛋糕', Price: '258.00', name: '甜蜜如心鲜奶蛋糕'}
-      ],
       guess: [],
       api: 'http://88ja9g.natappfree.cc/Canso/img/'
     }
