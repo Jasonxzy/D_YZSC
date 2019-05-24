@@ -1,13 +1,13 @@
 <template>
   <div>
     <!--顶部导航-->
-    <!--<TopNavigation/>-->
+    <TopNavigation/>
     <!--导航banner-->
-    <!--<TopBanner/>-->
+    <TopBanner/>
     <!--搜索部分-->
-    <!--<search/>-->
+    <search/>
     <!--分类导航部分-->
-    <!--<ClassNav/>-->
+    <ClassNav/>
     <!--内容页头部-->
     <div class="YZ-top fonts-12 allcolor">
       <router-link to="/" >主页</router-link>
@@ -42,7 +42,7 @@
               <div class="puchase-carousel-content float-l">
                 <ul>
                   <li @mouseenter="lev(i,index)" v-for="(i,index) in imgList" :key="index">
-                    <img :src="i.img"/>
+                    <img :src="i"/>
                   </li>
                 </ul>
               </div>
@@ -52,11 +52,11 @@
           </div>
           <!--商品信息-->
           <div class="productright float-r fontf">
-            <div class="shop-title fonts-16 lightgrey">{{ginfoName}}</div>
-            <div class="shop-name fonts-12 lightgray margin-B-15">{{ginfoSynopsis}}</div>
+            <div class="shop-title fonts-16 lightgrey">{{goodsinfo.ginfoName}}</div>
+            <div class="shop-name fonts-12 lightgray margin-B-15">{{goodsinfo.ginfoSynopsis}}</div>
             <div class="shop-price margin-B-25 ">
               <div class="fonts-14 float-l lightgray">优惠价: </div>
-              <div class="fonts-24 red2 float-l fontw padding-L-10">￥{{ginfoPrice}}</div>
+              <div class="fonts-24 red2 float-l fontw padding-L-10">￥{{goodsinfo.ginfoPrice}}</div>
             </div>
             <div class="shop-specifications margin-B-25 lightgray">
               <div class="fonts-14 float-l">选择规格: </div>
@@ -105,7 +105,7 @@
               贴心宅配
             </div>
             <div class="shop-collection">
-              <div class="Serial-number padding-L-10 lightgrey">商品编号：100000786</div>
+              <div class="Serial-number padding-L-10 lightgrey">{{goodsinfo.ginfoNumber}}</div>
               <a href="#"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />
                 <span class="float-r">收藏</span>
               </a>
@@ -118,14 +118,9 @@
           <el-tab-pane label="商品介绍" name="first">
             <div class="ProductShow">
               <div  class="productshow-tabbody">
-                <div class="productshow-tabbody-content">
-                  <span>保冷包新旧交替中，随机出货，商品以实物为主</span>
-                  <img src="http://pic.ganso.com.cn/description/100000770_1.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_2.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_3.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_4.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_5.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_6.jpg">
+                <span>保冷包新旧交替中，随机出货，商品以实物为主</span>
+                <div class="productshow-tabbody-content"  v-for="(i,index) in BigimgList">
+                  <img :src="i">
                 </div>
               </div>
             </div>
@@ -182,11 +177,12 @@
       <div class="Maylove float-r allcolor">
         <div class="Maylove-nav white deeppinkred margin-B-10 fonts-14 fontw">猜你喜欢</div>
         <ul>
-          <!--<li v-for="i in list" :key="i">-->
-          <li v-for="(i,index) in list" :key="index">
-            <a href="#"><img :src="i.img" :alt="i.name"/></a>
-            <div class="love-money fontw fonts-12 red2">￥{{i.money}}</div>
-            <div class="love-name gray">{{i.name}}</div>
+          <li v-for="i in guess" :key="i">
+            <router-link :to="'/purchase?goodsid='+i.ginfoId">
+              <img :src="api+i.ginfoId+'.jpg'" />
+            <div class="love-money fontw fonts-12 red2">¥{{i.ginfoPrice}}</div>
+            <div class="love-name gray">{{i.ginfoName}}</div>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -196,7 +192,9 @@
   </div>
 </template>
 <script>
-import {shopinformation, Usercomments} from 'api/request_yms'
+import {guess} from 'api/request'
+import {shopinformation} from 'api/request_yms'
+import {Dtails} from 'api/request'
 import img1 from '../public/img/100000027_M.jpg'
 import img2 from '../public/img/100001236_M.jpg'
 import img3 from '../public/img/100001239_M.jpg'
@@ -220,12 +218,9 @@ export default {
   data () {
     return {
       //   handleMove: true,
-      imgList: [
-        {img: iagms1},
-        {img: iagms2},
-        {img: iagms3}
-      ],
-      min_img: iagms1,
+      imgList: [],
+      BigimgList: [],
+      min_img: [],
       num8: 1,
       dialogVisible: false,
       activeName: 'first',
@@ -234,28 +229,20 @@ export default {
       current2: null,
       current3: null,
       index: 0,
+      guess: [],
+      api: 'http://88ja9g.natappfree.cc/Canso/img/',
       selectorList: [
         {name: '规格1'},
-        {name: '规格2asdasd'},
+        {name: '规格2'},
         {name: '规格3'}
       ],
       species: [
-        {name: '种类123123'},
+        {name: '种类1'},
         {name: '种类2'},
         {name: '种类3'}
       ],
-      list: [
-        {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
-        {name: '朵朵咖啡鲜奶蛋糕', img: img2, money: '258.00'},
-        {name: '8号桃花扇鲜奶蛋糕', img: img3, money: '778.00'}
-      ],
-      // selectorList: [],
       evaluation: [],
-      // 商品详情数据：
-      ginfoName: [],
-      ginfoPrice: [],
-      ginfoSynopsis: []
-      // ginfoSpecs: []
+      goodsinfo: []
     }
   },
   methods: {
@@ -282,7 +269,7 @@ export default {
     },
     lev: function (i, index) {
       this.curren = index
-      this.min_img = i.img
+      this.min_img = i
     },
     changeBorder1: function (index) {
       this.current2 = index
@@ -300,15 +287,27 @@ export default {
       // 用户评论
       this.evaluation = res.comment
     })
-    Usercomments((res) => {
-      console.log(123)
+    let data = {goodsid: this.$route.query.goodsid}
+    console.log("6666")
+    Dtails(data, (res) => {
+      console.log("6666")
+      console.log(res.goodsinfo)
+      this.goodsinfo = res.goodsinfo
+      this.min_img = 'http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
+      for (var i = 0; i < 3 ;i++) {
+        console.log('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.imgList.push('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+      }
+      for (var i = 0; i < 6 ;i++) {
+        console.log('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.BigimgList.push('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+      }
+    })
+    // 猜你喜欢
+    guess((res) => {
+      console.log('元祖西点')
       console.log(res)
-      // 商品详情：名称 价格 等
-      // this.ginfoSpecs = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoSpecs
-      this.ginfoName = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoName
-      this.ginfoSynopsis = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoSynopsis
-      this.ginfoPrice = res.goodsinfolist[1].goodstypetwos[0].goodsinfos[1].ginfoPrice
-
+      this.guess = res.goodsinfo
     })
   }
 }

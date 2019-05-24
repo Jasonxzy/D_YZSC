@@ -41,7 +41,7 @@
       <div class="line">
         <!--单件商品-->
         <div v-for="i in commodity" :key="i" class="Products" :id="i.ginfoId">
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+i.ginfoId" class="photo" :id="i.ginfoId">
             <img :title="i.alt" :alt="i.alt" :src="api+i.ginfoId+'.jpg'" />
           </router-link>
           <div class="ms">
@@ -52,7 +52,7 @@
             <P class="spec">规格：{{i.ginfoSpecs}}</P>
           </div>
            <strong class="price">￥{{i.ginfoPrice}}</strong>
-          <router-link to="/purchase" class="btn_minxi">立即购买</router-link>
+          <router-link :to="'/purchase?goodsid='+i.ginfoId" class="btn_minxi">立即购买</router-link>
         </div>
         <!--商品分页-->
         <div class="block">
@@ -75,7 +75,7 @@
         <h4 class="redTitle">猜你喜欢</h4>
         <ul class="likeProductList">
           <li v-for="i in guess" :key="i">
-            <router-link to="/purchase">
+            <router-link :to="'/purchase?goodsid='+i.ginfoId">
               <img :src="api+i.ginfoId+'.jpg'" :alt="i.ginfoSynopsis"/>
             </router-link>
             <em>¥{{i.ginfoPrice}}</em>
@@ -203,7 +203,7 @@ export default {
     console.log(data)
     getLists(data, (res) => {
       console.log('666')
-      console.log(res)
+      console.log(res.goodsinfo)
       console.log('666')
       this.commodity = res.goodsinfo
     })

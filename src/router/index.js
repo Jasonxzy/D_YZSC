@@ -196,7 +196,8 @@ export default new Router({
       path: '/purchase',
       components: {
         default: purchase
-      }
+      },
+      props: (route) => ({ goodsid: route.query.goodsid})
     },
     {
       path: '/City',

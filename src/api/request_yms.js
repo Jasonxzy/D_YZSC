@@ -1,6 +1,6 @@
 // 专门存放发送请求的方法
 import sendAxios from './axios'
-// 商品信息接口：
+// 根据商品id获取评论：
 let shopinformation = function (fn) {
   sendAxios('post', '/Canso/getcommentbygoodsid?goodsid=1').then((res) => {
     fn(res)

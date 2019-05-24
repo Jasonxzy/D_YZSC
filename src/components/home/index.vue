@@ -38,35 +38,35 @@
           <div class="Tab_nr">
             <ul class="ProductList3">
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+prodlist1.ginfoId" class="photo">
                   <img :title="prodlist1.ginfoSynopsis" :alt="prodlist1.ginfoSynopsis" :src="api+'/img/'+prodlist1.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{prodlist1.ginfoName}}</strong>
                 <em> ¥ {{prodlist1.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+prodlist2.ginfoId" class="photo">
                   <img :title="prodlist2.ginfoSynopsis" :alt="prodlist2.ginfoSynopsis" :src="api+'/img/'+prodlist2.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{prodlist2.ginfoName}}</strong>
                 <em> ¥ {{prodlist2.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+prodlist3.ginfoId" class="photo">
                   <img :title="prodlist3.ginfoSynopsis" :alt="prodlist3.ginfoSynopsis" :src="api+'/img/'+prodlist3.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{prodlist3.ginfoName}}</strong>
                 <em> ¥ {{prodlist3.ginfoPrice}}</em>
               </li>
               <li>
-              <router-link to="/purchase" class="photo">
+              <router-link :to="'/purchase?goodsid='+prodlist4.ginfoId" class="photo">
                 <img :title="prodlist4.ginfoSynopsis" :alt="prodlist4.ginfoSynopsis" :src="api+'/img/'+prodlist4.ginfoId+'.jpg'"/>
               </router-link>
               <strong>{{prodlist4.ginfoName}}</strong>
               <em> ¥ {{prodlist4.ginfoPrice}}</em>
             </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+prodlist5.ginfoId" class="photo">
                   <img :title="prodlist5.ginfoSynopsis" :alt="prodlist5.ginfoSynopsis" :src="api+'/img/'+prodlist5.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{prodlist5.ginfoName}}</strong>
@@ -80,35 +80,35 @@
           <div class="Tab_nr">
             <ul class="ProductList3">
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Selllist1.ginfoId" class="photo">
                   <img :title="Selllist1.ginfoSynopsis" :alt="Selllist1.ginfoSynopsis" :src="api+'/img/'+Selllist1.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Selllist1.ginfoName}}</strong>
                 <em> ¥ {{Selllist1.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Selllist2.ginfoId" class="photo">
                   <img :title="Selllist2.ginfoSynopsis" :alt="Selllist2.ginfoSynopsis" :src="api+'/img/'+Selllist2.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Selllist2.ginfoName}}</strong>
                 <em> ¥ {{Selllist2.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Selllist3.ginfoId" class="photo">
                   <img :title="Selllist3.ginfoSynopsis" :alt="Selllist3.ginfoSynopsis" :src="api+'/img/'+Selllist3.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Selllist3.ginfoName}}</strong>
                 <em> ¥ {{Selllist3.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Selllist4.ginfoId" class="photo">
                   <img :title="Selllist4.ginfoSynopsis" :alt="Selllist4.ginfoSynopsis" :src="api+'/img/'+Selllist4.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Selllist4.ginfoName}}</strong>
                 <em> ¥ {{Selllist4.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Selllist5.ginfoId" class="photo">
                   <img :title="Selllist5.ginfoSynopsis" :alt="Selllist5.ginfoSynopsis" :src="api+'/img/'+Selllist5.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Selllist5.ginfoName}}</strong>
@@ -122,35 +122,35 @@
           <div class="Tab_nr">
             <ul class="ProductList3">
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+folklist1.ginfoId" class="photo">
                   <img :title="folklist1.ginfoSynopsis" :alt="folklist1.ginfoSynopsis" :src="api+'/img/'+folklist1.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{folklist1.ginfoName}}</strong>
                 <em> ¥ {{folklist1.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+folklist2.ginfoId" class="photo">
                   <img :title="folklist2.ginfoSynopsis" :alt="folklist2.ginfoSynopsis" :src="api+'/img/'+folklist2.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{folklist2.ginfoName}}</strong>
                 <em> ¥ {{folklist2.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+folklist3.ginfoId" class="photo">
                   <img :title="folklist3.ginfoSynopsis" :alt="folklist3.ginfoSynopsis" :src="api+'/img/'+folklist3.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{folklist3.ginfoName}}</strong>
                 <em> ¥ {{folklist3.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+folklist4.ginfoId" class="photo">
                   <img :title="folklist4.ginfoSynopsis" :alt="folklist4.ginfoSynopsis" :src="api+'/img/'+folklist4.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{folklist4.ginfoName}}</strong>
                 <em> ¥ {{folklist4.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+folklist5.ginfoId" class="photo">
                   <img :title="folklist5.ginfoSynopsis" :alt="folklist5.ginfoSynopsis" :src="api+'/img/'+folklist5.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{folklist5.ginfoName}}</strong>
@@ -164,35 +164,35 @@
           <div class="Tab_nr">
             <ul class="ProductList3">
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Cardlist1.ginfoId" class="photo">
                   <img :title="Cardlist1.ginfoSynopsis" :alt="Cardlist1.ginfoSynopsis" :src="api+'/img/'+Cardlist1.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Cardlist1.ginfoName}}</strong>
                 <em> ¥ {{Cardlist1.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Cardlist2.ginfoId" class="photo">
                   <img :title="Cardlist2.ginfoSynopsis" :alt="Cardlist2.ginfoSynopsis" :src="api+'/img/'+Cardlist2.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Cardlist2.ginfoName}}</strong>
                 <em> ¥ {{Cardlist2.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Cardlist3.ginfoId" class="photo">
                   <img :title="Cardlist3.ginfoSynopsis" :alt="Cardlist3.ginfoSynopsis" :src="api+'/img/'+Cardlist3.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Cardlist3.ginfoName}}</strong>
                 <em> ¥ {{Cardlist3.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Cardlist4.ginfoId" class="photo">
                   <img :title="Cardlist4.ginfoSynopsis" :alt="Cardlist4.ginfoSynopsis" :src="api+'/img/'+Cardlist4.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Cardlist4.ginfoName}}</strong>
                 <em> ¥ {{Cardlist4.ginfoPrice}}</em>
               </li>
               <li>
-                <router-link to="/purchase" class="photo">
+                <router-link :to="'/purchase?goodsid='+Cardlist5.ginfoId" class="photo">
                   <img :title="Cardlist5.ginfoSynopsis" :alt="Cardlist5.ginfoSynopsis" :src="api+'/img/'+Cardlist5.ginfoId+'.jpg'"/>
                 </router-link>
                 <strong>{{Cardlist5.ginfoName}}</strong>
@@ -222,7 +222,7 @@
       </div>
       <ul class="ProductList">
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+Cakelist1.ginfoId" class="photo">
             <img :title="Cakelist1.ginfoSynopsis" :alt="Cakelist1.ginfoSynopsis" :src="api+'/img/'+Cakelist1.ginfoId+'.jpg'"/>
             <strong>{{Cakelist1.ginfoName}}</strong>
             <span>{{Cakelist1.ginfoSynopsis}}</span>
@@ -230,7 +230,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+Cakelist2.ginfoId" class="photo">
             <img :title="Cakelist2.ginfoSynopsis" :alt="Cakelist2.ginfoSynopsis" :src="api+'/img/'+Cakelist2.ginfoId+'.jpg'"/>
             <strong>{{Cakelist2.ginfoName}}</strong>
             <span>{{Cakelist2.ginfoSynopsis}}</span>
@@ -238,7 +238,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+Cakelist3.ginfoId" class="photo">
             <img :title="Cakelist3.ginfoSynopsis" :alt="Cakelist3.ginfoSynopsis" :src="api+'/img/'+Cakelist3.ginfoId+'.jpg'"/>
             <strong>{{Cakelist3.ginfoName}}</strong>
             <span>{{Cakelist3.ginfoSynopsis}}</span>
@@ -265,7 +265,7 @@
       </div>
       <ul class="ProductList">
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+GiftBoxlist1.ginfoId" class="photo">
             <img :title="GiftBoxlist1.ginfoSynopsis" :alt="GiftBoxlist1.ginfoSynopsis" :src="api+'/img/'+GiftBoxlist1.ginfoId+'.jpg'"/>
             <strong>{{GiftBoxlist1.ginfoName}}</strong>
             <span>{{GiftBoxlist1.ginfoSynopsis}}</span>
@@ -273,7 +273,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+GiftBoxlist2.ginfoId" class="photo">
             <img :title="GiftBoxlist2.ginfoSynopsis" :alt="GiftBoxlist2.ginfoSynopsis" :src="api+'/img/'+GiftBoxlist2.ginfoId+'.jpg'"/>
             <strong>{{GiftBoxlist2.ginfoName}}</strong>
             <span>{{GiftBoxlist2.ginfoSynopsis}}</span>
@@ -281,7 +281,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+GiftBoxlist3.ginfoId" class="photo">
             <img :title="GiftBoxlist3.ginfoSynopsis" :alt="GiftBoxlist3.ginfoSynopsis" :src="api+'/img/'+GiftBoxlist3.ginfoId+'.jpg'"/>
             <strong>{{GiftBoxlist3.ginfoName}}</strong>
             <span>{{GiftBoxlist3.ginfoSynopsis}}</span>
@@ -308,7 +308,7 @@
       </div>
       <ul class="ProductList">
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+westPointlist1.ginfoId" class="photo">
             <img :title="westPointlist1.ginfoSynopsis" :alt="westPointlist1.ginfoSynopsis" :src="api+'/img/'+westPointlist1.ginfoId+'.jpg'"/>
             <strong>{{westPointlist1.ginfoName}}</strong>
             <span>{{westPointlist1.ginfoSynopsis}}</span>
@@ -316,7 +316,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+westPointlist2.ginfoId" class="photo">
             <img :title="westPointlist2.ginfoSynopsis" :alt="westPointlist2.ginfoSynopsis" :src="api+'/img/'+westPointlist2.ginfoId+'.jpg'"/>
             <strong>{{westPointlist2.ginfoName}}</strong>
             <span>{{westPointlist2.ginfoSynopsis}}</span>
@@ -324,7 +324,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/purchase" class="photo">
+          <router-link :to="'/purchase?goodsid='+westPointlist3.ginfoId" class="photo">
             <img :title="westPointlist3.ginfoSynopsis" :alt="westPointlist3.ginfoSynopsis" :src="api+'/img/'+westPointlist3.ginfoId+'.jpg'"/>
             <strong>{{westPointlist3.ginfoName}}</strong>
             <span>{{westPointlist3.ginfoSynopsis}}</span>

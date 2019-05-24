@@ -66,6 +66,12 @@ let guess = function (fn) {
     fn(res)
   })
 }
+// 商品详情也页面
+let Dtails = function (data, fn) {
+  sendAxios('post', '/Canso/getgoodsbyid', data).then((res) => {
+    fn(res)
+  })
+}
 export {
   getList,
   getLists,
@@ -77,5 +83,6 @@ export {
   Cake,
   GiftBox,
   westPoint,
-  guess
+  guess,
+  Dtails
 }
