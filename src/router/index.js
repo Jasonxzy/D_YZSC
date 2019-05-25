@@ -158,16 +158,18 @@ export default new Router({
       }
     },
     {
-      path: '/Notice/:id',
+      path: '/Notice',
       components: {
         default: Notice
-      }
+      },
+      props: (route) => ({id: route.query.id})
     },
     {
       path: '/SearchList',
       components: {
         default: SearchList
-      }
+      },
+      props: (route) => ({ typeone: route.query.typeone},{typetwo: route.query.typetwo})
     },
     {
       path: '/HelpCenter',
@@ -195,7 +197,8 @@ export default new Router({
       path: '/purchase',
       components: {
         default: purchase
-      }
+      },
+      props: (route) => ({ goodsid: route.query.goodsid})
     },
     {
       path: '/City',

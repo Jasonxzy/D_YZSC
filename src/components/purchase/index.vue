@@ -14,11 +14,7 @@
       >
       <router-link to="/" >元祖商城</router-link>
       >
-      <router-link to="" >冰品季</router-link>
-      >
-      <router-link to="" >冰品点心</router-link>
-      >
-      <router-link to="" >糯米拥抱冰淇淋</router-link>
+      <router-link to="" >{{goodsinfo.ginfoName}}</router-link>
     </div>
     <!--内容页内容部分-->
     <div class="YZ-bottom allcolor">
@@ -42,7 +38,7 @@
               <div class="puchase-carousel-content float-l">
                 <ul>
                   <li @mouseenter="lev(i,index)" v-for="(i,index) in imgList" :key="index">
-                    <img :src="i.img"/>
+                    <img :src="i"/>
                   </li>
                 </ul>
               </div>
@@ -52,11 +48,11 @@
           </div>
           <!--商品信息-->
           <div class="productright float-r fontf">
-            <div class="shop-title fonts-16 lightgrey">雪麻糬</div>
-            <div class="shop-name fonts-12 lightgray margin-B-15">糯米拥抱冰淇淋</div>
+            <div class="shop-title fonts-16 lightgrey">{{goodsinfo.ginfoName}}</div>
+            <div class="shop-name fonts-12 lightgray margin-B-15">{{goodsinfo.ginfoSynopsis}}</div>
             <div class="shop-price margin-B-25 ">
               <div class="fonts-14 float-l lightgray">优惠价: </div>
-              <div class="fonts-24 red2 float-l fontw padding-L-10">￥15.00</div>
+              <div class="fonts-24 red2 float-l fontw padding-L-10">￥{{goodsinfo.ginfoPrice}}</div>
             </div>
             <div class="shop-specifications margin-B-25 lightgray">
               <div class="fonts-14 float-l">选择规格: </div>
@@ -65,6 +61,18 @@
                   <li @click="changeBorder1(index)" v-for="(i,index) in selectorList" :key="index">
                     <a :class="{change:index == current2}" class=" a-hover-pink" href="javascript:void(0);">{{i.name}}</a>
                   </li>
+                  <!--<li>{{ginfoSpecs}}</li>-->
+                </ul>
+              </div>
+            </div>
+            <div class="shop-specifications margin-B-25 lightgray">
+              <div class="fonts-14 float-l">蛋糕夹层: </div>
+              <div class="fonts-12 float-l choose">
+                <ul >
+                  <li @click="changeBorder2(index)" v-for="(i,index) in species" :key="index">
+                    <a :class="{change:index == current3}" class=" a-hover-pink" href="javascript:void(0);">{{i.name}}</a>
+                  </li>
+                  <!--<li>{{ginfoSpecs}}</li>-->
                 </ul>
               </div>
             </div>
@@ -75,10 +83,11 @@
               </li></ul>
               <button class="buy fonts-20 float-l buypinkred"><router-link to="./ShoppingCart">立即购买</router-link></button>
               <button class="join fonts-20 float-l white joinred">
-                <el-popover ref="popover2" placement="top-start" title="成功加入购物车" width="145" trigger="click"
-                  content="">
-                </el-popover>
-                <el-button v-popover:popover2>加入购物车</el-button>
+                <!--<el-popover ref="popover2" placement="top-start" title="成功加入购物车" width="145" trigger="click"-->
+                  <!--content="">-->
+                <!--</el-popover>-->
+                <!--<el-button v-popover:popover2>加入购物车</el-button>-->
+                <el-button :plain="true" @click="open3">加入购物车</el-button>
               </button>
              </div>
             <div class="shop-service fonts-12 margin-B-20">
@@ -93,10 +102,11 @@
               贴心宅配
             </div>
             <div class="shop-collection">
-              <div class="Serial-number padding-L-10 lightgrey">商品编号：100000786</div>
-              <a href="#"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />
-                <span class="float-r">收藏</span>
+              <div class="Serial-number padding-L-10 lightgrey">{{goodsinfo.ginfoNumber}}</div>
+              <a>
+                <span class="float-r"></span><el-button plain @click="open2"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />收藏</el-button>
               </a>
+
             </div>
           </div>
         </div>
@@ -106,14 +116,9 @@
           <el-tab-pane label="商品介绍" name="first">
             <div class="ProductShow">
               <div  class="productshow-tabbody">
-                <div class="productshow-tabbody-content">
-                  <span>保冷包新旧交替中，随机出货，商品以实物为主</span>
-                  <img src="http://pic.ganso.com.cn/description/100000770_1.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_2.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_3.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_4.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_5.jpg">
-                  <img src="http://pic.ganso.com.cn/description/100000770_6.jpg">
+                <span>保冷包新旧交替中，随机出货，商品以实物为主</span>
+                <div class="productshow-tabbody-content"  v-for="(i,index) in BigimgList">
+                  <img :src="i">
                 </div>
               </div>
             </div>
@@ -121,14 +126,23 @@
           <el-tab-pane label="商品评价" name="second">
             <div class="ProductShow2">
               <div  class="productshow-tabbody2">
-                <div class="productshow-tabbody-content2" style="display: block">
+                <div id="fontw1" class="productshow-tabbody-content2" style="display: block">
                   <div class="borderbottom">
-                    <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l" id="disn"></i>
-                    <router-link to="#" @click.native="sas" id="aa">欢迎您第一个发表评论</router-link>
-                    <div class="float-r">0/0评论</div>
+                    <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l"></i>
+                    <router-link to="#" @click.native="sas">欢迎您发表评论</router-link>
+                    <div id="666" class="float-r">{{length.length}}/{{length.length}}评论</div>
+                  </div>
+                  <div class="borderbottom-content padding-T-20">
+                    <ul>
+                      <li v-for="(first, index) in evaluation" :key="index">
+                        <p><a href="#" >用户:{{first.userinfo.userName}}</a></p>
+                        <p ><span >用户评论：{{first.CContent}}</span> </p>
+                        <p><el-rate v-model="first.CStarnum"></el-rate></p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-                <div id="fontw" class="productshow-tabbody-content2 " style="display: none">
+                <div id="fontw2" class="productshow-tabbody-content2 " style="display: none">
                   <div class="content2-title fonts-12 fontw">发表评论</div>
                   <div class="content2-published fonts-12 lightgrey">
                     <div class="float-l">请输入您的评论</div>
@@ -143,11 +157,11 @@
                     </div>
                   </div>
                   <div class="content2-submit">
-                    <button><router-link to="#" >提交评论</router-link></button>
+                    <button><router-link to="#" @click.native="ee">提交评论</router-link></button>
                   </div>
                   <div class="content2-return">
                     <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l padding-T-5">
-                      <router-link to="#" @click.native="ee" id="rr" class="float-r">返回评论</router-link>
+                      <router-link to="#" @click.native="ee" class="float-r">返回评论</router-link>
                     </i>
                   </div>
                 </div>
@@ -161,10 +175,12 @@
       <div class="Maylove float-r allcolor">
         <div class="Maylove-nav white deeppinkred margin-B-10 fonts-14 fontw">猜你喜欢</div>
         <ul>
-          <li v-for="(i,index) in list" :key="index">
-            <a href="#"><img :src="i.img" :alt="i.name"/></a>
-            <div class="love-money fontw fonts-12 red2">￥{{i.money}}</div>
-            <div class="love-name gray">{{i.name}}</div>
+          <li v-for="i in guess" :key="i">
+            <router-link :to="'/purchase?goodsid='+i.ginfoId">
+              <img :src="api+i.ginfoId+'.jpg'" />
+            <div class="love-money fontw fonts-12 red2">¥{{i.ginfoPrice}}</div>
+            <div class="love-name gray">{{i.ginfoName}}</div>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -174,7 +190,9 @@
   </div>
 </template>
 <script>
-import {getList} from 'api/request_yms'
+import {comment} from 'api/request'
+import {guess} from 'api/request'
+import {Dtails} from 'api/request'
 import img1 from '../public/img/100000027_M.jpg'
 import img2 from '../public/img/100001236_M.jpg'
 import img3 from '../public/img/100001239_M.jpg'
@@ -186,8 +204,10 @@ import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
 import BottomNav from '../public/BottomNavigation.vue'
+import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
 export default {
   components: {
+    ElButton,
     TopNavigation,
     TopBanner,
     search,
@@ -198,77 +218,111 @@ export default {
   data () {
     return {
       //   handleMove: true,
-      imgList: [
-        {img: iagms1},
-        {img: iagms2},
-        {img: iagms3}
-      ],
-      min_img: iagms1,
+      imgList: [],
+      BigimgList: [],
+      min_img: [],
       num8: 1,
       dialogVisible: false,
       activeName: 'first',
-      value1: null,
+      value1: 3,
       value2: null,
-      current2: 0,
-      //        menu: ['蓝莓味', '草莓味', '芒果味'],
+      current2: null,
+      current3: null,
       index: 0,
-      list: [
-        {name: '甜蜜如心鲜奶蛋糕', img: img1, money: '238.00'},
-        {name: '朵朵咖啡鲜奶蛋糕', img: img2, money: '258.00'},
-        {name: '8号桃花扇鲜奶蛋糕', img: img3, money: '778.00'}
-      ],
+      length: [],
+      guess: [],
+      api: 'http://huangchuan.natapp1.cc/Canso/img/',
       selectorList: [
-        {name: '巧克力'},
-        {name: '奶油味'},
-        {name: '仙女味'}
-      ]
+        {name: '规格1'},
+        {name: '规格2'},
+        {name: '规格3'}
+      ],
+      species: [
+        {name: '种类1'},
+        {name: '种类2'},
+        {name: '种类3'}
+      ],
+      evaluation: [],
+      goodsinfo: []
     }
   },
   methods: {
     handleClick (tab, event) {
       console.log(tab, event)
-      //        console.log(tab, event)
     },
     son (item, idx) {
       this.index = idx
     },
     handleChange (value) {
-      //        console.log(value);
+    },
+    open2 () {
+      this.$message({
+        message: '收藏成功',
+        type: 'success'
+      })
+    },
+    open3 () {
+      this.$notify({
+        message: '成功加入购物车',
+        type: 'success'
+      })
     },
     sas: function () {
-      let fontw = document.querySelector('#fontw')
-      let rr = document.querySelector('#rr')
-      let aa = document.querySelector('#aa')
-      let disn = document.querySelector('#disn')
-      fontw.style.display = 'block'
-      aa.style.display = 'none'
-      rr.style.display = 'block'
-      disn.style.display = 'none'
+      let fontw1 = document.querySelector('#fontw1')
+      let fontw2 = document.querySelector('#fontw2')
+      fontw1.style.display = 'none'
+      fontw2.style.display = 'block'
     },
     ee: function () {
-      let fontw = document.querySelector('#fontw')
-      let rr = document.querySelector('#rr')
-      let aa = document.querySelector('#aa')
-      let disn = document.querySelector('#disn')
-      disn.style.display = 'block'
-      fontw.style.display = 'none'
-      rr.style.display = 'none'
-      aa.style.display = 'block'
+      let fontw1 = document.querySelector('#fontw1')
+      let fontw2 = document.querySelector('#fontw2')
+      fontw1.style.display = 'block'
+      fontw2.style.display = 'none'
     },
     lev: function (i, index) {
       this.curren = index
-      this.min_img = i.img
+      this.min_img = i
     },
     changeBorder1: function (index) {
       this.current2 = index
       console.log(this.current2)
+    },
+    changeBorder2: function (index) {
+      this.current3 = index
+      console.log(this.current3)
     }
   },
   // 获取数据
   mounted () {
-    getList({}, (res) => {
-      console.log(res.data)
-      //      this.goodsList = data.lists
+    let data = {goodsid: this.$route.query.goodsid}
+    console.log("6666")
+    Dtails(data, (res) => {
+      console.log("6666")
+      console.log(res.goodsinfo)
+      this.goodsinfo = res.goodsinfo
+      this.min_img = 'http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
+      for (var i = 0; i < 3 ;i++) {
+        console.log('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.imgList.push('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+      }
+      for (var i = 0; i < 6 ;i++) {
+        console.log('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.BigimgList.push('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+      }
+    })
+    // 猜你喜欢
+    guess((res) => {
+      console.log('元祖西点')
+      console.log(res)
+      this.guess = res.goodsinfo
+    })
+    // 根据商品id获取评论
+    comment(data, (res) => {
+      console.log('根据商品id获取评论')
+      console.log(data)
+      console.log(res.comment.length)
+      this.length = res.comment
+      this.evaluation = res.comment
     })
   }
 }
@@ -487,6 +541,11 @@ export default {
               margin-right: 21px;
               cursor: pointer;
               float: left;
+            }
+            /deep/.el-button{
+              border:none;
+              padding: 0;
+              color:#666666;
               &:hover {
                 color: #E93D6D;
               }
@@ -561,18 +620,32 @@ export default {
             padding: 20px 0 20px 0;
             display: block;
 
-            .productshow-tabbody2-content2 {
+            .productshow-tabbody-content2 {
               position: relative;
               padding: 10px 0 20px 0;
               text-align: left;
               .borderbottom{
                 width: 920px;
-                height: 15px;
+                height: 20px;
                 border-bottom: 1px solid #a5a5a5;
+                a{
+                  float: left;
+                }
                 #disn{
                   width: 15px;
                 }
 
+              }
+              .borderbottom-content{
+                li{
+                  padding-bottom: 20px;
+                  p{
+                    padding: 5px 0;
+                    span{
+                      padding-left: 20px;
+                    }
+                  }
+                }
               }
             }
             /*隐藏部分*/

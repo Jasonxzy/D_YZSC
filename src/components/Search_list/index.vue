@@ -38,32 +38,32 @@
           <span class="sl"><span id="Current_page">当前页：<ins>1</ins></span></span>
         </li>
       </el-menu>
-      <div class="line">
+      <div class="line" :data="userList.slice((currentPage-1)*pagesize,currentPage*pagesize)">
         <!--单件商品-->
-        <div v-for="i in commodity" :key="i" class="Products" :id="i.id">
-          <router-link to="/purchase" class="photo">
-            <img :title="i.alt" :alt="i.alt" :src="i.img" />
+        <div v-for="i in commodity" :key="i" class="Products" :id="i.ginfoId">
+          <router-link :to="'/purchase?goodsid='+i.ginfoId" class="photo" :id="i.ginfoId">
+            <img :title="i.alt" :alt="i.alt" :src="api+i.ginfoId+'.jpg'" />
           </router-link>
           <div class="ms">
             <h5>
-              <router-link to="/purchase">{{i.title}}</router-link>
+              <router-link to="/purchase">{{i.ginfoName}}</router-link>
             </h5>
-            <P>{{i.describe}}</P>
-            <P class="spec">规格：{{i.spe}}</P>
+            <P>{{i.ginfoSynopsis}}</P>
+            <P class="spec">规格：{{i.ginfoSpecs}}</P>
           </div>
-           <strong class="price">￥{{i.Price}}</strong>
-          <router-link to="/purchase" class="btn_minxi">立即购买</router-link>
+           <strong class="price">￥{{i.ginfoPrice}}</strong>
+          <router-link :to="'/purchase?goodsid='+i.ginfoId" class="btn_minxi">立即购买</router-link>
         </div>
         <!--商品分页-->
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage1"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
+            :current-page="currentPage"
+            :page-sizes="[2, 4, 6, 8]"
+            :page-size="pagesize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="400">
+            :total="userList.length">
           </el-pagination>
         </div>
         <!--商品分页结束-->
@@ -74,12 +74,12 @@
       <div class="yCmsContentSlot">
         <h4 class="redTitle">猜你喜欢</h4>
         <ul class="likeProductList">
-          <li v-for="i in Guess" :key="i">
-            <router-link to="/purchase">
-              <img :src="i.img" :alt="i.alt"/>
+          <li v-for="i in guess" :key="i">
+            <router-link :to="'/purchase?goodsid='+i.ginfoId">
+              <img :src="api+i.ginfoId+'.jpg'" :alt="i.ginfoSynopsis"/>
             </router-link>
-            <em>¥{{i.Price}}</em>
-            <strong>{{i.name}}</strong>
+            <em>¥{{i.ginfoPrice}}</em>
+            <strong>{{i.ginfoName}}</strong>
           </li>
         </ul>
       </div>
@@ -90,6 +90,9 @@
   </div>
 </template>
 <script>
+import {guess} from 'api/request'
+import {getLists} from 'api/request'
+import {getListstow} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -112,18 +115,32 @@ export default {
     return {
       imglist: [banner1, banner2, banner3],
       activeIndex: '1',
-      currentPage1: 1,
-      commodity: [
-        {id: '1', title: '芝兰玉叶慕思蛋糕', img: img11, describe: '干酪慕思，布朗尼饼干底', alt: '芝兰玉叶慕思蛋糕', spe: '78号、56号', Price: '145.00'}
-      ],
-      Guess: [
-        {id: '1', img: img1, alt: '甜蜜如心鲜奶蛋糕', Price: '258.00', name: '甜蜜如心鲜奶蛋糕'},
-        {id: '1', img: img1, alt: '甜蜜如心鲜奶蛋糕', Price: '258.00', name: '甜蜜如心鲜奶蛋糕'},
-        {id: '1', img: img1, alt: '甜蜜如心鲜奶蛋糕', Price: '258.00', name: '甜蜜如心鲜奶蛋糕'}
-      ]
+      currentPage: 1,
+      pagesize: 4,
+      commodity: [],
+      guess: [],
+      userList: [],
+      api: 'http://huangchuan.natapp1.cc/Canso/img/'
     }
   },
+  created() {
+    this.handleUserList()
+  },
   methods: {
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+    handleSizeChange: function (size) {
+      this.pagesize = size;
+      console.log(this.pagesize)  // 每页下拉显示数据
+    },
+    handleCurrentChange: function(currentPage){
+      this.currentPage = currentPage;
+      console.log(this.currentPage)  // 点击第几页
+    },
+//    handleUserList () {
+//      this.$http.get('http://localhost:3000/userList').then(res => {  //这是从本地请求的数据接口，
+//        this.userList = res.body
+//      })
+//    }
     handleSelect (key, keyPath) {
     },
     handleSizeChange (val) {
@@ -144,7 +161,7 @@ export default {
       for (var i = 0; i < Allprice.length; i++) {
         for (var j = 0; j < i; j++) {
           if (Allprice[i].innerHTML < Allprice[j].innerHTML) {
-          //   html排序
+            //   html排序
             a = com[i].innerHTML
             com[i].innerHTML = com[j].innerHTML
             com[j].innerHTML = a
@@ -161,6 +178,8 @@ export default {
       let Allprice = document.querySelectorAll('.price')
       let com = document.querySelectorAll('.Products')
       let a = null
+      console.log(Allprice.length)
+
       for (var i = 0; i < Allprice.length; i++) {
         for (var j = 0; j < i; j++) {
           if (Allprice[i].innerHTML > Allprice[j].innerHTML) {
@@ -195,6 +214,34 @@ export default {
         }
       }
     }
+  },
+  //   获取数据
+  mounted () {
+    console.log()
+    let data = {typeone: this.$route.query.typeone}
+    console.log(data)
+    getLists(data, (res) => {
+      console.log('666')
+      console.log(res.goodsinfo)
+      console.log('666')
+      this.commodity = res.goodsinfo
+      this.userList = res.goodsinfo
+    })
+    let da = {typetwo: this.$route.query.typetwo}
+    console.log(da)
+    getListstow(da, (res) => {
+      console.log('7777')
+      console.log(res)
+      console.log('7777')
+      this.commodity = res.goodsinfo
+      this.userList = res.goodsinfo
+    })
+    // 猜你喜欢
+    guess((res) => {
+      console.log('元祖西点')
+      console.log(res)
+      this.guess = res.goodsinfo
+    })
   }
 }
 </script>

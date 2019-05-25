@@ -23,44 +23,44 @@
             <li class="hui_bg">
               <strong>
                 <span class="icon1 wizard0" style="background-position: 0px 0px;"></span>
-                <router-link to="/SearchList">{{goneName1}}</router-link>
+                <router-link :to="'/SearchList?typeone='+goneId1.goneId">{{goneName1}}</router-link>
               </strong>
-              <em v-for="i in CcnList1" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList1" :key="i"><router-link :to="'/SearchList?typetwo='+i.gtwoId">{{i.gtwoName}}</router-link></em>
               </li>
             <li>
               <strong>
                 <span class="icon1 wizard1" style="background-position: 0px 0px;"></span>
-                <router-link to="/SearchList">{{goneName2}}</router-link>
+                <router-link :to="'/SearchList?typeone='+goneId2.goneId">{{goneName2}}</router-link>
               </strong>
-              <em v-for="i in CcnList2" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList2" :key="i"><router-link :to="'/SearchList?typetwo='+i.gtwoId">{{i.gtwoName}}</router-link></em>
             </li>
             <li class="hui_bg">
               <strong>
                 <span class="icon1 wizard2" style="background-position: 0px 0px;"></span>
-                <router-link to="/SearchList">{{goneName3}}</router-link>
+                <router-link :to="'/SearchList?typeone='+goneId3.goneId">{{goneName3}}</router-link>
               </strong>
-              <em v-for="i in CcnList3" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList3" :key="i"><router-link :to="'/SearchList?typetwo='+i.gtwoId">{{i.gtwoName}}</router-link></em>
             </li>
             <li>
               <strong>
                 <span class="icon1 wizard3" style="background-position: 0px 0px;"></span>
-                <router-link to="/SearchList">{{goneName4}}</router-link>
+                <router-link :to="'/SearchList?typeone='+goneId4.goneId">{{goneName4}}</router-link>
               </strong>
-              <em v-for="i in CcnList4" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList4" :key="i"><router-link :to="'/SearchList?typetwo='+i.gtwoId">{{i.gtwoName}}</router-link></em>
             </li>
             <li class="hui_bg">
               <strong>
                 <span class="icon1 wizard4" style="background-position: 0px 0px;"></span>
-                <router-link to="/SearchList">{{goneName5}}</router-link>
+                <router-link :to="'/SearchList?typeone='+goneId5.goneId">{{goneName5}}</router-link>
               </strong>
-              <em v-for="i in CcnList5" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList5" :key="i"><router-link :to="'/SearchList?typetwo='+i.gtwoId">{{i.gtwoName}}</router-link></em>
             </li>
             <li>
               <strong>
                 <span class="icon1 wizard5" style="background-position: 0px 0px;"></span>
-                <router-link to="/SearchList">{{goneName6}}</router-link>
+                <router-link :to="'/SearchList?typeone='+goneId6.goneId">{{goneName6}}</router-link>
               </strong>
-              <em v-for="i in CcnList6" :key="i"><router-link to="/SearchList">{{i}}</router-link></em>
+              <em v-for="i in CcnList6" :key="i"><router-link :to="'/SearchList?typetwo='+i.gtwoId">{{i.gtwoName}}</router-link></em>
             </li>
           </ul>
         </div>
@@ -73,6 +73,13 @@ import {getList} from 'api/request'
 export default {
   data () {
     return {
+      goneId1: [],
+      goneId2: [],
+      goneId3: [],
+      goneId4: [],
+      goneId5: [],
+      goneId6: [],
+      // 二级商品id
       // 全部商品分类商品大标题
       goneName1: [],
       goneName2: [],
@@ -93,43 +100,61 @@ export default {
   mounted () {
     // 全部商品分类下悬浮列表数据
     getList((res) => {
-      //      console.log( res.goodsinfolist[0].goodstypetwos[0].gtwoName)
+            console.log( res)
+      console.log(res)
       this.goneName1 = res.goodsinfolist[0].goneName
+      this.goneId1 = res.goodsinfolist[0]
       this.goneName2 = res.goodsinfolist[1].goneName
+      this.goneId2 = res.goodsinfolist[1]
       this.goneName3 = res.goodsinfolist[2].goneName
+      this.goneId3 = res.goodsinfolist[2]
       this.goneName4 = res.goodsinfolist[3].goneName
+      this.goneId4 = res.goodsinfolist[3]
       this.goneName5 = res.goodsinfolist[4].goneName
+      this.goneId5 = res.goodsinfolist[4]
       this.goneName6 = res.goodsinfolist[5].goneName
+      this.goneId6 = res.goodsinfolist[5]
       // 第一个
       for (var i = 0; i < res.goodsinfolist[0].goodstypetwos.length; i++) {
         this.CcnList1.push(res.goodsinfolist[0].goodstypetwos[i].gtwoName)
       }
-      console.log(this.CcnList1)
+//      console.log(this.CcnList1)
       // 第二个
       for (var a = 0; a < res.goodsinfolist[1].goodstypetwos.length; a++) {
         this.CcnList2.push(res.goodsinfolist[1].goodstypetwos[a].gtwoName)
       }
-      console.log(this.CcnList2)
+//      console.log(this.CcnList2)
       // 第三个
       for (var b = 0; b < res.goodsinfolist[2].goodstypetwos.length; b++) {
         this.CcnList3.push(res.goodsinfolist[2].goodstypetwos[b].gtwoName)
       }
-      console.log(this.CcnList3)
+//      console.log(this.CcnList3)
       // 第四个
       for (var c = 0; c < res.goodsinfolist[3].goodstypetwos.length; c++) {
         this.CcnList4.push(res.goodsinfolist[3].goodstypetwos[c].gtwoName)
       }
-      console.log(this.CcnList4)
+//      console.log(this.CcnList4)
       // 第五个
       for (var d = 0; d < res.goodsinfolist[4].goodstypetwos.length; d++) {
         this.CcnList5.push(res.goodsinfolist[4].goodstypetwos[d].gtwoName)
       }
-      console.log(this.CcnList5)
-      // 第六个
+//      console.log(this.CcnList5)
+//       第六个
       for (var e = 0; e < res.goodsinfolist[5].goodstypetwos.length; e++) {
         this.CcnList6.push(res.goodsinfolist[5].goodstypetwos[e].gtwoName)
       }
-      console.log(this.CcnList6)
+//      console.log(this.CcnList6)
+      this.CcnList1 = res.goodsinfolist[0].goodstypetwos
+      // 第二个
+      this.CcnList2 = res.goodsinfolist[1].goodstypetwos
+      // 第三个
+      this.CcnList3 = res.goodsinfolist[2].goodstypetwos
+      // 第四个
+      this.CcnList4 = res.goodsinfolist[3].goodstypetwos
+      // 第五个
+      this.CcnList5 = res.goodsinfolist[4].goodstypetwos
+      // 第六个
+      this.CcnList6 = res.goodsinfolist[5].goodstypetwos
     })
   }
 }

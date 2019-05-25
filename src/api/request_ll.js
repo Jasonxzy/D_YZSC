@@ -2,11 +2,23 @@
 
 import sendAxios from './axios'
 
-let orderLL = function (data, callback) {
-  sendAxios('post', '/Canso/getordertb').then((res) => {
-    callback(res)
+let orderLL = function (fn) {
+  sendAxios('post', '/Canso/getordertb?userid=1').then((res) => {
+    fn(res)
+  })
+}
+let homeNl = function (data, fn) {
+  sendAxios('post', '/Canso/getNoticeType', data).then((res) => {
+    fn(res)
+  })
+}
+let homeNlq = function (fn) {
+  sendAxios('post', '/Canso/getNoticeType').then((res) => {
+    fn(res)
   })
 }
 export {
-  orderLL
+  orderLL,
+  homeNl,
+  homeNlq
 }
