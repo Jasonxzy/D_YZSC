@@ -1,16 +1,14 @@
 //     封装axios请求
 import axios from 'axios'
 import {api} from './index'
-
+import qs from 'qs'
 
 function sendAxios (methods, url, data = {}) {
-  let qs = require('qs')
-  let requestrl = api + url + '?' + qs.stringify(data)
   return new Promise((resolve, reject) => {
     axios({
       method: methods,
-      url: requestrl,
-      data: data
+      url: api + url,
+      data: qs.stringify(data)
     }).then((res) => {
       if (res.data.success === true) {
         resolve(res.data)

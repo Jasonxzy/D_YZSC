@@ -40,19 +40,19 @@
       </el-menu>
       <div class="line">
         <!--单件商品-->
-        <div v-for="i in commodity" class="Products" :id="i.id">
-          <router-link to="/purchase" class="photo">
-            <img :title="i.alt" :alt="i.alt" :src="i.img" />
+        <div v-for="i in commodity" :key="i" class="Products" :id="i.ginfoId">
+          <router-link :to="'/purchase?goodsid='+i.ginfoId" class="photo" :id="i.ginfoId">
+            <img :title="i.alt" :alt="i.alt" :src="api+i.ginfoId+'.jpg'" />
           </router-link>
           <div class="ms">
             <h5>
-              <router-link to="/purchase">{{i.title}}</router-link>
+              <router-link to="/purchase">{{i.ginfoName}}</router-link>
             </h5>
-            <P>{{i.describe}}</P>
-            <P class="spec">规格：{{i.spe}}</P>
+            <P>{{i.ginfoSynopsis}}</P>
+            <P class="spec">规格：{{i.ginfoSpecs}}</P>
           </div>
-           <strong class="price">￥{{i.Price}}</strong>
-          <router-link to="/purchase" class="btn_minxi">立即购买</router-link>
+           <strong class="price">￥{{i.ginfoPrice}}</strong>
+          <router-link :to="'/purchase?goodsid='+i.ginfoId" class="btn_minxi">立即购买</router-link>
         </div>
         <!--商品分页-->
         <div class="block">
@@ -74,12 +74,12 @@
       <div class="yCmsContentSlot">
         <h4 class="redTitle">猜你喜欢</h4>
         <ul class="likeProductList">
-          <li v-for="i in Guess">
-            <router-link to="/purchase">
-              <img :src="i.img" :alt="i.alt"/>
+          <li v-for="i in guess" :key="i">
+            <router-link :to="'/purchase?goodsid='+i.ginfoId">
+              <img :src="api+i.ginfoId+'.jpg'" :alt="i.ginfoSynopsis"/>
             </router-link>
-            <em>¥{{i.Price}}</em>
-            <strong>{{i.name}}</strong>
+            <em>¥{{i.ginfoPrice}}</em>
+            <strong>{{i.ginfoName}}</strong>
           </li>
         </ul>
       </div>
@@ -90,6 +90,9 @@
   </div>
 </template>
 <script>
+import {guess} from 'api/request'
+import {getLists} from 'api/request'
+import {getListstow} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -98,9 +101,9 @@ import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
 import BottomNav from '../public/BottomNavigation.vue'
 // 商品
-import img_1 from './img/100000027_M.jpg'
+import img1 from './img/100000027_M.jpg'
 // 猜你喜欢
-import img1 from './img/100001442_M.jpg'
+import img11 from './img/100001442_M.jpg'
 export default {
   components: {
     TopNavigation,
@@ -113,14 +116,9 @@ export default {
       imglist: [banner1, banner2, banner3],
       activeIndex: '1',
       currentPage1: 1,
-      commodity: [
-        {id:"1",title:"芝兰玉叶慕思蛋糕",img:img_1,describe:"干酪慕思，布朗尼饼干底",alt:"芝兰玉叶慕思蛋糕",spe:"78号、56号",Price:"145.00"}
-      ],
-      Guess: [
-        {id:"1",img:img1,alt:"甜蜜如心鲜奶蛋糕",Price:'258.00',name:"甜蜜如心鲜奶蛋糕"},
-        {id:"2",img:img1,alt:"甜蜜如心鲜奶蛋糕",Price:'258.00',name:"甜蜜如心鲜奶蛋糕"},
-        {id:"3",img:img1,alt:"甜蜜如心鲜奶蛋糕",Price:'258.00',name:"甜蜜如心鲜奶蛋糕"}
-      ]
+      commodity: [],
+      guess: [],
+      api: 'http://77npin.natappfree.cc/Canso/img/'
     }
   },
   methods: {
@@ -131,19 +129,19 @@ export default {
       let total = document.querySelector('.total')
       total.innerHTML = `每页：${val} 条`
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
       let curpa = document.querySelector('#Current_page')
       curpa.innerHTML = `当前页：${val}`
     },
     //    价格：由低到高
-    Low_to_high:function () {
-      let All_price = document.querySelectorAll('.price')
-      let com = document.querySelectorAll(".Products")
+    Low_to_high: function () {
+      let Allprice = document.querySelectorAll('.price')
+      let com = document.querySelectorAll('.Products')
       let a = null
-      for(var i = 0; i < All_price.length; i++) {
-        for(var j = 0; j < i; j++) {
-          if (All_price[i].innerHTML < All_price[j].innerHTML) {
+      for (var i = 0; i < Allprice.length; i++) {
+        for (var j = 0; j < i; j++) {
+          if (Allprice[i].innerHTML < Allprice[j].innerHTML) {
           //   html排序
             a = com[i].innerHTML
             com[i].innerHTML = com[j].innerHTML
@@ -157,13 +155,15 @@ export default {
       }
     },
     //    价格：由高到低
-    high_to_Low:function () {
-      let All_price = document.querySelectorAll('.price')
-      let com = document.querySelectorAll(".Products")
+    high_to_Low: function () {
+      let Allprice = document.querySelectorAll('.price')
+      let com = document.querySelectorAll('.Products')
       let a = null
-      for(var i = 0; i < All_price.length; i++) {
-        for(var j = 0; j < i; j++) {
-          if (All_price[i].innerHTML > All_price[j].innerHTML) {
+      console.log(Allprice.length)
+
+      for (var i = 0; i < Allprice.length; i++) {
+        for (var j = 0; j < i; j++) {
+          if (Allprice[i].innerHTML > Allprice[j].innerHTML) {
             //   html排序
             a = com[i].innerHTML
             com[i].innerHTML = com[j].innerHTML
@@ -177,11 +177,11 @@ export default {
       }
     },
     //    综合排序
-    comp:function () {
-      let com = document.querySelectorAll(".Products")
+    comp: function () {
+      let com = document.querySelectorAll('.Products')
       let a = null
-      for(var i = 0; i < com.length; i++) {
-        for(var j = 0; j < i; j++) {
+      for (var i = 0; i < com.length; i++) {
+        for (var j = 0; j < i; j++) {
           if (com[i].id < com[j].id) {
             //   html排序
             a = com[i].innerHTML
@@ -195,6 +195,32 @@ export default {
         }
       }
     }
+  },
+  //   获取数据
+  mounted () {
+    console.log()
+    let data = {typeone: this.$route.query.typeone}
+    console.log(data)
+    getLists(data, (res) => {
+      console.log('666')
+      console.log(res.goodsinfo)
+      console.log('666')
+      this.commodity = res.goodsinfo
+    })
+    let da = {typetwo: this.$route.query.typetwo}
+    console.log(da)
+    getListstow(da, (res) => {
+      console.log('7777')
+      console.log(res)
+      console.log('7777')
+      this.commodity = res.goodsinfo
+    })
+    // 猜你喜欢
+    guess((res) => {
+      console.log('元祖西点')
+      console.log(res)
+      this.guess = res.goodsinfo
+    })
   }
 }
 </script>

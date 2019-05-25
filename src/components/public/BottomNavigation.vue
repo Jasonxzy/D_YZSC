@@ -28,10 +28,10 @@
           </a>
         </li>
         <li id="btn_hd">
-          <a href="#">
+          <router-link to="/">
             <span></span>
             <em>最新活动</em>
-          </a>
+          </router-link>
         </li>
         <li id="btn_cart">
           <router-link to="/ShoppingCart">

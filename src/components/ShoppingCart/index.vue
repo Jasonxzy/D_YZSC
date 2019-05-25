@@ -1,13 +1,13 @@
 <template>
   <div>
-    !--顶部导航-->
-    <TopNavigation/>
+    <!--顶部导航-->
+    <!--<TopNavigation/>-->
     <!--导航banner-->
-    <TopBanner/>
+    <!--<TopBanner/>-->
     <!--搜索部分-->
-    <search/>
+    <!--<search/>-->
     <!--分类导航部分-->
-    <ClassNav/>
+    <!--<ClassNav/>-->
     <!--购物车-->
     <div id="car1" class="display">
       <div class="Cartop fonts-12 allcolor gray">
@@ -32,20 +32,20 @@
             <th>数量</th>
             <th>操作</th>
           </tr>
-          <tr>
+          <tr v-for="(first, index) in lists" :key="index">
             <td>
               <div class="cartproduct">
                 <a href="#" class="cartproduct-img">
-                  <img src="http://pic.ganso.com.cn/images1/100001433/100001433_M.jpg" />
+                  <img src="../public/img/100000027_M.jpg"/>
                 </a>
                 <strong>
-                  <a href="#">吟紫鸢鲜奶蛋糕</a>
+                  <a href="#">{{first.goodsName}}</a>
                 </strong>
-                <p>规格：<span>8号</span>  夹馅：<span>香芋+香芋（网红款）</span></p>
+                <p>规格：<span>2号</span>  夹馅：<span>布丁+红豆</span></p>
               </div>
             </td>
             <td>
-              <strong class="red fontw">¥258.00</strong>
+              <strong class="red fontw">¥{{first.goodsPrice}}</strong>
             </td>
             <td>
               <div class="cartnumber">
@@ -53,22 +53,22 @@
               </div>
             </td>
             <td>
-              <a href="#" class="remove">移除</a>
+              <a href="#" @click="deleteList(index)" class="remove">移除</a>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
-      <div class="Carbottom">
+      <div class="Carbottom" :total="total">
         <div class="carbox float-r margin-R-15">
           <h3>订单合计</h3>
           <dl>
             <dt>商品数量总计：</dt>
-            <dd>1</dd>
+            <dd>{{total.number}}</dd>
             <dt>商品金额总计（不含运费）：</dt>
-            <dd><strong>¥258.00</strong></dd>
+            <dd><strong>¥{{total.price}}</strong></dd>
           </dl>
-          <div class="statistical">总计： ¥258.00</div>
+          <div class="statistical">总计： ¥{{total.price}}</div>
           <div class="carbtn">
             <a href="#">继续购物</a>
             <a href="#" @click="jiesuan">结算</a>
@@ -114,7 +114,7 @@
           <el-button type="text" @click="dialogVisible = true">
           <a href="#" class="btn_add_address">新增收货人地址</a>
           </el-button>
-            <el-dialog title="新增收货人地址":visible.sync="dialogVisible"width="50%" :before-close="handleClose">
+            <el-dialog title="新增收货人地址" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
               <div class="creat-address">
                 <form>
                   <dl>
@@ -194,7 +194,7 @@
       </div>
       <div class="Shoppinglist">
         <h3 class="title"><span>购物清单</span></h3>
-        <p class="float-r"><a href="#" class="gray"> << 返回购物车修改商品 </a></p>
+        <p class="float-r"><a href="#" class="gray">返回购物车修改商品</a></p>
         <table>
           <tbody>
             <tr>
@@ -256,7 +256,7 @@
             <h4>最终订单金额：</h4>
             <dl>
               <dt>商品金额：</dt>
-              <dd>	¥258.00</dd>
+              <dd>¥258.00</dd>
               <dt>运费：</dt>
               <dd>免费</dd>
               <dt>折扣：</dt>
@@ -292,7 +292,7 @@
           恭喜您订单提交成功
         </div>
         <div class="OrderMinxi">
-          <p >订单编号：2019051802834104       　 　 应付款项：
+          <p >订单编号：2019051802834104 应付款项：
             <strong>¥258.00</strong>
           </p>
           <p class="hei">
@@ -307,6 +307,7 @@
   </div>
 </template>
 <script>
+import {shopcart} from 'api/request_yms'
 import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
@@ -324,33 +325,52 @@ export default {
     return {
       num1: 1,
       dialogVisible: false
-    };
+    }
   },
+  computed: {
+    lists: function () {
+      console.log(this.$store)
+      return this.$store.state.cart.cartLists
+    },
+    total: function () {
+      return this.$store.getters.total
+    }
+  },
+  mounted () {
+    this.shopcart()
+    shopcart((res) => {})
+    console.log(this.carLists)
+  },
+//  computed: {
+//    lists: () => this.$store.state.cart.cartLists
+//  },
   methods: {
-    handleClose(done) {
+    handleClose (done) {
       this.$confirm('确认关闭？')
         .then(_ => {
-          done();
+          done()
         })
-        .catch(_ => {});
+        .catch(_ => {})
     },
-    jiesuan:function () {
-      let car1 = document.querySelector("#car1")
-      let car2 = document.querySelector("#car2")
-      let car3 = document.querySelector("#car3")
-      car1.style.display = "none"
-      car2.style.display = "block"
-      car3.style.display = "none"
-      console.log(sss)
+    jiesuan: function () {
+      let car1 = document.querySelector('#car1')
+      let car2 = document.querySelector('#car2')
+      let car3 = document.querySelector('#car3')
+      car1.style.display = 'none'
+      car2.style.display = 'block'
+      car3.style.display = 'none'
     },
-    xiadan:function () {
-      let car1 = document.querySelector("#car1")
-      let car2 = document.querySelector("#car2")
-      let car3 = document.querySelector("#car3")
-      car1.style.display = "none"
-      car2.style.display = "none"
-      car3.style.display = "block"
-      console.log(sss)
+    xiadan: function () {
+      let car1 = document.querySelector('#car1')
+      let car2 = document.querySelector('#car2')
+      let car3 = document.querySelector('#car3')
+      car1.style.display = 'none'
+      car2.style.display = 'none'
+      car3.style.display = 'block'
+    },
+    deleteList (index) {
+      this.lists.splice(index, 1)
+      this.$store.commit('changeCartLists', this.lists)
     }
   }
 }
