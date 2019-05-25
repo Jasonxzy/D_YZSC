@@ -341,7 +341,7 @@
       <ul class="imgList">
         <li v-for="i in ActivitiesList" :key="i">
           <div class="simple_disp-img">
-            <router-link to="/purchase">
+            <router-link :to="'/purchase?goodsid='+30">
               <img :src="i.img"/>
             </router-link>
           </div>
@@ -392,7 +392,7 @@ export default {
   },
   data () {
     return {
-      api: 'http://88ja9g.natappfree.cc/Canso',
+      api: 'http://77npin.natappfree.cc/Canso',
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
       // banner下面tab切换

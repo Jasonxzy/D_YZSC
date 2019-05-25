@@ -118,7 +118,7 @@ export default {
       currentPage1: 1,
       commodity: [],
       guess: [],
-      api: 'http://88ja9g.natappfree.cc/Canso/img/'
+      api: 'http://77npin.natappfree.cc/Canso/img/'
     }
   },
   methods: {

@@ -14,11 +14,7 @@
       >
       <router-link to="/" >元祖商城</router-link>
       >
-      <router-link to="" >冰品季</router-link>
-      >
-      <router-link to="" >冰品点心</router-link>
-      >
-      <router-link to="" >糯米拥抱冰淇淋</router-link>
+      <router-link to="" >{{goodsinfo.ginfoName}}</router-link>
     </div>
     <!--内容页内容部分-->
     <div class="YZ-bottom allcolor">
@@ -193,7 +189,6 @@
 </template>
 <script>
 import {guess} from 'api/request'
-import {shopinformation} from 'api/request_yms'
 import {Dtails} from 'api/request'
 import img1 from '../public/img/100000027_M.jpg'
 import img2 from '../public/img/100001236_M.jpg'
@@ -230,7 +225,7 @@ export default {
       current3: null,
       index: 0,
       guess: [],
-      api: 'http://88ja9g.natappfree.cc/Canso/img/',
+      api: 'http://77npin.natappfree.cc/Canso/img/',
       selectorList: [
         {name: '规格1'},
         {name: '规格2'},
@@ -282,25 +277,20 @@ export default {
   },
   // 获取数据
   mounted () {
-    shopinformation((res) => {
-      console.log(res)
-      // 用户评论
-      this.evaluation = res.comment
-    })
     let data = {goodsid: this.$route.query.goodsid}
     console.log("6666")
     Dtails(data, (res) => {
       console.log("6666")
       console.log(res.goodsinfo)
       this.goodsinfo = res.goodsinfo
-      this.min_img = 'http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
+      this.min_img = 'http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
       for (var i = 0; i < 3 ;i++) {
-        console.log('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
-        this.imgList.push('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        console.log('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.imgList.push('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
       }
       for (var i = 0; i < 6 ;i++) {
-        console.log('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
-        this.BigimgList.push('http://88ja9g.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        console.log('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.BigimgList.push('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
       }
     })
     // 猜你喜欢
