@@ -72,6 +72,12 @@ let Dtails = function (data, fn) {
     fn(res)
   })
 }
+// 根据商品id获取评论
+let comment = function (data, fn) {
+  sendAxios('post', '/Canso/getcommentbygoodsid', data).then((res) => {
+    fn(res)
+  })
+}
 export {
   getList,
   getLists,
@@ -84,5 +90,6 @@ export {
   GiftBox,
   westPoint,
   guess,
-  Dtails
+  Dtails,
+  comment
 }

@@ -53,6 +53,16 @@
 </template>
 <script>
 export default {
+//   data () {},
+//   computed: {
+//     token:function(){
+//       return this.$store.state.token
+//     }
+//   },
+//   mounted () {
+//     var token = window.localStorage.getItem('token');
+    
+//   }
 }
 </script>
 <style>
