@@ -11,7 +11,7 @@
             <!--<span></span>-->
         </div>
         <div class="examine">
-            <el-steps :active="1" align-center>
+            <el-steps :active="0" align-center>
                 <el-step :title="i.name" v-for="i in orderel" :key="i"></el-step>
                 <!--<el-step title="订单审核" ></el-step>-->
                 <!--<el-step title="自提、配送"></el-step>-->
@@ -68,21 +68,24 @@
                         <td>门店</td>
                     </tr>
                     <tr class="table-img">
-                        <td><img src="./img/sh.jpg"></td>
+                        <td v-for="(i,index) in imgList" :key="index">
+                          <img :src="i.img">
+                          <!--{{i.img}}-->
+                        </td>
                         <td>
-                            <p>朝羽鲜奶蛋糕</p>
+                            <p v-for="(i,index) in orderdetail" :key="index">{{i.name}}</p>
                             <p>规格：
-                                <span>8号</span>
-                                <span>夹馅：</span>
-                                <span>香芋+香芋</span>
-                                <span>（网红款）</span>
+                                <span v-for="(i,index) in orderspan3" :key="index">{{i.name}}</span>
+                                <!--<span>夹馅：</span>-->
+                                <!--<span>香芋+香芋</span>-->
+                                <!--<span>（网红款）</span>-->
                             </p>
                         </td>
-                        <td>1</td>
-                        <td>￥210.00</td>
-                        <td>￥214.00</td>
-                        <td>门店提取</td>
-                        <td>北京双井店</td>
+                        <td v-for="(i,index) in ordertd" :key="index">{{i.name}}</td>
+                        <!--<td>￥210.00</td>-->
+                        <!--<td>￥214.00</td>-->
+                        <!--<td>门店提取</td>-->
+                        <!--<td>北京双井店</td>-->
                     </tr>
                 </table>
             </div>
@@ -92,7 +95,7 @@
                 <li class="list-p">订单合计</li>
                 <li>
                     <span>商品数量总计</span>
-                    <span class="fr">1</span>
+                    <span class="fr">{{accounts1.name}}</span>
                 </li>
                 <li>
                     <span>商品金额总计</span>
@@ -114,6 +117,7 @@
 </template>
 <script>
 import {orderLL} from 'api/request_ll'
+import img0 from './img/sh.jpg'
 export default {
   data () {
     return {
@@ -156,12 +160,34 @@ export default {
       ],
       orderspan2: [
         {name: '19961210 16:40'}
-      ]
+      ],
+      imgList: [
+        {img: img0}
+      ],
+      orderdetail: [
+        {name: '朝羽鲜奶蛋糕'}
+      ],
+      orderspan3: [
+        {name: '8号'},
+        {name: '夹馅： '},
+        {name: '香芋+香芋'},
+        {name: '（网红款）'}
+      ],
+      ordertd: [
+        {name: '1'},
+        {name: '￥210.00'},
+        {name: '￥214.00'},
+        {name: '门店提取'},
+        {name: '北京双井店'}
+      ],
+      accounts1: {
+        name: '1'
+      },
+      lis: []
     }
   },
-  mouted () {
+  mounted () {
     orderLL((res) => {
-      console.log('5454')
       console.log(res)
     })
   }

@@ -158,10 +158,11 @@ export default new Router({
       }
     },
     {
-      path: '/Notice/:id',
+      path: '/Notice',
       components: {
         default: Notice
-      }
+      },
+      props: (route) => ({id: route.query.id})
     },
     {
       path: '/SearchList',

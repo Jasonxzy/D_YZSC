@@ -24,8 +24,8 @@
           <em>元祖公告</em>
         </div>
         <ul class="NewsList">
-          <li v-for="i in NoticeList" :key="i">
-            <router-link to="/Notice" :title="i.title">{{i.name}}</router-link>
+          <li v-for="(i,index) in homeNlist" :key="index">
+            <router-link :to="'/Notice?id='+i.NId" :id="i.NId">【公告】{{i.NTitle}}</router-link>
           </li>
         </ul>
       </div>
@@ -194,6 +194,7 @@
 </template>
 <script>
 import {getList} from 'api/request'
+import {homeNlq} from 'api/request_ll'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -228,6 +229,7 @@ export default {
     return {
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
+      homeNlist: [],
 // banner下面tab切换
       prodlist: [
         {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
@@ -280,14 +282,14 @@ export default {
         {img: img8},
         {img: img9},
         {img: img10}
-      ],
-      //    公告
-      NoticeList: [
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"}
       ]
+      //    公告
+//      NoticeList: [
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"}
+//      ]
     }
   },
   methods: {
@@ -301,6 +303,11 @@ export default {
       console.log("111111")
       console.log(res)
       //      this.goodsList = data.lists
+    })
+    homeNlq((res) => {
+      this.homeNlist = res.noticelist
+      console.log('ll')
+      console.log(this.homeNlist)
     })
   }
 
