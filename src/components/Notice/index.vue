@@ -9,24 +9,26 @@
     <div class="Notice-head">
       <router-link to="/#" class="gray fonts-12">主页</router-link>
       >
-      <router-link to="#" class="gray fonts-12"> 元祖公告44（18年中秋月饼销毁公告）</router-link>
+      <router-link to="#" class="gray fonts-12">{{divList.NSynopsis}}</router-link>
     </div>
     <div class="Notice-cotainer">
       <div class="Notice-logo">
         <img src="./Noticeimg/ganso-logo.png" alt="">
         <span>
-        {{divlist.name}}
+        {{divList.NTitle}}
         </span>
       </div>
       <div class="Notice-content">
-        <p class="fonts-24" v-for="i in divlist1" :key="i">
-          {{i.name}}
-        </p>
+        <p v-html="divList.NContent"></p>
       </div>
       <!--落款-->
       <div class="Inscription">
-         <span class="fonts-20" v-for="i in divlist2" :key="i">
-            {{i.name}}
+         <span class="fonts-20">
+            {{divList.NCompany}}
+         </span>
+        <span class="fonts-20">
+          <br/>
+          {{NTime}}
          </span>
       </div>
     </div>
@@ -34,12 +36,15 @@
   </div>
 </template>
 <script>
+//import moment from 'moment'
 import TopNavigation from '@/components/public/TopNavigation.vue'
 import TopBanner from '@/components/public/TopBanner.vue'
 import search from '@/components/public/search.vue'
 import ClassNav from '@/components/public/ClassNav.vue'
 import BottomNav from '@/components/public/BottomNavigation.vue'
+import {homeNl} from 'api/request_ll'
 export default {
+  props: ['id'],
   components: {
     TopNavigation,
     TopBanner,
@@ -49,33 +54,23 @@ export default {
   },
   data () {
     return {
-      divlist: {
-        name: '【公告】元祖2018年中秋月饼报废公告'
-      },
-      divlist1: [
-        {name: '为维护广大消费者的合法权益，元祖已将2018年月饼提货券的提领时间，' +
-        '分别延期至2018年9月24日和2018年10月15日，并公布了“元祖对已过中秋节的月饼' +
-        '提领政策”，指引消费者在2018年' +
-        '10月15日前及时携券提领月饼，提醒消费者逾期将无法提领。'
-        },
-        {name: '为严格执行《食品安全法》关于及时清理超过保质期食品的相关规定，' +
-        '同时因月饼本身具有保质期和销售期，元祖对已过期产品一贯采取及时报废原则，' +
-        '并对过期产品报废过程及对报废品处理实行严格的管控流程，故元祖于2018年10月在' +
-        '各门店张贴了关于2018年10月30日销毁过期月饼的公告，并于当天在上海元祖梦果子股' +
-        '份有限公司现场销毁月饼，' +
-        '总计陆仟肆佰余盒，整个过程由公证机关进行了现场公证。'},
-        {name: '至此，元祖2018年度中秋月饼已全部销毁，同时敬告广大消费者，2018年中秋月饼提货券' +
-        '将不再予以提领。'}
-      ],
-      divlist2: [
-        {name: '上海元祖梦果子股份有限公司'},
-        {name: '2018年11月5日'}
-      ]
+      divList: [],
+      NTime: '',
+      aa: []
     }
   },
   // 文档加载完成
   mounted () {
-    console.log(this.$route.params.id)
+    let id = {id: this.$route.query.id}
+    console.log(id)
+    homeNl(id, (res) => {
+      this.aa = id.id
+      this.divList = res.noticelist[this.aa - 1]
+      console.log(res.noticelist[0])
+      let a = new Date(this.divList.NTime)
+      let b = a.getFullYear() + '年' + a.getMonth() + '月' + a.getDay() + '日'
+      this.NTime = b
+    })
   }
 }
 </script>

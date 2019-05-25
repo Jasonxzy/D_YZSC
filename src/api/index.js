@@ -2,5 +2,6 @@
 
 const api = '/api/'
 
-
-export {api}
+export {
+  api
+}

@@ -1,10 +1,7 @@
 //     封装axios请求
-
-
 import axios from 'axios'
 import {api} from './index'
 import qs from 'qs'
-
 
 function sendAxios (methods, url, data = {}) {
   return new Promise((resolve, reject) => {

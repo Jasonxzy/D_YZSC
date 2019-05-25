@@ -24,8 +24,8 @@
           <em>元祖公告</em>
         </div>
         <ul class="NewsList">
-          <li v-for="i in NoticeList" :key="i">
-            <router-link to="/Notice" :title="i.title">{{i.name}}</router-link>
+          <li v-for="(i,index) in homeNlist" :key="index">
+            <router-link :to="'/Notice?id='+i.NId" :id="i.NId">【公告】{{i.NTitle}}</router-link>
           </li>
         </ul>
       </div>
@@ -353,6 +353,8 @@
   </div>
 </template>
 <script>
+import {getList} from 'api/request'
+import {homeNlq} from 'api/request_ll'
 import {westPoint} from 'api/request'
 import {GiftBox} from 'api/request'
 import {Cake} from 'api/request'
@@ -395,6 +397,7 @@ export default {
       api: 'http://huangchuan.natapp1.cc/Canso',
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
+      homeNlist: [],
       // banner下面tab切换
       prodlist1: [],
       prodlist2: [],
@@ -437,6 +440,13 @@ export default {
         {img: img9},
         {img: img10}
       ]
+      //    公告
+//      NoticeList: [
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
+//        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"}
+//      ]
     }
   },
   methods: {
@@ -509,6 +519,11 @@ export default {
       this.westPointlist1 = res.goodsinfo[0]
       this.westPointlist2 = res.goodsinfo[1]
       this.westPointlist3 = res.goodsinfo[2]
+    })
+    homeNlq((res) => {
+      this.homeNlist = res.noticelist
+      console.log('ll')
+      console.log(this.homeNlist)
     })
   }
 
