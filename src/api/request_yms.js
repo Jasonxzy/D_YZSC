@@ -14,13 +14,11 @@ let deleteUsercomments = function (fn) {
 }
 // 购物车页面接口
 let shopcart = function (fn) {
-  sendAxios('post', '/Canso/getshopping').then((res) => {
+  sendAxios('post', '/Canso/getshopping?userid=1').then((res) => {
     fn(res)
   })
 }
 export {
-  shopinformation,
-  Usercomments,
   addUsercomments,
   shopcart,
   deleteUsercomments

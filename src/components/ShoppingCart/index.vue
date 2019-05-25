@@ -11,7 +11,7 @@
     <!--购物车-->
     <div id="car1" class="display">
       <div class="Cartop fonts-12 allcolor gray">
-        <a href="#">主页</a>
+        <router-link to="/">主页</router-link>
         >
         <a href="#">购物车</a>
       </div>
@@ -32,24 +32,25 @@
             <th>数量</th>
             <th>操作</th>
           </tr>
-          <tr v-for="(first, index) in lists" :key="index">
+          <tr v-for="(first, index) in shopc" :key="index">
             <td>
               <div class="cartproduct">
                 <a href="#" class="cartproduct-img">
-                  <img src="../public/img/100000027_M.jpg"/>
+                  <!--<img src="../public/img/100000027_M.jpg"/>-->
+                  <!--<img :title="first.goodsinfo.goodsimgses[13].imgSrc" :alt="prodlist4.ginfoSynopsis" :src="api+'/img/'+prodlist4.ginfoId+'.jpg'"/>-->
                 </a>
                 <strong>
-                  <a href="#">{{first.goodsName}}</a>
+                  <a href="#">{{first.goodsinfo.ginfoName}}</a>
                 </strong>
-                <p>规格：<span>2号</span>  夹馅：<span>布丁+红豆</span></p>
+                <p>规格：<span>{{first.goodsinfo.ginfoSpecs}}</span>  夹馅：<span>{{first.fillers}}</span></p>
               </div>
             </td>
             <td>
-              <strong class="red fontw">¥{{first.goodsPrice}}</strong>
+              <strong class="red fontw">¥{{first.goodsinfo.ginfoPrice}}</strong>
             </td>
             <td>
               <div class="cartnumber">
-                <el-input-number v-model="num1" @change="handleChange"></el-input-number>
+                <el-input-number v-model="first.shAmount" @change="handleChange" :min="0"></el-input-number>
               </div>
             </td>
             <td>
@@ -59,7 +60,7 @@
           </tbody>
         </table>
       </div>
-      <div class="Carbottom" :total="total">
+      <div class="Carbottom">
         <div class="carbox float-r margin-R-15">
           <h3>订单合计</h3>
           <dl>
@@ -70,7 +71,7 @@
           </dl>
           <div class="statistical">总计： ¥{{total.price}}</div>
           <div class="carbtn">
-            <a href="#">继续购物</a>
+            <router-link to="/">继续购物</router-link>
             <a href="#" @click="jiesuan">结算</a>
           </div>
         </div>
@@ -80,7 +81,7 @@
     <!--提交订单-->
     <div id="car2" class="display2">
       <div class="Cartop fonts-12 allcolor gray">
-        <a href="#">主页</a>
+        <router-link to="/">主页</router-link>
         >
         <a href="#">结账</a>
         >
@@ -194,7 +195,7 @@
       </div>
       <div class="Shoppinglist">
         <h3 class="title"><span>购物清单</span></h3>
-        <p class="float-r"><a href="#" class="gray">返回购物车修改商品</a></p>
+        <p class="float-r"><a class="gray" @click="recar1">返回购物车修改商品</a></p>
         <table>
           <tbody>
             <tr>
@@ -203,16 +204,16 @@
               <th>数量</th>
               <th>总计</th>
             </tr>
-            <tr>
+            <tr v-for="(first, index) in shopc" :key="index">
               <td>
                 <div class="cartProduct">
-                  <strong><a href="#" class="gray">吟紫鸢鲜奶蛋糕</a></strong>
-                  <p>规格：<span>8号</span>夹馅<span>香芋+香芋（网红款）</span></p>
+                  <strong><a href="#" class="gray">{{first.goodsinfo.ginfoName}}</a></strong>
+                  <p>规格：<span>{{first.specifications}}</span>夹馅<span>{{first.fillers}}</span></p>
                 </div>
               </td>
-              <td><em>¥258.00</em></td>
-              <td>1</td>
-              <td><em>¥258.00</em></td>
+              <td><em>¥{{first.goodsinfo.ginfoPrice}}</em></td>
+              <td>{{first.shAmount}}</td>
+              <td><em>¥{{first.goodsinfo.ginfoPrice * first.shAmount}}</em></td>
             </tr>
             <tr>
               <td><div class="distribution">
@@ -236,7 +237,7 @@
         </div>
         <form class="form-actions">
           <span class="float-l">备注：</span>
-          <span><input type="text" placeholder="好几十岁的人了还过什么生日？？？"/></span>
+          <span><input type="text" placeholder="生日快乐，有什么需要请备注.."/></span>
         </form>
       </div>
       <div class="PaymentType">
@@ -256,13 +257,13 @@
             <h4>最终订单金额：</h4>
             <dl>
               <dt>商品金额：</dt>
-              <dd>¥258.00</dd>
+              <dd>¥{{total.price}}</dd>
               <dt>运费：</dt>
               <dd>免费</dd>
               <dt>折扣：</dt>
               <dd>¥0.00</dd>
               <dt>应付总额：</dt>
-              <dd>¥258.00</dd>
+              <dd>¥{{total.price}}</dd>
             </dl>
           </div>
           <form><a href="#" @click="xiadan">下订单</a> </form>
@@ -272,7 +273,7 @@
     <!--提交成功-->
     <div id="car3" class="display3">
       <div class="Cartop fonts-12 allcolor gray">
-        <a href="#">主页</a>
+        <router-link to="/">主页</router-link>
         >
         <a href="#">结账</a>
         >
@@ -323,27 +324,27 @@ export default {
   },
   data () {
     return {
-      num1: 1,
       dialogVisible: false
     }
   },
   computed: {
-    lists: function () {
-      console.log(this.$store)
-      return this.$store.state.cart.cartLists
+    shopc: function () {
+      console.log(this.$store.state.cart.cartLists)
+      return this.$store.state.cart.shopc
     },
     total: function () {
       return this.$store.getters.total
     }
   },
   mounted () {
-    this.shopcart()
-    shopcart((res) => {})
-    console.log(this.carLists)
+//    this.$store.dispatch('getCartList')
+    shopcart((res) => {
+      this.$store.commit('changeCartLists', res.shoppingcart)
+    })
   },
-//  computed: {
-//    lists: () => this.$store.state.cart.cartLists
-//  },
+  //  computed: {
+  //    lists: () => this.$store.state.cart.cartLists
+  //  },
   methods: {
     handleClose (done) {
       this.$confirm('确认关闭？')
@@ -352,12 +353,23 @@ export default {
         })
         .catch(_ => {})
     },
+    handleChange (value) {
+      console.log(value);
+    },
     jiesuan: function () {
       let car1 = document.querySelector('#car1')
       let car2 = document.querySelector('#car2')
       let car3 = document.querySelector('#car3')
       car1.style.display = 'none'
       car2.style.display = 'block'
+      car3.style.display = 'none'
+    },
+    recar1: function () {
+      let car1 = document.querySelector('#car1')
+      let car2 = document.querySelector('#car2')
+      let car3 = document.querySelector('#car3')
+      car1.style.display = 'block'
+      car2.style.display = 'none'
       car3.style.display = 'none'
     },
     xiadan: function () {
@@ -369,8 +381,11 @@ export default {
       car3.style.display = 'block'
     },
     deleteList (index) {
-      this.lists.splice(index, 1)
-      this.$store.commit('changeCartLists', this.lists)
+      this.shopc.splice(index, 1)
+      this.$store.commit('changeCartLists', this.shopc)
+    },
+    addnumber (index) {
+//      this.lists.
     }
   }
 }
@@ -797,6 +812,9 @@ export default {
                   float: left;
                   overflow: hidden;
                   list-style-type: none;}
+              }
+              em{
+                color: #e9004f;
               }
             }
           }
