@@ -10,5 +10,5 @@ const calcuMD5  = function (pwd) {
 }
 
 export {
-    calcuMD5
+  calcuMD5
 }

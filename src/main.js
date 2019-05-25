@@ -1,3 +1,4 @@
+// import store from '/store'
 import Vue from 'vue'
 import App from './App.vue'
 import ElementUi from 'element-ui'
@@ -12,6 +13,7 @@ Vue.use(ElementUi)
 new Vue({
   el: '#app',
   router,
+  // store,
   components: { App },
   template: '<App />'
 })

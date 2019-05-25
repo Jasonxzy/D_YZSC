@@ -24,13 +24,22 @@
                 <el-form-item label="手机" prop="phone">
                   <el-input v-model="ruleForm.phone" placeholder="请输入你登录的手机号"></el-input>
                 </el-form-item>
-                <el-form-item label="验证码"  prop="pass">
+                <!-- <el-form-item label="验证码"  prop="pass">
                   <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入你登录的密码" class="el-input-phone"></el-input>
                   <span class="a-phone"><img></span>
+                </el-form-item> -->
+                <el-form-item  prop="pass"  label="新密码" name="">
+                  <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入你的密码"></el-input>
+                </el-form-item>
+                 <el-form-item  prop="checkPass" label=" 确认密码" name=" ">
+                  <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" placeholder="请输入确认密码"></el-input>
                 </el-form-item>
                 <el-form-item prop="Shortmessage" label="短信验证">
                   <el-input  v-model="ruleForm.Shortmessage" placeholder="请输入你的手机号" class="el-input-phone"></el-input>
-                  <span class="a-phone">获取验证码</span>
+                  <a class="a-phone fr">
+                  <span v-show="sendAuthCode" class="auth_text auth_text_blue"  @click="getAuthCode">获取验证码</span>
+                  <span v-show="!sendAuthCode" class="auth_text"><span class="auth_text_blue codes">{{auth_time}}</span>秒之后重发</span>
+                </a>
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="submitForm('ruleForm')">找回密码</el-button>
@@ -47,14 +56,36 @@
   </div>
 </template>
 <script>
+import {calcuMD5} from 'api/public'
+import {Forgetpassword} from 'api/request_wyl.js'
+import {Shortmessage} from 'api/request_wyl.js'
 import BottomNav from '../public/BottomNavigation.vue'
 import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
-  export default {
-    data() {
-      var phone = (rule, value, callback) => {
+export default {
+  data () {
+        var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass')
+        }
+        callback()
+      }
+    }
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
+    var phone = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('手机号不能为空'))
       } else {
@@ -66,45 +97,106 @@ import ClassNav from '../public/ClassNav.vue'
         }
       }
     }
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
+    // var validatePass = (rule, value, callback) => {
+    //   if (value === '') {
+    //     callback(new Error('请输入密码'))
+    //   } else {
+    //     if (this.ruleForm.checkPass !== '') {
+    //       this.$refs.ruleForm.validateField('checkPass')
+    //     }
+    //     callback()
+    //   }
+    // }
+    var Shortmessage = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('获取验证码'))
       } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
+        var reg = /^\d{6}$/
+        if (reg.test(value) === false) {
+          return callback(new Error('请输入正确的验证码'))
+        } else {
+          callback()
         }
-        callback()
       }
     }
-      return {
-        ruleForm: {
+    return {
+      sendAuthCode: true,
+      auth_time: 0,
+      ruleForm: {
+        // pass: '',
+        phone: '',
+        Shortmessage: '',
         pass: '',
-        phone: ''
+        checkPass: '',
       },
       rules: {
+        // pass: [
+        //   { validator: validatePass, trigger: 'blur' }
+        // ],
+        phone: [
+          { validator: phone, trigger: 'blur' }
+        ],
+        Shortmessage: [
+          { validator: Shortmessage, trigger: 'blur' }
+        ],
         pass: [
           { validator: validatePass, trigger: 'blur' }
         ],
-        phone: [
-          { validator: phone, trigger: 'blur' }
-        ]
+        checkPass: [
+          { validator: validatePass2, trigger: 'blur' }
+        ], 
       },
-        activeName2: 'first'
-      }
-    },
-    methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
-    },
-    components: {
-      BottomNav,
-      ClassNav,
-      search,
-      TopBanner,
-      TopNavigation
+      activeName2: 'first'
     }
+  },
+  methods: {
+    getAuthCode: function () {
+      Shortmessage ({
+        'Userinfo_userTelnumber': this.ruleForm.phone
+      }, (res) => {
+        console.log(res)
+        //  this.collectionlist = data.lists
+          })
+      this.sendAuthCode = false
+      this.auth_time = 30
+      var authtimetimer = setInterval(() => {
+        this.auth_time--
+        if (this.auth_time <= 0) {
+          this.sendAuthCode = true
+          clearInterval(authtimetimer)
+        }
+      }, 1000)
+    },
+    handleClick (tab, event) {
+      console.log(tab, event)
+    },
+      submitForm (formName) {
+      // 判读表单是否通过验证
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          Forgetpassword({
+            'userinfo_userTelnumber': this.ruleForm.phone,
+            'verificationCode': this.ruleForm.Shortmessage,
+            'userinfo_userPassword': calcuMD5(this.ruleForm.pass),
+          },(res) => {
+            console.log(res)
+             this.collectionlist = data.lists
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    }
+  },
+  components: {
+    BottomNav,
+    ClassNav,
+    search,
+    TopBanner,
+    TopNavigation
   }
+}
 </script>
 <style scoped>
   .Forgetpassword{
@@ -178,4 +270,3 @@ import ClassNav from '../public/ClassNav.vue'
     margin-bottom: 14px;
 } 
 </style>
-

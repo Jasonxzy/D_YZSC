@@ -37,7 +37,7 @@
         <el-tab-pane label="元祖新品" name="first">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in prodlist">
+              <li v-for="i in prodlist" :key="i">
                 <router-link to="/purchase" class="photo">
                   <img :title="i.title" :alt="i.title" :src="i.img"/>
                 </router-link>
@@ -51,7 +51,7 @@
         <el-tab-pane label="热销商品" name="second">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in Selllist">
+              <li v-for="i in Selllist" :key="i">
                 <router-link to="/purchase" class="photo">
                   <img :title="i.title" :alt="i.title" :src="i.img"/>
                 </router-link>
@@ -65,7 +65,7 @@
         <el-tab-pane label="节庆民俗" name="third">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in folklist">
+              <li v-for="i in folklist" :key="i">
                 <router-link to="/purchase" class="photo">
                   <img :title="i.title" :alt="i.title" :src="i.img"/>
                 </router-link>
@@ -79,7 +79,7 @@
         <el-tab-pane label="元祖卡券" name="fourth">
           <div class="Tab_nr">
             <ul class="ProductList3">
-              <li v-for="i in Cardlist">
+              <li v-for="i in Cardlist" :key="i">
                 <router-link to="/purchase" class="photo">
                   <img :title="i.title" :alt="i.title" :src="i.img"/>
                 </router-link>
@@ -109,7 +109,7 @@
         </div>
       </div>
       <ul class="ProductList">
-        <li v-for="i in Cakelist">
+        <li v-for="i in Cakelist" :key="i">
           <router-link to="/purchase" class="photo">
             <img :title="i.title" :alt="i.title" :src="i.img"/>
             <strong>{{i.name}}</strong>
@@ -136,7 +136,7 @@
         </div>
       </div>
       <ul class="ProductList">
-        <li v-for="i in GiftBoxlist">
+        <li v-for="i in GiftBoxlist" :key="i">
           <router-link to="/purchase" class="photo">
             <img :title="i.title" :alt="i.title" :src="i.img"/>
             <strong>{{i.name}}</strong>
@@ -163,7 +163,7 @@
         </div>
       </div>
       <ul class="ProductList">
-        <li v-for="i in westPointlist">
+        <li v-for="i in westPointlist" :key="i">
           <router-link to="/purchase" class="photo">
             <img :title="i.title" :alt="i.title" :src="i.img"/>
             <strong>{{i.name}}</strong>
@@ -179,7 +179,7 @@
       <h3 class="PartTitle">精选活动 </h3>
       <span class="clear"></span>
       <ul class="imgList">
-        <li v-for="i in ActivitiesList">
+        <li v-for="i in ActivitiesList" :key="i">
           <div class="simple_disp-img">
             <router-link to="/purchase">
               <img :src="i.img"/>
@@ -193,7 +193,6 @@
   </div>
 </template>
 <script>
-import {getList} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
 import banner2 from './img/-20190501134142.jpg'
 import banner3 from './img/WechatIMG249.png'
@@ -228,52 +227,52 @@ export default {
     return {
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
-// banner下面tab切换
+      // banner下面tab切换
       prodlist: [
-        {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "8号溪云初起巧克力蛋糕",img: img1, monery: "258.00"}
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img1, monery: '258.00'}
       ],
       Selllist: [
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img2, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img2, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img2, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img2, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img2, monery: "258.00"}
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img2, monery: '258.00'}
       ],
       folklist: [
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img3, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img3, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img3, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img3, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img3, monery: "258.00"}
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img3, monery: '258.00'}
       ],
       Cardlist: [
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img4, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img4, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img4, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img4, monery: "258.00"},
-        {name: "溪云初起巧克力蛋糕",title: "6号朝羽鲜奶蛋糕",img: img4, monery: "258.00"}
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'},
+        {name: '溪云初起巧克力蛋糕', title: '6号朝羽鲜奶蛋糕', img: img4, monery: '258.00'}
       ],
       //      MUCH蛋糕
       Cakelist: [
-        {name: "朝羽鲜奶蛋糕",title: "6号朝羽鲜奶蛋糕",describe: "寓意良辰美景， 幸福的时刻", img: img5, monery: "258.00"},
-        {name: "朝羽鲜奶蛋糕",title: "6号朝羽鲜奶蛋糕",describe: "寓意良辰美景， 幸福的时刻", img: img5, monery: "258.00"},
-        {name: "朝羽鲜奶蛋糕",title: "6号朝羽鲜奶蛋糕",describe: "寓意良辰美景， 幸福的时刻", img: img5, monery: "258.00"}
+        {name: '朝羽鲜奶蛋糕', title: '6号朝羽鲜奶蛋糕', describe: '寓意良辰美景， 幸福的时刻', img: img5, monery: '258.00'},
+        {name: '朝羽鲜奶蛋糕', title: '6号朝羽鲜奶蛋糕', describe: '寓意良辰美景， 幸福的时刻', img: img5, monery: '258.00'},
+        {name: '朝羽鲜奶蛋糕', title: '6号朝羽鲜奶蛋糕', describe: '寓意良辰美景， 幸福的时刻', img: img5, monery: '258.00'}
       ],
       //      元祖礼盒
       GiftBoxlist: [
-        {name: "藤椒牛肉粽",title: "藤椒牛肉粽竹篮版",describe: "麻辣爽口，料多馅足，优选牛柳", img: img6, monery: "258.00"},
-        {name: "藤椒牛肉粽",title: "藤椒牛肉粽竹篮版",describe: "麻辣爽口，料多馅足，优选牛柳", img: img6, monery: "258.00"},
-        {name: "藤椒牛肉粽",title: "藤椒牛肉粽竹篮版",describe: "麻辣爽口，料多馅足，优选牛柳", img: img6, monery: "258.00"}
+        {name: '藤椒牛肉粽', title: '藤椒牛肉粽竹篮版', describe: '麻辣爽口，料多馅足，优选牛柳', img: img6, monery: '258.00'},
+        {name: '藤椒牛肉粽', title: '藤椒牛肉粽竹篮版', describe: '麻辣爽口，料多馅足，优选牛柳', img: img6, monery: '258.00'},
+        {name: '藤椒牛肉粽', title: '藤椒牛肉粽竹篮版', describe: '麻辣爽口，料多馅足，优选牛柳', img: img6, monery: '258.00'}
       ],
       //      元祖礼盒
       westPointlist: [
-        {name: "西点卷",title: "小西点虎皮卷",describe: "卷起来的幸福", img: img7, monery: "258.00"},
-        {name: "西点卷",title: "小西点虎皮卷",describe: "卷起来的幸福", img: img7, monery: "258.00"},
-        {name: "西点卷",title: "小西点虎皮卷",describe: "卷起来的幸福", img: img7, monery: "258.00"}
+        {name: '西点卷', title: '小西点虎皮卷', describe: '卷起来的幸福', img: img7, monery: '258.00'},
+        {name: '西点卷', title: '小西点虎皮卷', describe: '卷起来的幸福', img: img7, monery: '258.00'},
+        {name: '西点卷', title: '小西点虎皮卷', describe: '卷起来的幸福', img: img7, monery: '258.00'}
       ],
       //    精选活动
       ActivitiesList: [
@@ -283,10 +282,10 @@ export default {
       ],
       //    公告
       NoticeList: [
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"},
-        {name: "【公告】18年中秋月饼销毁",title: "【公告】18年中秋月饼销毁"}
+        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'},
+        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'},
+        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'},
+        {name: '【公告】18年中秋月饼销毁', title: '【公告】18年中秋月饼销毁'}
       ]
     }
   },
@@ -294,15 +293,15 @@ export default {
     handleClick (tab, event) {
       console.log(tab, event)
     }
-  },
-  // 获取数据
-  mounted () {
-    getList((res) => {
-      console.log("111111")
-      console.log(res)
-      //      this.goodsList = data.lists
-    })
   }
+  // 获取数据
+//  mounted () {
+//    getList((res) => {
+//      console.log("111111")
+//      console.log(res)
+//      //      this.goodsList = data.lists
+//    })
+//  }
 
 }
 </script>

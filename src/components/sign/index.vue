@@ -17,12 +17,13 @@
           <el-form-item prop="email" label="邮箱" name="email">
               <el-input v-model="ruleForm.email" placeholder="请输入你的邮箱"></el-input>
           </el-form-item>
-          <el-form-item prop="picture" label="验证码" name="">
+          <!-- <el-form-item prop="picture" label="验证码" name="">
               <el-input v-model="ruleForm.picture" placeholder="请输入验证码" class="el-input-phone"></el-input>
-              <img>
-          </el-form-item>
+              <img class="img" @click="changeImageCode" :src="imgcode + timestamp "/>
+          </el-form-item> -->
           <el-form-item prop="Shortmessage" label="短信验证" name="">
-              <el-input v-model="ruleForm.Shortmessage" placeholder="请输入你的手机号" class="el-input-phone"></el-input><a class="a-phone fr">
+              <el-input v-model="ruleForm.Shortmessage" placeholder="请输入你的手机号" class="el-input-phone"></el-input>
+              <a class="a-phone fr">
                 <span v-show="sendAuthCode" class="auth_text auth_text_blue"  @click="getAuthCode">获取验证码</span>
                 <span v-show="!sendAuthCode" class="auth_text"><span class="auth_text_blue codes">{{auth_time}}</span>秒之后重发</span>
               </a>
@@ -52,16 +53,15 @@
 </template>
 <script>
 import {register} from 'api/request_wyl.js'
-// import {picturec} from 'api/request_wyl.js'
-// import {calcuMD5} from 'api/common' 
-// import {picturec} from 'api/request_wyl.js'
+import {Shortmessage} from 'api/request_wyl.js'
 import {calcuMD5} from 'api/public'
 import BottomNav from '../public/BottomNavigation.vue'
 import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
-console.log(calcuMD5(11111))
+import {host} from 'api/index'
+// console.log(calcuMD5(11111))
 export default {
   data () {
     var phone = (rule, value, callback) => {
@@ -144,8 +144,8 @@ export default {
       }
     }
     return {
-        sendAuthCode: true,
-        auth_time: 0,
+      sendAuthCode: true,
+      auth_time: 0,
       ruleForm: {
         pass: '',
         checkPass: '',
@@ -155,6 +155,8 @@ export default {
         picture: '',
         Recommender: ''
       },
+      timestamp: 0,
+      imgcode: host+ 'user_codeImgaction?timestamp=',
       activeName: 'second',
       rules: {
         pass: [
@@ -182,7 +184,17 @@ export default {
     }
   },
   methods: {
+    changeImageCode: function() {
+        var timestamp = new Date().getTime();
+        this.timestamp = timestamp
+    },
     getAuthCode: function () {
+      Shortmessage ({
+        'Userinfo_userTelnumber': this.ruleForm.phone
+      }, (res) => {
+        console.log(res)
+        //  this.collectionlist = data.lists
+          })
       this.sendAuthCode = false
       this.auth_time = 30
       var authtimetimer = setInterval(() => {
@@ -197,15 +209,15 @@ export default {
       console.log(tab, event)
     },
     submitForm (formName) {
-      //判读表单是否通过验证
+      // 判读表单是否通过验证
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          //发送请求到后台，并将用户传递的信息一起发送过去
+          // 发送请求到后台，并将用户传递的信息一起发送过去
           console.log(this.ruleForm.phone)
           register({
-            'userinfo.userTelnumber': this.ruleForm.phone,
-            "userinfo.userPassword": calcuMD5(this.ruleForm.pass),
-            "VerificationCode": this.ruleForm.Shortmessage
+            'userinfo_userTelnumber': this.ruleForm.phone,
+            'Userinfo_userPassword': calcuMD5(this.ruleForm.pass),
+            'verificationCode': this.ruleForm.Shortmessage
           },(res) => {
             console.log(res)
             //  this.collectionlist = data.lists
@@ -226,14 +238,7 @@ export default {
     search,
     TopBanner,
     TopNavigation
-  },
-  //  mounted () {
-  //    picturec((res) => {
-  //     console.log("111111")
-  //     console.log(res)
-  //     //      this.goodsList = data.lists
-  //   })
-  // }
+  }
 }
 </script>
 <style scoped>
@@ -269,10 +274,10 @@ export default {
    display:inline-block;
 }
 >>>.el-input-phone{
-  width: 70%;
+  width: 60%;
 }
 .a-phone{
-  width: 27%;
+  width: 30%;
   border: 1px soli;
   border-radius: 4px;
   background:#409EFF;
@@ -284,5 +289,9 @@ export default {
 }
 >>>.el-tabs__nav{
   left: 600px;
+}
+.img{
+  width: 36%;
+  height: 40px;
 }
 </style>

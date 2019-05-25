@@ -114,7 +114,7 @@
           <el-button type="text" @click="dialogVisible = true">
           <a href="#" class="btn_add_address">新增收货人地址</a>
           </el-button>
-            <el-dialog title="新增收货人地址":visible.sync="dialogVisible"width="50%" :before-close="handleClose">
+            <el-dialog title="新增收货人地址" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
               <div class="creat-address">
                 <form>
                   <dl>
@@ -194,7 +194,7 @@
       </div>
       <div class="Shoppinglist">
         <h3 class="title"><span>购物清单</span></h3>
-        <p class="float-r"><a href="#" class="gray"> << 返回购物车修改商品 </a></p>
+        <p class="float-r"><a href="#" class="gray">返回购物车修改商品</a></p>
         <table>
           <tbody>
             <tr>
@@ -256,7 +256,7 @@
             <h4>最终订单金额：</h4>
             <dl>
               <dt>商品金额：</dt>
-              <dd>	¥258.00</dd>
+              <dd>¥258.00</dd>
               <dt>运费：</dt>
               <dd>免费</dd>
               <dt>折扣：</dt>
@@ -292,7 +292,7 @@
           恭喜您订单提交成功
         </div>
         <div class="OrderMinxi">
-          <p >订单编号：2019051802834104       　 　 应付款项：
+          <p >订单编号：2019051802834104 应付款项：
             <strong>¥258.00</strong>
           </p>
           <p class="hei">
@@ -324,33 +324,31 @@ export default {
     return {
       num1: 1,
       dialogVisible: false
-    };
+    }
   },
   methods: {
-    handleClose(done) {
+    handleClose (done) {
       this.$confirm('确认关闭？')
         .then(_ => {
-          done();
+          done()
         })
-        .catch(_ => {});
+        .catch(_ => {})
     },
-    jiesuan:function () {
-      let car1 = document.querySelector("#car1")
-      let car2 = document.querySelector("#car2")
-      let car3 = document.querySelector("#car3")
-      car1.style.display = "none"
-      car2.style.display = "block"
-      car3.style.display = "none"
-      console.log(sss)
+    jiesuan: function () {
+      let car1 = document.querySelector('#car1')
+      let car2 = document.querySelector('#car2')
+      let car3 = document.querySelector('#car3')
+      car1.style.display = 'none'
+      car2.style.display = 'block'
+      car3.style.display = 'none'
     },
-    xiadan:function () {
-      let car1 = document.querySelector("#car1")
-      let car2 = document.querySelector("#car2")
-      let car3 = document.querySelector("#car3")
-      car1.style.display = "none"
-      car2.style.display = "none"
-      car3.style.display = "block"
-      console.log(sss)
+    xiadan: function () {
+      let car1 = document.querySelector('#car1')
+      let car2 = document.querySelector('#car2')
+      let car3 = document.querySelector('#car3')
+      car1.style.display = 'none'
+      car2.style.display = 'none'
+      car3.style.display = 'block'
     }
   }
 }

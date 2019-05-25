@@ -225,5 +225,5 @@ export default new Router({
         default: clickAddress
       }
     }
-]
+  ]
 })

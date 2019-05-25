@@ -12,7 +12,7 @@
 </template>
 <script>
 import topBanner1 from './img/-333333333333333333333.jpg'
-import topBanner2 from './img/-333333333333333333333.jpg'
+import topBanner2 from './img/header123.jpg'
 export default {
   data () {
     return {

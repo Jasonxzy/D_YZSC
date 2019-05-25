@@ -57,8 +57,7 @@ export default {
     }
   },
  mounted () {
-   picturec((res) => {
-      console.log("111111")
+  picturec((res) => {
       console.log(res)
       //      this.goodsList = data.lists
     })

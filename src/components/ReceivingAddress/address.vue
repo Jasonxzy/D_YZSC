@@ -22,8 +22,9 @@
             <el-form-item prop="phone" label="手机号">
               <el-input v-model="ruleForm.phone" placeholder="请输入你的手机号"></el-input>
             </el-form-item>
-            <el-form-item label="性别" prop="name">
-              <select class="select">
+            <div></div>
+            <el-form-item label="性别" prop="name" >
+              <select class="select" v-model="ruleForm.sex">
                 <option>男</option>
                 <option>女</option>
               </select>
@@ -48,15 +49,16 @@
   </div>
 </template>
 <script>
+import {address} from 'api/request_wyl.js'
 import City from '@/components/ReceivingAddress/City.vue'
 export default {
   data () {
-   var address = (rule, value, callback) => {
+    var address = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('地址不能为空'))
       } else {
         var reg = /[\u4e00-\u9fa5]/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入正确的地址'))
         } else {
           callback()
@@ -75,12 +77,24 @@ export default {
         }
       }
     }
-      var Postal = (rule, value, callback) => {
+      var sex = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('名字不能为空'))
+      } else {
+        var reg = /[\u4e00-\u9fa5]/
+        if (reg.test(value) === false) {
+          return callback(new Error('名字必须是中文'))
+        } else {
+          callback()
+        }
+      }
+    }
+    var Postal = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('邮政编码不能为空'))
       } else {
         var reg = /\d{6}/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入真确的邮政编码'))
         } else {
           callback()
@@ -92,7 +106,7 @@ export default {
         return callback(new Error('手机不能为空'))
       } else {
         var reg = /0?(13|14|15|18)[0-9]{9}/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入正确的手机号'))
         } else {
           callback()
@@ -104,7 +118,7 @@ export default {
         return callback(new Error('邮箱不能为空'))
       } else {
         var reg = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/
-      if (reg.test(value) === false) {
+        if (reg.test(value) === false) {
           return callback(new Error('请输入正确的邮箱'))
         } else {
           callback()
@@ -112,7 +126,7 @@ export default {
       }
     }
     return {
-     ruleForm: {
+      ruleForm: {
         name: '',
         date1: '',
         delivery: false,
@@ -120,7 +134,9 @@ export default {
         address: '',
         Postal: '',
         phone: '',
-        mailbox: ''
+        mailbox: '',
+        sex:'',
+        city:''
       },
       rules: {
         name: [
@@ -144,6 +160,13 @@ export default {
         mailbox: [
           { required: true, validator: mailbox, trigger: 'blur' },
           // { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
+        ],
+        sex: [
+        { required: true, validator: sex, trigger: 'blur' },
+        ],
+        city: [
+        { required: true, validator: name, trigger: 'blur' },
+        {}
         ]
       }
     }
@@ -153,6 +176,23 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!')
+          console.log(this.ruleForm)
+           address({
+            'address_addName': this.ruleForm.name,
+            'address_address' : this.ruleForm.address,
+            'address_zipcode': this.ruleForm.Postal,
+            // 'address_contacts':address_contacts,//城市
+            'address_phone':this.ruleForm.phone,
+            'address_sex':this.ruleForm.name,//性别
+            'address_birthday':this.ruleForm.date1,
+            'address_email':this.ruleForm.mailbox
+            },(res) => {
+            console.log(res)
+            window.localStorage.setItem('token',res.success)
+            window.localStorage.setItem('use',JSON.stringify(res.userphon))
+            // this.$store.commit()
+            this.$router.push({path: '/'})
+          })
         } else {
           console.log('error submit!!')
           return false

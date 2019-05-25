@@ -1,5 +1,4 @@
-<template xmlns="http://www.w3.org/1999/html">
-
+<template>
     <div class="register">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm" label-width="100px">
         <el-form-item prop="phone" label="手机">
@@ -8,10 +7,10 @@
         <el-form-item prop="email" label="邮箱">
             <el-input v-model="ruleForm.email" placeholder="请输入你的邮箱"></el-input>
         </el-form-item>
-        <el-form-item prop="picture" label="验证码">
+        <!-- <el-form-item prop="picture" label="验证码">
             <el-input v-model="ruleForm.picture" placeholder="请输入验证码" class="el-input-phone"></el-input>
             <img>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item prop="Shortmessage" label="短信验证">
             <el-input v-model="ruleForm.Shortmessage" placeholder="请输入你的手机号" class="el-input-phone"></el-input><a class="a-phone fr">获取验证码</a>
         </el-form-item>

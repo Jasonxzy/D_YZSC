@@ -43,19 +43,18 @@
   </div>
 </template>
 <script>
-import {collectionlist} from 'api/request_wyl.js'
+// import {collectionlist} from 'api/request_wyl.js'
 export default {
-   // 获取数据
-  //  data(){
-  //    collectionlist [{}]
-  //  },
-  mounted () {
-    collectionlist((res) => {
-      console.log("111111")
-      console.log(res)
-          //  this.collectionlist = data.lists
-    })
-  }
+  //  // 获取数据
+  // //  data(){
+  // //    collectionlist [{}]
+  // //  },
+  // mounted () {
+  //   collectionlist((res) => {
+  //     console.log(res)
+  //         //  this.collectionlist = data.lists
+  //   })
+  // }
 }
 </script>
 <style scoped>
