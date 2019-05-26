@@ -37,7 +37,7 @@
                 </li>
                 <li>
                    <p class="list-p">预计到货时间</p>
-                   <span v-for="i in orderspan2" :key="i">{{i.name}}</span>
+                   <span>{{litim}}</span>
                   <span>(* 温馨提示：快递类商品以实际到货时间为准，实际到货时间可能有0.5~1小时的偏差哦~)</span>
                 </li>
                 <li>
@@ -189,14 +189,23 @@ export default {
       accounts1: {
         name: '1'
       },
-      lis: []
+      lis: [],
+      litime: [],
+      litim: '',
+      liss: []
     }
   },
   mounted () {
     orderLL((res) => {
       console.log(res.ordertb[0].orderdetailses[0].goodsinfo.goodsimgses)
       this.lis = res.ordertb[0].orderdetailses[0].goodsinfo.goodsimgses
-      console.log(res)
+      console.log(1212)
+      console.log(res.ordertb[0].orderdetailses[0])
+      this.liss = res.ordertb[0].orderdetailses
+      this.litime = res.ordertb[0]
+      let a = new Date(this.litime.OTime)
+      let b = a.getFullYear() + '年' + a.getMonth() + '月' + a.getDay() + '日' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds()
+      this.litim = b
     })
   }
 }
@@ -277,9 +286,10 @@ table
 .table-img img{
     width: 120px;
     height: 120px;
+  display: block;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-left: -14px;
+    margin-left: 5px;
 }
 .datails-Cart ul{
     width: 300px;
