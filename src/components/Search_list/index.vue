@@ -38,7 +38,7 @@
           <span class="sl"><span id="Current_page">当前页：<ins>1</ins></span></span>
         </li>
       </el-menu>
-      <div class="line">
+      <div class="line" :data="userList.slice((currentPage-1)*pagesize,currentPage*pagesize)">
         <!--单件商品-->
         <div v-for="i in commodity" :key="i" class="Products" :id="i.ginfoId">
           <router-link :to="'/purchase?goodsid='+i.ginfoId" class="photo" :id="i.ginfoId">
@@ -59,11 +59,11 @@
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage1"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
+            :current-page="currentPage"
+            :page-sizes="[2, 4, 6, 8]"
+            :page-size="pagesize"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="400">
+            :total="userList.length">
           </el-pagination>
         </div>
         <!--商品分页结束-->
@@ -115,13 +115,32 @@ export default {
     return {
       imglist: [banner1, banner2, banner3],
       activeIndex: '1',
-      currentPage1: 1,
+      currentPage: 1,
+      pagesize: 4,
       commodity: [],
       guess: [],
-      api: 'http://77npin.natappfree.cc/Canso/img/'
+      userList: [],
+      api: 'http://huangchuan.natapp1.cc/Canso/img/'
     }
   },
+  created() {
+    this.handleUserList()
+  },
   methods: {
+    // 初始页currentPage、初始每页数据数pagesize和数据data
+    handleSizeChange: function (size) {
+      this.pagesize = size;
+      console.log(this.pagesize)  // 每页下拉显示数据
+    },
+    handleCurrentChange: function(currentPage){
+      this.currentPage = currentPage;
+      console.log(this.currentPage)  // 点击第几页
+    },
+//    handleUserList () {
+//      this.$http.get('http://localhost:3000/userList').then(res => {  //这是从本地请求的数据接口，
+//        this.userList = res.body
+//      })
+//    }
     handleSelect (key, keyPath) {
     },
     handleSizeChange (val) {
@@ -142,7 +161,7 @@ export default {
       for (var i = 0; i < Allprice.length; i++) {
         for (var j = 0; j < i; j++) {
           if (Allprice[i].innerHTML < Allprice[j].innerHTML) {
-          //   html排序
+            //   html排序
             a = com[i].innerHTML
             com[i].innerHTML = com[j].innerHTML
             com[j].innerHTML = a
@@ -206,6 +225,7 @@ export default {
       console.log(res.goodsinfo)
       console.log('666')
       this.commodity = res.goodsinfo
+      this.userList = res.goodsinfo
     })
     let da = {typetwo: this.$route.query.typetwo}
     console.log(da)
@@ -214,6 +234,7 @@ export default {
       console.log(res)
       console.log('7777')
       this.commodity = res.goodsinfo
+      this.userList = res.goodsinfo
     })
     // 猜你喜欢
     guess((res) => {

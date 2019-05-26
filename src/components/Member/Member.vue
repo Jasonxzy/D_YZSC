@@ -27,7 +27,9 @@ export default {}
 </script>
 <style scoped>
 .Member-content{
-  width: 1000px;
+  width: 940px;
+  margin-top: 30px;
+  margin-left: 30px;
 }
 .fl{
   float: left;
@@ -35,7 +37,7 @@ export default {}
 .fr{
   float: right;
 }
-.clearfix:active{
+.clearfix:after{
   content: " ";
   display: inline-block;
   clear: both;

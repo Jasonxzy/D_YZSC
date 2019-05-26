@@ -100,7 +100,6 @@ export default {
   mounted () {
     // 全部商品分类下悬浮列表数据
     getList((res) => {
-            console.log( res)
       console.log(res)
       this.goneName1 = res.goodsinfolist[0].goneName
       this.goneId1 = res.goodsinfolist[0]

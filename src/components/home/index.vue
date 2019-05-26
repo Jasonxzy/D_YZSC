@@ -394,7 +394,7 @@ export default {
   },
   data () {
     return {
-      api: 'http://77npin.natappfree.cc/Canso',
+      api: 'http://huangchuan.natapp1.cc/Canso',
       imglist: [banner1, banner2, banner3],
       activeName: 'first',
       homeNlist: [],

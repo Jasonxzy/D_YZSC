@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
+    // http://rvaetr.natappfree.cc/Canso/user_codeImgaction
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',

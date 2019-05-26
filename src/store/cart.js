@@ -1,39 +1,30 @@
+import {shopcart} from 'api/request_yms'
 
 const state = {
-  cartLists: [
-    {
-      goodsName: '甜蜜如心鲜奶蛋糕',
-      img: '../public/img/100000027_M.jpg',
-      specifications: '8号',
-      goodsNum: 1,
-      fillers: '香芋+香芋（网红款）',
-      goodsPrice: '238.00'},
-    {
-      goodsName: '仙茶香草蛋糕',
-      img: '../public/img/100000027_M.jpg',
-      specifications: '6号',
-      goodsNum: 1,
-      fillers: '香芋+黄金',
-      goodsPrice: '258.00'}
-  ]
+  shopc: []
 }
 
 const mutations = {
-  changeCartLists: function (state, lists) {
-    state.cartLists = lists
+  changeCartLists: function (state, shopc) {
+    state.shopc = shopc
   }
 }
 
 const actions = {
-
+  getCartList: function (context) {
+    shopcart((res) => {
+      context.commit('changeCartLists', res.shoppingcart)
+      // context.shopc = res.shoppingcart
+    })
+  }
 }
 
 const getters = {
   total: function (state) {
-    let number = 0, price = 0, List = state.cartLists
+    let number = 0, price = 0, List = state.shopc
     for (let i = 0; i < List.length; i++) {
-      number += List[i].goodsNum
-      price += List[i].goodsPrice * List[i].goodsNum
+      number += List[i].shAmount
+      price += List[i].goodsinfo.ginfoPrice * List[i].shAmount
     }
     return {
       number,

@@ -22,8 +22,9 @@
             <el-form-item prop="phone" label="手机号">
               <el-input v-model="ruleForm.phone" placeholder="请输入你的手机号"></el-input>
             </el-form-item>
-            <el-form-item label="性别" prop="name">
-              <select class="select">
+            <div></div>
+            <el-form-item label="性别" prop="name" >
+              <select class="select" v-model="ruleForm.sex">
                 <option>男</option>
                 <option>女</option>
               </select>
@@ -48,6 +49,7 @@
   </div>
 </template>
 <script>
+import {address} from 'api/request_wyl.js'
 import City from '@/components/ReceivingAddress/City.vue'
 export default {
   data () {
@@ -64,6 +66,18 @@ export default {
       }
     }
     var name = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('名字不能为空'))
+      } else {
+        var reg = /[\u4e00-\u9fa5]/
+        if (reg.test(value) === false) {
+          return callback(new Error('名字必须是中文'))
+        } else {
+          callback()
+        }
+      }
+    }
+      var sex = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('名字不能为空'))
       } else {
@@ -120,7 +134,9 @@ export default {
         address: '',
         Postal: '',
         phone: '',
-        mailbox: ''
+        mailbox: '',
+        sex:'',
+        city:''
       },
       rules: {
         name: [
@@ -142,8 +158,15 @@ export default {
           { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
         ],
         mailbox: [
-          { required: true, validator: mailbox, trigger: 'blur' }
+          { required: true, validator: mailbox, trigger: 'blur' },
           // { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
+        ],
+        sex: [
+        { required: true, validator: sex, trigger: 'blur' },
+        ],
+        city: [
+        { required: true, validator: name, trigger: 'blur' },
+        {}
         ]
       }
     }
@@ -153,6 +176,23 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert('submit!')
+          console.log(this.ruleForm)
+           address({
+            'address_addName': this.ruleForm.name,
+            'address_address' : this.ruleForm.address,
+            'address_zipcode': this.ruleForm.Postal,
+            // 'address_contacts':address_contacts,//城市
+            'address_phone':this.ruleForm.phone,
+            'address_sex':this.ruleForm.name,//性别
+            'address_birthday':this.ruleForm.date1,
+            'address_email':this.ruleForm.mailbox
+            },(res) => {
+            console.log(res)
+            window.localStorage.setItem('token',res.success)
+            window.localStorage.setItem('use',JSON.stringify(res.userphon))
+            // this.$store.commit()
+            this.$router.push({path: '/'})
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -170,14 +210,14 @@ export default {
 </script>
 <style scoped>
 .address-box{
-  width: 1000px;
+  width: 940px;
    margin:0 auto;
 }
 .address{
   border: 1px solid #cccccc;
 }
 .Management{
-  width: 900px;
+  width: 800px;
   border-bottom:1px solid #cccccc;
   font-size: 14px;
   height: 30px;

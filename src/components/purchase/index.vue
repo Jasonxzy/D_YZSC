@@ -83,10 +83,11 @@
               </li></ul>
               <button class="buy fonts-20 float-l buypinkred"><router-link to="./ShoppingCart">立即购买</router-link></button>
               <button class="join fonts-20 float-l white joinred">
-                <el-popover ref="popover2" placement="top-start" title="成功加入购物车" width="145" trigger="click"
-                  content="">
-                </el-popover>
-                <el-button v-popover:popover2>加入购物车</el-button>
+                <!--<el-popover ref="popover2" placement="top-start" title="成功加入购物车" width="145" trigger="click"-->
+                  <!--content="">-->
+                <!--</el-popover>-->
+                <!--<el-button v-popover:popover2>加入购物车</el-button>-->
+                <el-button :plain="true" @click="open3">加入购物车</el-button>
               </button>
              </div>
             <div class="shop-service fonts-12 margin-B-20">
@@ -102,9 +103,10 @@
             </div>
             <div class="shop-collection">
               <div class="Serial-number padding-L-10 lightgrey">{{goodsinfo.ginfoNumber}}</div>
-              <a href="#"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />
-                <span class="float-r">收藏</span>
+              <a>
+                <span class="float-r"></span><el-button plain @click="open2"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />收藏</el-button>
               </a>
+
             </div>
           </div>
         </div>
@@ -128,14 +130,14 @@
                   <div class="borderbottom">
                     <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l"></i>
                     <router-link to="#" @click.native="sas">欢迎您发表评论</router-link>
-                    <div class="float-r">0/0评论</div>
+                    <div id="666" class="float-r">{{length.length}}/{{length.length}}评论</div>
                   </div>
                   <div class="borderbottom-content padding-T-20">
                     <ul>
                       <li v-for="(first, index) in evaluation" :key="index">
                         <p><a href="#" >用户:{{first.userinfo.userName}}</a></p>
                         <p ><span >用户评论：{{first.CContent}}</span> </p>
-                        <p><span>评论星级：{{first.CState}}</span></p>
+                        <p><el-rate v-model="first.CStarnum"></el-rate></p>
                       </li>
                     </ul>
                   </div>
@@ -188,6 +190,7 @@
   </div>
 </template>
 <script>
+import {comment} from 'api/request'
 import {guess} from 'api/request'
 import {Dtails} from 'api/request'
 import img1 from '../public/img/100000027_M.jpg'
@@ -201,8 +204,10 @@ import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
 import BottomNav from '../public/BottomNavigation.vue'
+import ElButton from "../../../node_modules/element-ui/packages/button/src/button.vue";
 export default {
   components: {
+    ElButton,
     TopNavigation,
     TopBanner,
     search,
@@ -224,8 +229,9 @@ export default {
       current2: null,
       current3: null,
       index: 0,
+      length: [],
       guess: [],
-      api: 'http://77npin.natappfree.cc/Canso/img/',
+      api: 'http://huangchuan.natapp1.cc/Canso/img/',
       selectorList: [
         {name: '规格1'},
         {name: '规格2'},
@@ -248,7 +254,18 @@ export default {
       this.index = idx
     },
     handleChange (value) {
-//        console.log(value);
+    },
+    open2 () {
+      this.$message({
+        message: '收藏成功',
+        type: 'success'
+      })
+    },
+    open3 () {
+      this.$notify({
+        message: '成功加入购物车',
+        type: 'success'
+      })
     },
     sas: function () {
       let fontw1 = document.querySelector('#fontw1')
@@ -283,14 +300,14 @@ export default {
       console.log("6666")
       console.log(res.goodsinfo)
       this.goodsinfo = res.goodsinfo
-      this.min_img = 'http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
+      this.min_img = 'http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
       for (var i = 0; i < 3 ;i++) {
-        console.log('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
-        this.imgList.push('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        console.log('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.imgList.push('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
       }
       for (var i = 0; i < 6 ;i++) {
-        console.log('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
-        this.BigimgList.push('http://77npin.natappfree.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        console.log('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+        this.BigimgList.push('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
       }
     })
     // 猜你喜欢
@@ -298,6 +315,14 @@ export default {
       console.log('元祖西点')
       console.log(res)
       this.guess = res.goodsinfo
+    })
+    // 根据商品id获取评论
+    comment(data, (res) => {
+      console.log('根据商品id获取评论')
+      console.log(data)
+      console.log(res.comment.length)
+      this.length = res.comment
+      this.evaluation = res.comment
     })
   }
 }
@@ -516,6 +541,11 @@ export default {
               margin-right: 21px;
               cursor: pointer;
               float: left;
+            }
+            /deep/.el-button{
+              border:none;
+              padding: 0;
+              color:#666666;
               &:hover {
                 color: #E93D6D;
               }
