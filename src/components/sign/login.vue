@@ -72,9 +72,10 @@ export default {
             },(res) => {
             console.log(res)
             window.localStorage.setItem('token',res.success)
-            window.localStorage.setItem('use',JSON.stringify(res.userphon))
-            // this.$store.commit()
+            window.localStorage.setItem('user',JSON.stringify(res.userphon))
             this.$router.push({path: '/'})
+            this.$store.commit('userInfor', res.userphon)
+            // this.$store.commit('userInfor', res.telphone)
           })
         } else {
           console.log('error submit!!')

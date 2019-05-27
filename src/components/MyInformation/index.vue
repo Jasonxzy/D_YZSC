@@ -17,7 +17,7 @@
       <span>更改你的密码</span>
       <span>更新个人详细信息</span>
       <span>更新你的电子邮箱</span>
-      <span>更新你的手机号</span>
+      <router-link to="/Member/phone"><span>更新你的手机号</span></router-link>
     </div>
     <span class="clear"></span>
   </div>

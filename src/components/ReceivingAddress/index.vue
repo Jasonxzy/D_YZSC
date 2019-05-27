@@ -4,6 +4,18 @@
         <div class="Management clearfix">
           <span class="fl">管理你的收货地址</span>
          <router-link to="/ReceivingAddress/lickAddress" class="fr">添加地址</router-link>
+         <span class="clearfix"></span>
+        </div>
+        <span class="clearfix"></span>
+        <div class="address-add">
+          <div class="address-add-box">
+              <div class="fl address-add-l">地址</div>
+              <div class="fr address-add-l">操作</div>
+              <span class="clearfix"></span>
+          </div>
+          <div v-for="list in lists">
+            <span>{{list.addName}}</span>
+          </div>
         </div>
      </div>
   </div>
@@ -16,7 +28,8 @@ export default {
         name: '',
         date1: '',
         delivery: false,
-        type: []
+        type: [],
+        lists:[]
       },
       rules: {
         name: [
@@ -47,6 +60,11 @@ export default {
 }
 </script>
 <style scoped>
+.address-add{
+  width: 800px;
+  min-height: 500px;
+  background: #d72a28;
+}
 .address-box{
   width: 940px;
    margin:0 auto;
@@ -73,13 +91,13 @@ export default {
 .fl{
   float: left;
 }
-.clearfix{
-  clear: both;
-}
 .Management span{
   font-weight: bold;
 }
-.clearfix::after{
+.clearfix{
+  clear: both;
+}
+.clearfix:after{
   content: " ";
   display: inline-block;
   clear: both;
@@ -103,5 +121,16 @@ export default {
 .address-conter{
   width: 900px;
   margin: auto;
+}
+.address-add-box{
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #cccccc;
+}
+.address-add-l{
+  margin-left: 30px;
+}
+.address-add-l{
+  margin-right: 30px;
 }
 </style>
