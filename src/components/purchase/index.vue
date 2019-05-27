@@ -263,7 +263,7 @@ export default {
         message: '收藏成功',
         type: 'success'
       })
-      let data = {userId: 2, ginfoId: index}
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
       MerColl(data, (res) => {
 
       })
@@ -273,7 +273,7 @@ export default {
         message: '成功加入购物车',
         type: 'success'
       })
-      let data = {userId: 1, ginfoId: index}
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
       Addcart(data, (res) => {
 
       })
@@ -283,7 +283,7 @@ export default {
       let comments = document.querySelector('.comments').value
       let star = this.value1
       alert("评论成功")
-      let data = {userId: 2, ginfoId: index, cstarnum: star, ccontent: comments}
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index, cstarnum: star, ccontent: comments}
       Addcomment (data, (res) => {
 
       })
