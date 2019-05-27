@@ -62,7 +62,6 @@ export default {
   // 文档加载完成
   mounted () {
     let id = {id: this.$route.query.id}
-    console.log(id)
     homeNl(id, (res) => {
       this.aa = id.id
       this.divList = res.noticelist[this.aa - 1]

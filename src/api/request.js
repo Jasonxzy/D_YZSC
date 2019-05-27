@@ -78,6 +78,42 @@ let comment = function (data, fn) {
     fn(res)
   })
 }
+// 根据用户获取收藏信息
+let Collection = function (data, fn) {
+  sendAxios('post', '/Canso/getcollectlist', data).then((res) => {
+    fn(res)
+  })
+}
+// 删除收藏信息
+let DeleteGoods = function (data, fn) {
+  sendAxios('post', '/Canso/deletecollectbyid', data).then((res) => {
+    fn(res)
+  })
+}
+// 根据用户id和产品id添加收藏信息
+let MerColl = function (data, fn) {
+  sendAxios('post', '/Canso/addCollect', data).then((res) => {
+    fn(res)
+  })
+}
+// 根据用户id和产品id添加购物车
+let Addcart = function (data, fn) {
+  sendAxios('post', '/Canso/addCollect', data).then((res) => {
+    fn(res)
+  })
+}
+// 根据用户id和产品id添加评论
+let Addcomment = function (data, fn) {
+  sendAxios('post', '/Canso/addComment', data).then((res) => {
+    fn(res)
+  })
+}
+// 根据名称模糊查询
+let SearGoods = function (data, fn) {
+  sendAxios('post', '/Canso/getGoodsforname', data).then((res) => {
+    fn(res)
+  })
+}
 export {
   getList,
   getLists,
@@ -91,5 +127,11 @@ export {
   westPoint,
   guess,
   Dtails,
-  comment
+  comment,
+  Collection,
+  DeleteGoods,
+  MerColl,
+  Addcart,
+  Addcomment,
+  SearGoods
 }

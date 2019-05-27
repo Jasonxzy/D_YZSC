@@ -10,8 +10,8 @@
     </div>
      <div class="search">
        <form class="searchform">
-         <input type="text" class="text" placeholder="请输入搜索名称"/>
-         <button class="btn_send" type="submit">搜索</button>
+         <input id="666" type="text" class="text" v-model="valueadd" placeholder="请输入搜索名称"/>
+         <button class="btn_send" @click="SearchGoods"><router-link :to="'/SearchList?goodsname='+valueadd">搜索</router-link></button>
          <P>
            热门搜索：
            <router-link to="/SearchList" title="元祖梦蛋糕">元祖梦蛋糕</router-link>
@@ -26,9 +26,24 @@
   </header>
 </template>
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      valueadd: ''
+    }
+  },
+  methods: {
+    SearchGoods () {
+      let addSea = document.getElementById('666').value
+      this.valueadd = addSea
+    }
+  }
+}
 </script>
 <style>
+  .btn_send a{
+    color: #fff;
+  }
   .header{
     height: 95px;
     min-width: 1200px;

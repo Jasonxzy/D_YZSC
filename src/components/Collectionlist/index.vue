@@ -43,18 +43,19 @@
   </div>
 </template>
 <script>
-// import {collectionlist} from 'api/request_wyl.js'
+import {Collection} from 'api/request'
 export default {
-  //  // 获取数据
-  // //  data(){
-  // //    collectionlist [{}]
-  // //  },
-  // mounted () {
-  //   collectionlist((res) => {
-  //     console.log(res)
-  //         //  this.collectionlist = data.lists
-  //   })
-  // }
+  data () {
+    return {
+
+    }
+  },
+  mounted () {
+    Collection((res) => {
+      console.log("根据用户获取收藏信息")
+      console.log(res)
+    })
+  }
 }
 </script>
 <style scoped>

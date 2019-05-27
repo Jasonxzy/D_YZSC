@@ -99,7 +99,8 @@ export default new Router({
       },
       {
         path: 'Orderlist',
-        component: Orderlist
+        component: Orderlist,
+        props:(route) => ({ userid: route.query.userid})
       },
       {
         path: 'details',
@@ -169,7 +170,7 @@ export default new Router({
       components: {
         default: SearchList
       },
-      props: (route) => ({ typeone: route.query.typeone},{typetwo: route.query.typetwo})
+      props: (route) => ({ typeone: route.query.typeone},{typetwo: route.query.typetwo},{goodsname: route.query.goodsname})
     },
     {
       path: '/HelpCenter',
