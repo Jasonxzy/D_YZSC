@@ -31,8 +31,9 @@
     </div>
     <div class="userbar">
       <div class="wenhou">
-        <span v-if="!token"><router-link to="/login">请登录</router-link></span>
-        <span v-if="token"><router-link to="">用户{{token}}</router-link></span>
+        <span v-if="!token" ><router-link to="/login">请登录</router-link></span>
+
+        <span v-if="token" @="click"><router-link to="">退出登录{{token}}</router-link></span>
       </div>
       <ul>
         <li>
@@ -57,15 +58,27 @@ export default {
   data () {
     return{}
   },
-  computed: {
-    token:function(){
-      return this.$store.state.token
+  mounted () {
+    var token = window.localStorage.getItem("token")
+    var userinfo = window.localStorage.getItem("userinfo")
+    if(token){
+    this.$store.commit('getuserinfo', {userinfo: userinfo ,token:token})
     }
   },
-  // mounted () {
-  //   var token = window.localStorage.getItem('token');
-    
-  // }
+  computed: {
+    token :function(){
+      console.log(this.$store)
+      return this.$store.state.login.token
+    },
+    userinfo:function(){
+      return this.$store.state.login.userinfo
+    }
+  },
+  methods:{
+    click :function(){
+         localStorage.clear()
+    }
+  }
 }
 </script>
 <style>
@@ -182,5 +195,8 @@ export default {
     cursor: pointer;
     transition: color 200ms linear 0s,background-color 200ms linear 0s,border-color 200ms linear 0s;
     color: #e93d6d;
+  }
+  .login-ss{
+    display: none
   }
 </style>
