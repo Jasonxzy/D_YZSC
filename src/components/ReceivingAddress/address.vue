@@ -163,8 +163,7 @@ export default {
         { required: true, validator: sex, trigger: 'blur' },
         ],
         city: [
-        { required: true, validator: name, trigger: 'blur' },
-        {}
+        { required: true, validator: name, trigger: 'blur' }
         ]
       }
     }
@@ -175,19 +174,18 @@ export default {
         if (valid) {
           // alert('submit!')
           // console.log(this.ruleForm)
-           address({
+          address({
             'address_addName': this.ruleForm.name,
-            'address_address' : this.ruleForm.address,
+            'address_address': this.ruleForm.address,
             'address_zipcode': this.ruleForm.Postal,
             // 'address_contacts':address_contacts,//城市
-            'address_phone':this.ruleForm.phone,
+            'address_phone': this.ruleForm.phone,
             // 'address_sex':this.ruleForm.name,//性别
             // 'address_birthday':this.ruleForm.date1,
-            'address_email':this.ruleForm.mailbox
-            },(res) => {
+            'address_email': this.ruleForm.mailbox
+          }, (res) => {
             console.log(res)
             this.$router.push({path: '/Member/ReceivingAddress'})
-
           })
         } else {
           console.log('error submit!!')

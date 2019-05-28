@@ -137,11 +137,11 @@ export default {
       this.currentPage = currentPage;
       console.log(this.currentPage)  // 点击第几页
     },
-//    handleUserList () {
-//      this.$http.get('http://localhost:3000/userList').then(res => {  //这是从本地请求的数据接口，
-//        this.userList = res.body
-//      })
-//    }
+    // handleUserList () {
+    // this.$http.get('http://localhost:3000/userList').then(res => {  //这是从本地请求的数据接口，
+    // this.userList = res.body
+    // })
+    // }
     handleSelect (key, keyPath) {
     },
     handleSizeChange (val) {

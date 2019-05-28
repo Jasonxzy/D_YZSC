@@ -21,18 +21,9 @@
   </div>
 </template>
 <script>
-import {addresslist} from 'api/request_wyl.js'
+// import {addresslist} from 'api/request_wyl.js'
 export default {
-  data () {
-    return {
-      list:[]
-    }
-  },
-  mounted (){
-    addresslist({
-    },(res) => {
-})
-  }
+
 }
 </script>
 <style scoped>

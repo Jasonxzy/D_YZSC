@@ -385,7 +385,7 @@ export default {
       this.$store.commit('changeCartLists', this.shopc)
     },
     addnumber (index) {
-//      this.lists.
+      //this.lists.
     }
   }
 }

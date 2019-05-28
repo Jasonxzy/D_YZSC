@@ -1,12 +1,12 @@
 const state = {
-  token:'',
-  userinfo:''
+  token: '',
+  userinfo: ''
 }
 const mutations = {
-  getuserinfo: function (state,data){
-    state.token=data.token
-    state.userinfo=data.userinfo
-  }
+  getuserinfo: function (state, data){
+    state.token = data.token
+    state.userinfo = data.userinfo
+   }
   }
   export default {
     namespace: true,
