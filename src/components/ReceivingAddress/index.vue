@@ -13,49 +13,25 @@
               <div class="fr address-add-l">操作</div>
               <span class="clearfix"></span>
           </div>
-          <div v-for="list in lists">
-            <span>{{list.addName}}</span>
+          <div>
+            <span></span>
           </div>
         </div>
      </div>
   </div>
 </template>
 <script>
+import {addresslist} from 'api/request_wyl.js'
 export default {
   data () {
     return {
-      ruleForm: {
-        name: '',
-        date1: '',
-        delivery: false,
-        type: [],
-        lists:[]
-      },
-      rules: {
-        name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ]
-      }
+      list:[]
     }
   },
-  methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
-    }
+  mounted (){
+    addresslist({
+    },(res) => {
+})
   }
 }
 </script>
@@ -63,7 +39,6 @@ export default {
 .address-add{
   width: 800px;
   min-height: 500px;
-  background: #d72a28;
 }
 .address-box{
   width: 940px;
