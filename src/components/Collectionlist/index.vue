@@ -43,17 +43,19 @@
   </div>
 </template>
 <script>
-//import {orderLL1} from 'api/request_ll'
-// import {collectionlist} from 'api/request_wyl.js'
+import {Collection} from 'api/request'
 export default {
-  // 获取数据
-   data () {
-   },
- mounted () {
-//   orderLL1((res) => {
-//     console.log(res)
-//   })
- }
+  data () {
+    return {
+
+    }
+  },
+  mounted () {
+    Collection((res) => {
+      console.log("根据用户获取收藏信息")
+      console.log(res)
+    })
+  }
 }
 </script>
 <style scoped>

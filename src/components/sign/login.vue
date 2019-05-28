@@ -70,12 +70,19 @@ export default {
             'Userinfo_userTelnumber': this.loginForm.phone,
             'Userinfo_userPassword': calcuMD5(this.loginForm.Pass),
             },(res) => {
-            console.log(res)
-            window.localStorage.setItem('token',res.success)
-            window.localStorage.setItem('use',JSON.stringify(res.userphon))
-            // this.$store.commit()
+            window.localStorage.setItem('token',res.userid)
+            window.localStorage.setItem('userinfo',res.userphon)
+            this.$store.commit('getuserinfo', {userinfo: res.userphon,token:res.userid})
+            window.onbeforeunload = function (e) {
+              localStorage.clear()
+            }
             this.$router.push({path: '/'})
-          })
+            if(res.success===true){
+              alert("密码正确")
+            }else{
+            alert("密码不对后用户名不对")
+            }
+          }) 
         } else {
           console.log('error submit!!')
           return false
@@ -85,6 +92,10 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     }
+  },
+  mounted () {
+    console.log(  window.localStorage.getItem('user'));
+    console.log(  window.localStorage.getItem('userId'));
   }
 }
 </script>

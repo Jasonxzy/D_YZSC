@@ -32,7 +32,7 @@
         </el-submenu>
         <li class="subTotal">
           <!--共多少个商品-->
-          <strong class="total">每页：100条</strong>
+          <strong class="total">每页：4条</strong>
         </li>
         <li class="page2">
           <span class="sl"><span id="Current_page">当前页：<ins>1</ins></span></span>
@@ -91,6 +91,7 @@
 </template>
 <script>
 import {guess} from 'api/request'
+import {SearGoods} from 'api/request'
 import {getLists} from 'api/request'
 import {getListstow} from 'api/request'
 import banner1 from './img/4e1ba6692b4dedcc9aefdf81441e7e0.jpg'
@@ -136,11 +137,11 @@ export default {
       this.currentPage = currentPage;
       console.log(this.currentPage)  // 点击第几页
     },
-//    handleUserList () {
-//      this.$http.get('http://localhost:3000/userList').then(res => {  //这是从本地请求的数据接口，
-//        this.userList = res.body
-//      })
-//    }
+    // handleUserList () {
+    // this.$http.get('http://localhost:3000/userList').then(res => {  //这是从本地请求的数据接口，
+    // this.userList = res.body
+    // })
+    // }
     handleSelect (key, keyPath) {
     },
     handleSizeChange (val) {
@@ -233,6 +234,16 @@ export default {
       console.log('7777')
       console.log(res)
       console.log('7777')
+      this.commodity = res.goodsinfo
+      this.userList = res.goodsinfo
+    })
+    // 模糊查询
+    let dataSearch = {goodsname: this.$route.query.goodsname}
+    console.log(dataSearch)
+    SearGoods(dataSearch, (res) => {
+      console.log('888')
+      console.log(res)
+      console.log('888')
       this.commodity = res.goodsinfo
       this.userList = res.goodsinfo
     })
