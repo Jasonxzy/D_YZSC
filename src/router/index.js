@@ -6,6 +6,7 @@ import register from '@/components/sign/register.vue' // 注册
 import password from '@/components/sign/login.vue' // 登录
 import Member from '@/components/Member/index.vue'// 会员中心公共组件
 import ShoppingCart from '@/components/ShoppingCart/index.vue' // 购物车页面
+import Address from '@/components/ShoppingCart/Address.vue' // 购物车页面
 import purchase from '@/components/purchase/index.vue' // 商品详情页
 import BrandStory from '@/components/BrandStory/index.vue'// 品牌故事
 import TopNavigation from '@/components/public/TopNavigation.vue' // 顶部
@@ -125,6 +126,12 @@ export default new Router({
       path: '/ShoppingCart',
       components: {
         default: ShoppingCart
+      }
+    },
+    {
+      path: '/Address',
+      components: {
+        default: Address
       }
     },
     {

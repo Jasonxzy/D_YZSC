@@ -5,7 +5,6 @@ import axios from 'axios'
 import {api} from './index'
 import qs from 'qs'//上传数据转化成？连接
 // npm i qs --save安装方法
-
 function sendAxios (methods, url, data = {}) {
   return new Promise((resolve, reject) => {
     axios({
@@ -17,6 +16,7 @@ function sendAxios (methods, url, data = {}) {
         resolve(res.data)
       } else {
         console.log('请求失败')
+        console.log(123)
       }
     }).catch((err) => {
       console.log('网络错误')
