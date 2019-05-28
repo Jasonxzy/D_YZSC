@@ -98,7 +98,7 @@ let MerColl = function (data, fn) {
 }
 // 根据用户id和产品id添加购物车
 let Addcart = function (data, fn) {
-  sendAxios('post', '/Canso/addCollect', data).then((res) => {
+  sendAxios('post', '/Canso/addshopp', data).then((res) => {
     fn(res)
   })
 }
@@ -111,6 +111,18 @@ let Addcomment = function (data, fn) {
 // 根据名称模糊查询
 let SearGoods = function (data, fn) {
   sendAxios('post', '/Canso/getGoodsforname', data).then((res) => {
+    fn(res)
+  })
+}
+// 根据用户查询购物车
+let queryCart = function (data, fn) {
+  sendAxios('post', '/Canso/getshopping', data).then((res) => {
+    fn(res)
+  })
+}
+// 在收藏页根据用户查询购物车
+let meraddCart = function (data, fn) {
+  sendAxios('post', '/Canso/addshopp', data).then((res) => {
     fn(res)
   })
 }
@@ -133,5 +145,7 @@ export {
   MerColl,
   Addcart,
   Addcomment,
-  SearGoods
+  SearGoods,
+  queryCart,
+  meraddCart
 }

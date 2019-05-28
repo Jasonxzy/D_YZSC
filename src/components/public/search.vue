@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     SearchGoods () {
+
       let addSea = document.getElementById('666').value
       this.valueadd = addSea
     }
