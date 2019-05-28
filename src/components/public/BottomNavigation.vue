@@ -53,19 +53,19 @@
 <script>
 import {queryCart} from 'api/request'
 export default {
-     data () {
-       return {
-         shoppingcart:[]
-       }
-     },
-     mounted () {
-       let data = {userid: window.localStorage.getItem('userId')}
-       queryCart (data, (res) => {
-            console.log("根据用户查询购物车")
-             console.log(res)
-         this.shoppingcart = res.shoppingcart
-       })
+   data () {
+     return {
+       shoppingcart: []
      }
+   },
+   mounted () {
+     let data = {userid: window.localStorage.getItem('userId')}
+     queryCart (data, (res) => {
+          console.log("根据用户查询购物车")
+           console.log(res)
+       this.shoppingcart = res.shoppingcart
+     })
+   }
 }
 </script>
 <style>

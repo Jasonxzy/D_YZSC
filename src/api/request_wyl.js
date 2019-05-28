@@ -29,23 +29,10 @@ let address= function (data, fn) {
     fn(res)
   })
 }
-function loging () {
-  // 1.请求后台判断是否登录
-  // 2.已登录 后台返回登录信息和token
-  // 3.将返回的信息存储到localstorage中
-  var telphone = window.localStorage.getItem('user')
-  telphone = JSON.parse(telphone)
-  console.log(telphone)
-  var token = window.localStorage.getItem('token')
-  store.commit('userInfor', token, telphone)
-  console.log(store.state)
-}
 export {
  register,
- picturec,
  Shortmessage,
  login,
  Forgetpassword,
  address,
- loging
 }

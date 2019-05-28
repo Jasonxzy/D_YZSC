@@ -81,7 +81,7 @@
               <ul><li>
                 <el-input-number v-model="num8" controls-position="right" @change="handleChange"></el-input-number>
               </li></ul>
-              <button class="buy fonts-20 float-l buypinkred"><router-link to="./ShoppingCart">立即购买</router-link></button>
+              <button class="buy fonts-20 float-l buypinkred" @click="addpurchase(goodsinfo.ginfoId)"><router-link to="./ShoppingCart">立即购买</router-link></button>
               <button class="join fonts-20 float-l white joinred">
                 <!--<el-popover ref="popover2" placement="top-start" title="成功加入购物车" width="145" trigger="click"-->
                   <!--content="">-->
@@ -196,12 +196,6 @@ import {MerColl} from 'api/request'
 import {guess} from 'api/request'
 import {Dtails} from 'api/request'
 import {Addcomment} from 'api/request'
-import img1 from '../public/img/100000027_M.jpg'
-import img2 from '../public/img/100001236_M.jpg'
-import img3 from '../public/img/100001239_M.jpg'
-import iagms1 from './img/100000805_1.jpg'
-import iagms2 from './img/100000805_L.jpg'
-import iagms3 from './img/100000805_L2.jpg'
 import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
@@ -268,6 +262,13 @@ export default {
 
       })
     },
+    // 立即购买
+    addpurchase (index) {
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
+      Addcart(data, (res) => {
+
+      })
+    },
     open3 (index) {
       this.$notify({
         message: '成功加入购物车',
@@ -283,6 +284,7 @@ export default {
       let comments = document.querySelector('.comments').value
       let star = this.value1
       alert("评论成功")
+      alert(index)
       let data = {userId: window.localStorage.getItem('userId'), ginfoId: index, cstarnum: star, ccontent: comments}
       Addcomment (data, (res) => {
 

@@ -13,58 +13,41 @@
         </div>
       </div>
       <div class="Ordrlist-text fl">
-        <p class="Ordrlist-tex-p" @click="dialogVisible = true">添加到购物车</p>
+        <p>
+          <el-button :plain="true" @click="open3(i.goodsinfo.ginfoId)">添加到购物车</el-button>
+        </p>
         <p class="DeleteGoods" @click="DeleteGoods(i.colId)">删除</p>
       </div>
       <span class="clear"></span>
     </div>
     <div>
-      <el-dialog
-        title="已添加到购物车"
-        :visible.sync="dialogVisible"
-        width="50%"
-        :before-close="handleClose">
-        <div class="shopping">
-          <div class="shopping-box fl">
-             <img src="./img/sh.jpg">
-          </div>
-          <div class="munber fl">
-            <p>商品</p>
-            <p class="www">数量：<span>1</span></p>
-          </div>
-          <div class="many fr">总价：￥545454</div>
-          <span class="clear"></span>
-        </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false"><router-link to="/ShoppingCart">结算</router-link></el-button>
-        </span>
-      </el-dialog>
     </div>
   </div>
 </template>
 <script>
 import {Collection} from 'api/request'
+import {meraddCart} from 'api/request'
 import {DeleteGoods} from 'api/request'
 export default {
   data () {
     return {
-      dialogVisible: false,
       api: 'http://huangchuan.natapp1.cc/Canso/img/',
       CollectionList: [],
       CollLength: []
     }
   },
   methods: {
-    handleClose (done) {
-      this.$confirm('确认关闭？')
-        .then(_ => {
-          done()
-        })
-        .catch(_ => {})
-    }
-  },
-  methods: {
+    open3 (index) {
+      this.$notify({
+        title: '成功',
+        message: '添加成功',
+        type: 'success'
+      })
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
+      meraddCart(data, (res) => {
+        console.log(res)
+      })
+    },
     DeleteGoods: function (index) {
       let data = {colId: index}
       alert('删除成功')
@@ -74,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    let data = {userid: this.$route.query.userid}
+    let data = {userid: window.localStorage.getItem('userId')}
     Collection(data, (res) => {
       console.log('根据用户获取收藏信息')
       console.log(res.collectlist)
