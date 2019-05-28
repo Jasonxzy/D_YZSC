@@ -72,10 +72,14 @@ export default {
             },(res) => {
             console.log(res)
             window.localStorage.setItem('token',res.success)
-            window.localStorage.setItem('use',JSON.stringify(res.userphon))
-            // this.$store.commit()
-            this.$router.push({path: '/'})
-          })
+            window.localStorage.setItem('user',JSON.stringify(res.userphon))
+            window.localStorage.setItem('userId',JSON.stringify(res.userid))
+
+//            this.$router.push({path: '/'})
+              window.location.href = '/'
+            this.$store.commit('userInfor', res.userphon)
+            // this.$store.commit('userInfor', res.telphone)
+            })
         } else {
           console.log('error submit!!')
           return false
@@ -85,6 +89,10 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     }
+  },
+  mounted () {
+    console.log(  window.localStorage.getItem('user'));
+    console.log(  window.localStorage.getItem('userId'));
   }
 }
 </script>

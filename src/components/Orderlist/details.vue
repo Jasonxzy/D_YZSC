@@ -37,7 +37,7 @@
                 </li>
                 <li>
                    <p class="list-p">预计到货时间</p>
-                   <span v-for="i in orderspan2" :key="i">{{i.name}}</span>
+                   <span>{{litim}}</span>
                   <span>(* 温馨提示：快递类商品以实际到货时间为准，实际到货时间可能有0.5~1小时的偏差哦~)</span>
                 </li>
                 <li>
@@ -68,10 +68,14 @@
                         <td>门店</td>
                     </tr>
                     <tr class="table-img">
-                        <td v-for="(i,index) in imgList" :key="index">
-                          <img :src="i.img">
-                          <!--{{i.img}}-->
-                        </td>
+                        <!--<td v-for="(i,index) in imgList" :key="index">-->
+                          <!--<img :src="i.img">-->
+                          <!--&lt;!&ndash;{{i.img}}&ndash;&gt;-->
+                        <!--</td>-->
+                      <td>
+                        <img :src="api+'/img/'+lis[1].imgSrc">
+                        <!--{{i.img}}-->
+                      </td>
                         <td>
                             <p v-for="(i,index) in orderdetail" :key="index">{{i.name}}</p>
                             <p>规格：
@@ -116,11 +120,13 @@
   </div>
 </template>
 <script>
+//import {api} from 'api'
 import {orderLL} from 'api/request_ll'
 import img0 from './img/sh.jpg'
 export default {
   data () {
     return {
+      api: 'http://huangchuan.natapp1.cc/Canso',
       orderspan: [
         {name: '订单号'},
         {name: '15454515415'},
@@ -150,13 +156,13 @@ export default {
         name: '不需要发票'
       },
       orderspan1: [
-        {name: 'MOKJO,'},
-        {name: '中国,'},
-        {name: '河北省,'},
-        {name: '秦皇岛市,'},
-        {name: '卢龙县,'},
-        {name: '0JIJ0OIJOPI  OJPOIU'},
-        {name: '14729623123'}
+        {name: '重庆市沙坪坝区,'},
+        {name: '西永大道西科公寓'}
+//        {name: '河北省,'},
+//        {name: '秦皇岛市,'},
+//        {name: '卢龙县,'},
+//        {name: '0JIJ0OIJOPI  OJPOIU'},
+//        {name: '14729623123'}
       ],
       orderspan2: [
         {name: '19961210 16:40'}
@@ -183,12 +189,23 @@ export default {
       accounts1: {
         name: '1'
       },
-      lis: []
+      lis: [],
+      litime: [],
+      litim: '',
+      liss: []
     }
   },
   mounted () {
     orderLL((res) => {
-      console.log(res)
+      console.log(res.ordertb[0].orderdetailses[0].goodsinfo.goodsimgses)
+      this.lis = res.ordertb[0].orderdetailses[0].goodsinfo.goodsimgses
+      console.log(1212)
+      console.log(res.ordertb[0].orderdetailses[0])
+      this.liss = res.ordertb[0].orderdetailses
+      this.litime = res.ordertb[0]
+      let a = new Date(this.litime.OTime)
+      let b = a.getFullYear() + '年' + a.getMonth() + '月' + a.getDay() + '日' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds()
+      this.litim = b
     })
   }
 }
@@ -269,7 +286,10 @@ table
 .table-img img{
     width: 120px;
     height: 120px;
-    padding-top: 20px;
+  display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 5px;
 }
 .datails-Cart ul{
     width: 300px;

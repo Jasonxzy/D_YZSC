@@ -1,5 +1,5 @@
 // 封装一些公共的方法
-// import md5 from 'js-md5'
+import md5 from 'js-md5'
 /*
 作用： 封装md5 加密
 @param string 需要加密的密码

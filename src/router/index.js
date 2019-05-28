@@ -19,6 +19,7 @@ import BottomNav from '@/components/public/BottomNavigation.vue' // 公共底部
 import ReceivingAddress from '@/components/ReceivingAddress/index.vue'// 添加地址
 import ChangePassword from '@/components/ChangePassword/index.vue'// 修改密码
 import MyInformation from '@/components/MyInformation/index.vue' // 我的资料
+import phone from '@/components/MyInformation/phone.vue' //修改电话
 import Personal from '@/components/Member/Member.vue' // 会员中心
 import Collectionlist from '@/components/Collectionlist/index.vue' // 收藏列表
 import Orderlist from '@/components/Orderlist/index.vue' // 订单列表
@@ -75,8 +76,12 @@ export default new Router({
         component: Personal
       },
       {
+        path:'/phone/:id',
+        component: phone
+      },
+      {
         path: 'MyInformation',
-        component: MyInformation
+        component: MyInformation,
       },
       {
         path: 'ChangePassword',
@@ -100,7 +105,8 @@ export default new Router({
       },
       {
         path: 'Orderlist',
-        component: Orderlist
+        component: Orderlist,
+        props:(route) => ({ userid: route.query.userid})
       },
       {
         path: 'details',
@@ -176,7 +182,7 @@ export default new Router({
       components: {
         default: SearchList
       },
-      props: (route) => ({ typeone: route.query.typeone},{typetwo: route.query.typetwo})
+      props: (route) => ({ typeone: route.query.typeone},{typetwo: route.query.typetwo},{goodsname: route.query.goodsname})
     },
     {
       path: '/HelpCenter',
@@ -233,6 +239,12 @@ export default new Router({
       path: '/clickAddress',
       components: {
         default: clickAddress
+      }
+    },
+    {
+      path: '/TopNavigation',
+      components: {
+        default: TopNavigation
       }
     }
   ]

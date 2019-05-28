@@ -81,13 +81,13 @@
               <ul><li>
                 <el-input-number v-model="num8" controls-position="right" @change="handleChange"></el-input-number>
               </li></ul>
-              <button class="buy fonts-20 float-l buypinkred"><router-link to="./ShoppingCart">立即购买</router-link></button>
+              <button class="buy fonts-20 float-l buypinkred" @click="addpurchase(goodsinfo.ginfoId)"><router-link to="./ShoppingCart">立即购买</router-link></button>
               <button class="join fonts-20 float-l white joinred">
                 <!--<el-popover ref="popover2" placement="top-start" title="成功加入购物车" width="145" trigger="click"-->
                   <!--content="">-->
                 <!--</el-popover>-->
                 <!--<el-button v-popover:popover2>加入购物车</el-button>-->
-                <el-button :plain="true" @click="open3">加入购物车</el-button>
+                <el-button :plain="true" @click="open3(goodsinfo.ginfoId)">加入购物车</el-button>
               </button>
              </div>
             <div class="shop-service fonts-12 margin-B-20">
@@ -104,7 +104,7 @@
             <div class="shop-collection">
               <div class="Serial-number padding-L-10 lightgrey">{{goodsinfo.ginfoNumber}}</div>
               <a>
-                <span class="float-r"></span><el-button plain @click="open2"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />收藏</el-button>
+                <span class="float-r"></span><el-button plain @click="open2(goodsinfo.ginfoId)"><img src="http://mall.ganso.com.cn/_ui/hepimages/icon_sc.gif" />收藏</el-button>
               </a>
 
             </div>
@@ -149,15 +149,15 @@
                     <div class="float-r">标有星号 (*) 的字段是必填字段</div>
                   </div>
                   <div class="content2-describe fonts-14">评论描述*</div>
-                  <input type="text" class="comments"/>
+                  <input type="text" class="comments" value=""/>
                   <div class="content2-score">
                     <div class="block">
                       <span class="demonstration">您的评分 *:</span>
                       <el-rate v-model="value1"></el-rate>
                     </div>
                   </div>
-                  <div class="content2-submit">
-                    <button><router-link to="#" @click.native="ee">提交评论</router-link></button>
+                  <div class="content2-submit" @click="addComment(goodsinfo.ginfoId)">
+                    <button><router-link to="#">提交评论</router-link></button>
                   </div>
                   <div class="content2-return">
                     <i class="header-icon el-icon-caret-right lightgray fontw fonts-12 float-l padding-T-5">
@@ -190,15 +190,12 @@
   </div>
 </template>
 <script>
+import {Addcart} from 'api/request'
 import {comment} from 'api/request'
+import {MerColl} from 'api/request'
 import {guess} from 'api/request'
 import {Dtails} from 'api/request'
-import img1 from '../public/img/100000027_M.jpg'
-import img2 from '../public/img/100001236_M.jpg'
-import img3 from '../public/img/100001239_M.jpg'
-import iagms1 from './img/100000805_1.jpg'
-import iagms2 from './img/100000805_L.jpg'
-import iagms3 from './img/100000805_L2.jpg'
+import {Addcomment} from 'api/request'
 import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
@@ -255,16 +252,42 @@ export default {
     },
     handleChange (value) {
     },
-    open2 () {
+    open2 (index) {
       this.$message({
         message: '收藏成功',
         type: 'success'
       })
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
+      MerColl(data, (res) => {
+
+      })
     },
-    open3 () {
+    // 立即购买
+    addpurchase (index) {
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
+      Addcart(data, (res) => {
+
+      })
+    },
+    open3 (index) {
       this.$notify({
         message: '成功加入购物车',
         type: 'success'
+      })
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
+      Addcart(data, (res) => {
+
+      })
+    },
+    // 添加用户评论
+    addComment (index) {
+      let comments = document.querySelector('.comments').value
+      let star = this.value1
+      alert("评论成功")
+      alert(index)
+      let data = {userId: window.localStorage.getItem('userId'), ginfoId: index, cstarnum: star, ccontent: comments}
+      Addcomment (data, (res) => {
+
       })
     },
     sas: function () {
@@ -297,16 +320,17 @@ export default {
     let data = {goodsid: this.$route.query.goodsid}
     console.log("6666")
     Dtails(data, (res) => {
-      console.log("6666")
-      console.log(res.goodsinfo)
+      console.log("获取商品id")
+      console.log(res.goodsinfo.ginfoId)
       this.goodsinfo = res.goodsinfo
+      // 获取最牛逼的那张图片
       this.min_img = 'http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.ginfoId + '.jpg'
-      for (var i = 0; i < 3 ;i++) {
-        console.log('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+      // 获取放大镜下面的那三张图片
+      for (var i = 0; i < 3; i++) {
         this.imgList.push('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
       }
-      for (var i = 0; i < 6 ;i++) {
-        console.log('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
+      // 获取商品详细大图的图片
+      for (var i = 0; i < 6; i++) {
         this.BigimgList.push('http://huangchuan.natapp1.cc/Canso/img/' + res.goodsinfo.goodsimgses[i].imgSrc)
       }
     })
@@ -328,6 +352,9 @@ export default {
 }
 </script>
 <style lang="less"  scoped>
+   /deep/.el-notification.right {
+    right: 500px;
+  }
   .change{
     width: 100%!important;
     height: 100%!important;
@@ -693,6 +720,7 @@ export default {
                 color: white;
                 line-height: 40px;
                 text-align: center;
+                border-radius: 5px;
                 border: inherit;
                 font-weight: bold;
                 a{

@@ -4,49 +4,42 @@
         <div class="Management clearfix">
           <span class="fl">管理你的收货地址</span>
          <router-link to="/ReceivingAddress/lickAddress" class="fr">添加地址</router-link>
+         <span class="clearfix"></span>
+        </div>
+        <span class="clearfix"></span>
+        <div class="address-add">
+          <div class="address-add-box">
+              <div class="fl address-add-l">地址</div>
+              <div class="fr address-add-l">操作</div>
+              <span class="clearfix"></span>
+          </div>
+          <div>
+            <span></span>
+          </div>
         </div>
      </div>
   </div>
 </template>
 <script>
+import {addresslist} from 'api/request_wyl.js'
 export default {
   data () {
     return {
-      ruleForm: {
-        name: '',
-        date1: '',
-        delivery: false,
-        type: []
-      },
-      rules: {
-        name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ]
-      }
+      list:[]
     }
   },
-  methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
-    }
+  mounted (){
+    addresslist({
+    },(res) => {
+})
   }
 }
 </script>
 <style scoped>
+.address-add{
+  width: 800px;
+  min-height: 500px;
+}
 .address-box{
   width: 940px;
    margin:0 auto;
@@ -73,13 +66,13 @@ export default {
 .fl{
   float: left;
 }
-.clearfix{
-  clear: both;
-}
 .Management span{
   font-weight: bold;
 }
-.clearfix::after{
+.clearfix{
+  clear: both;
+}
+.clearfix:after{
   content: " ";
   display: inline-block;
   clear: both;
@@ -103,5 +96,16 @@ export default {
 .address-conter{
   width: 900px;
   margin: auto;
+}
+.address-add-box{
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #cccccc;
+}
+.address-add-l{
+  margin-left: 30px;
+}
+.address-add-l{
+  margin-right: 30px;
 }
 </style>
