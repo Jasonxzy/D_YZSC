@@ -12,6 +12,26 @@ import vueMagnify from 'vue-magnify'
 Vue.component('v-distpicker', VDistpicker)
 Vue.use(vueMagnify)
 Vue.use(ElementUi)
+// to 将要进入的路由
+// from 从哪个路由来的
+// next() 方法 进入哪一个路由 进入默认要进入的路由
+router.beforeEach((to , from, next) => {
+  // 判断是否需要登录， 根据meta 中的 req....
+  if(to.meta.requirAuth){
+     // 判断登录
+    let userid = window.localStorage.getItem('userId')
+    if(userid) {
+      // 已经登录
+      next()
+    }else{
+      next('/login')
+
+    }
+  }else {
+    next()
+  }
+
+})
 new Vue({
   el: '#app',
   router,

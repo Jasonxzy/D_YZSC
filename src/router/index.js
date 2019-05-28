@@ -43,6 +43,16 @@ export default new Router({
       components: {
         default: login
       },
+      beforeEnter: (to, from, next) => {
+        var userid = window.localStorage.getItem('userId')
+        if(userid){
+          // 已登录
+          next('/')
+        }else {
+          // 没有登录
+          next()
+        }
+      },
       children: [{
         path: '',
         component: password
@@ -70,10 +80,21 @@ export default new Router({
       components: {
         default: Member
       },
+      beforeEnter: (to, from, next) => {
+        var userid = window.localStorage.getItem('userId')
+        if(userid){
+          // 已登录
+          next()
+        }else {
+          // 没有登录
+          next('/login')
+        }
+      },
       children: [{
         path: '',
         component: Personal
       },
+
       {
         path:'/phone/:id',
         component: phone
@@ -125,6 +146,9 @@ export default new Router({
       path: '/ShoppingCart',
       components: {
         default: ShoppingCart
+      },
+      meta: {
+        requirAuth: true
       }
     },
     {

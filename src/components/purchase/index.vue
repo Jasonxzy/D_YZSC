@@ -253,10 +253,15 @@ export default {
     handleChange (value) {
     },
     open2 (index) {
-      this.$message({
-        message: '收藏成功',
-        type: 'success'
-      })
+      let userId = window.localStorage.getItem('userId')
+      if(userId){
+        this.$message({
+          message: '收藏成功',
+          type: 'success'
+        })
+      }else {
+        alert("你还没有登录")
+      }
       let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
       MerColl(data, (res) => {
 
@@ -270,10 +275,15 @@ export default {
       })
     },
     open3 (index) {
-      this.$notify({
-        message: '成功加入购物车',
-        type: 'success'
-      })
+      let userId = window.localStorage.getItem('userId')
+      if(userId){
+        this.$notify({
+          message: '成功加入购物车',
+          type: 'success'
+        })
+      }else{
+        alert('你还没有登录')
+      }
       let data = {userId: window.localStorage.getItem('userId'), ginfoId: index}
       Addcart(data, (res) => {
 

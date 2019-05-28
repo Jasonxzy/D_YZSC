@@ -72,7 +72,7 @@ export default {
             },(res) => {
             console.log(res)
             window.localStorage.setItem('token',res.success)
-            window.localStorage.setItem('user',JSON.stringify(res.userphon))
+            window.localStorage.setItem('user',res.userphon)
             window.localStorage.setItem('userId',JSON.stringify(res.userid))
 
 //            this.$router.push({path: '/'})
