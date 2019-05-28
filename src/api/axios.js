@@ -3,7 +3,7 @@
 
 import axios from 'axios'
 import {api} from './index'
-import qs from 'qs'//上传数据转化成？连接
+import qs from 'qs'// 上传数据转化成？连接
 // npm i qs --save安装方法
 
 function sendAxios (methods, url, data = {}) {
@@ -19,7 +19,8 @@ function sendAxios (methods, url, data = {}) {
         console.log('请求失败')
       }
     }).catch((err) => {
-      console.log('网络错误')
+      // console.log('网络错误')
+      console.log(err)
     })
   })
 }

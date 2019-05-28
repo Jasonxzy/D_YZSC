@@ -43,18 +43,17 @@
   </div>
 </template>
 <script>
+//import {orderLL1} from 'api/request_ll'
 // import {collectionlist} from 'api/request_wyl.js'
 export default {
-  //  // 获取数据
-  // //  data(){
-  // //    collectionlist [{}]
-  // //  },
-  // mounted () {
-  //   collectionlist((res) => {
-  //     console.log(res)
-  //         //  this.collectionlist = data.lists
-  //   })
-  // }
+  // 获取数据
+   data () {
+   },
+ mounted () {
+//   orderLL1((res) => {
+//     console.log(res)
+//   })
+ }
 }
 </script>
 <style scoped>
