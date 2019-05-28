@@ -7,13 +7,13 @@ let getList = function (fn) {
   })
 }
 // 全部商品一级列表分类
-let getLists = function (data,fn) {
+let getLists = function (data, fn) {
   sendAxios('post', '/Canso/getgoodsone', data).then((res) => {
     fn(res)
   })
 }
 // 全部商品二级列表分类
-let getListstow = function (data,fn) {
+let getListstow = function (data, fn) {
   sendAxios('post', '/Canso/getgoodstwo', data).then((res) => {
     fn(res)
   })

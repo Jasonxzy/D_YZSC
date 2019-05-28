@@ -1,13 +1,13 @@
 <template>
   <div>
     <!--顶部导航-->
-    <!--<TopNavigation/>-->
+    <TopNavigation/>
     <!--导航banner-->
-    <!--<TopBanner/>-->
+    <TopBanner/>
     <!--搜索部分-->
-    <!--<search/>-->
+    <search/>
     <!--分类导航部分-->
-    <!--<ClassNav/>-->
+    <ClassNav/>
     <!--购物车-->
     <div id="car1" class="display">
       <div class="Cartop fonts-12 allcolor gray">
@@ -35,14 +35,13 @@
           <tr v-for="(first, index) in shopc" :key="index">
             <td>
               <div class="cartproduct">
-                <a href="#" class="cartproduct-img">
-                  <!--<img src="../public/img/100000027_M.jpg"/>-->
-                  <!--<img :title="first.goodsinfo.goodsimgses[13].imgSrc" :alt="prodlist4.ginfoSynopsis" :src="api+'/img/'+prodlist4.ginfoId+'.jpg'"/>-->
+                <a href="#" class="cartproduct-img"  >
+                  <img :src="first.goodsinfo.goodsimgses.imgSrc" />
                 </a>
                 <strong>
                   <a href="#">{{first.goodsinfo.ginfoName}}</a>
                 </strong>
-                <p>规格：<span>{{first.goodsinfo.ginfoSpecs}}</span>  夹馅：<span>{{first.fillers}}</span></p>
+                <p>规格：<span>{{first.goodsinfo.ginfoSpecs}}</span>  夹馅：<span>{{first.goodsinfo.ginfoFavor}}</span></p>
               </div>
             </td>
             <td>
@@ -54,7 +53,7 @@
               </div>
             </td>
             <td>
-              <a href="#" @click="deleteList(index)" class="remove">移除</a>
+              <a href="javascript:void(0);" @click="deleteList(index)"  class="remove">移除</a>
             </td>
           </tr>
           </tbody>
@@ -72,7 +71,7 @@
           <div class="statistical">总计： ¥{{total.price}}</div>
           <div class="carbtn">
             <router-link to="/">继续购物</router-link>
-            <a href="#" @click="jiesuan">结算</a>
+            <a href="javascript:void(0);" @click="jiesuan">结算</a>
           </div>
         </div>
       </div>
@@ -101,9 +100,9 @@
           <li>
             <span class="btn float-r">
               <em>默认地址</em>
-              <a href="#" class="btnModify displayn">修改</a>
+              <!--<a href="#" class="btnModify displayn">修改</a>-->
             </span>
-            <input type="radio" name="address"/>
+            <input type="radio" name="address" checked />
             <span class="name">杨明松</span>
             <span>
               <em class="provinceMsg"></em><em class="cityMsg">重庆市</em><em class="regionMsg">沙坪坝区</em><em class="addressMsg"> 西永大道西科公寓</em>
@@ -111,84 +110,51 @@
             <span class="mobileMsg">15285270087</span>
           </li>
         </ul>
-        <div>
+        <tr v-cloak v-for="(item, index) in lists" :key="index">
+          <span class="btn float-r">
+            <em>默认地址</em>
+            <a href="#" class="btnModify displayn">修改</a>
+          </span>
+          <input type="radio" name="address"/>
+          <td class="padding-L-15">{{item.addName}}</td>
+          <td class="padding-L-15">{{item.address}}</td>
+          <td class="tr">{{item.addId}}</td>
+          <td class="fo"></td>
+          <td class="padding-L-25">{{item.telphone}}</td>
+        </tr>
+        <div class="addadress">
           <el-button type="text" @click="dialogVisible = true">
-          <a href="#" class="btn_add_address">新增收货人地址</a>
+           <a href="javascript:void(0);" class="btn_add_address">新增收货人地址</a>
           </el-button>
             <el-dialog title="新增收货人地址" :visible.sync="dialogVisible" width="50%" :before-close="handleClose">
               <div class="creat-address">
                 <form>
-                  <dl>
-                    <dt><span>*</span>收货人姓名：</dt>
-                    <dd>
-                      <input type="text" class="text"/>
-                      <span style="display:inline">请填写收货人姓名</span>
-                    </dd>
-                    <dt><span>*</span>所在区域：</dt>
-                    <dd>
-                      <select name="regionIso" class="select">
-                        <option value disable="disable" selected="selected">请选择</option>
-                        <option value="" class="v">北京市</option>
-                        <option value="" class="v">重庆市</option>
-                        <option value="" class="v">新疆维吾尔自治区</option>
-                        <option value="" class="v">贵州省</option>
-                        <option value="" class="v">海南岛</option>
-                      </select>-
-                      <select name="cityCode" class="select">
-                        <option value disable="disable" selected="selected">请选择</option>
-                        <option value="" class="v">北京市</option>
-                        <option value="" class="v">重庆市</option>
-                        <option value="" class="v">贵州省</option>
-                      </select>-
-                      <select name="cityDistrictCode" class="select">
-                        <option value disable="disable" selected="selected">请选择</option>
-                        <option value="" class="v">北京市</option>
-                        <option value="" class="v">重庆市</option>
-                        <option value="" class="v">贵州省</option>
-                      </select>
-                    </dd>
-                    <dt><span>*</span>详细地址：</dt>
-                    <dd>
-                      <input type="text" class="text1"/>
-                      <span style="display:inline">请填写详细地址</span>
-                    </dd>
-                    <dt>邮政编码：</dt>
-                    <dd>
-                      <input type="text"/>
-                      <span style="display:inline">请填写正确的邮政编码</span>
-                    </dd>
-                    <dt><span>*</span>手机号码：</dt>
-                    <dd>
-                      <input type="text" />
-                      <span style="display:inline">请填写手机号</span>
-                    </dd>
-                    <dt><span></span>性别</dt>
-                    <dd>
-                      <select name="gender" class="select">
-                        <option value disable="disable" selected="selected">请选择</option>
-                        <option value="" class="v">女</option>
-                        <option value="" class="v">男</option>
-                      </select>
-                      <span style="display:inline">请填写性别</span>
-                    </dd>
-                    <dt><span></span>生日</dt>
-                    <dd>
-                      <input type="text" />
-                      <span >(例：1970-01-01)</span>
-                      <span style="display:inline">请填写正确的生日</span>
-                    </dd>
-                    <dt><span></span>邮箱</dt>
-                    <dd>
-                      <input type="text"/>
-                      <span >(例：1970-01-01)</span>
-                      <span style="display:inline">请填写正确的邮箱</span>
-                    </dd>
-                  </dl>
+                  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                    <el-form-item label="收货人" prop="name">
+                      <el-input v-model="ruleForm.name" placeholder="收货人姓名"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="address" label="详细地址">
+                      <el-input v-model="ruleForm.address" placeholder="请输入你的详细地址"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="Postal" label="邮政编码">
+                      <el-input v-model="ruleForm.Postal" placeholder="请输入你的邮政编码"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="phone" label="手机号">
+                      <el-input v-model="ruleForm.phone" placeholder="请输入你的手机号"></el-input>
+                    </el-form-item>
+                    <div></div>
+                    <el-form-item prop="mailbox" label="邮箱">
+                      <el-input v-model="ruleForm.mailbox" placeholder="请输入你的邮政编码"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button type="primary" @click="submitForm('ruleForm')" class="fl">保存地址</el-button>
+                      <!--<el-button  class="fl">取消</el-button>-->
+                    </el-form-item>
+                  </el-form>
                 </form>
               </div>
               <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="dialogVisible = false">保存地址</el-button>
-                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">取消</el-button>
               </span>
             </el-dialog>
         </div>
@@ -208,7 +174,7 @@
               <td>
                 <div class="cartProduct">
                   <strong><a href="#" class="gray">{{first.goodsinfo.ginfoName}}</a></strong>
-                  <p>规格：<span>{{first.specifications}}</span>夹馅<span>{{first.fillers}}</span></p>
+                  <p>规格：<span>{{first.goodsinfo.ginfoSpecs}}</span>夹馅<span>{{first.goodsinfo.ginfoFavor}}</span></p>
                 </div>
               </td>
               <td><em>¥{{first.goodsinfo.ginfoPrice}}</em></td>
@@ -219,7 +185,7 @@
               <td><div class="distribution">
                 <h4>配送方式：</h4>
                 <ul>
-                  <li><input type="radio"/>门店配送</li>
+                  <li><input type="radio" checked/>门店配送</li>
                 </ul>
               </div></td>
               <td></td>
@@ -244,13 +210,13 @@
         <h3 class="title"><span>支付方式</span></h3>
         <div class="box">
           <p>温馨提示：使用支付宝或银联支付更快捷</p>
-          <input type="radio"/>支付宝
+          <input type="radio" checked/>支付宝
         </div>
       </div>
       <div class="Settlement">
         <h3 class="title"><span>订单结算</span></h3>
         <div class="invoice">
-          <h4><input type="radio"/>不需要发票</h4>
+          <h4><input type="radio" checked/>不需要发票</h4>
         </div>
         <div class="Payment">
           <div class="settleDIV">
@@ -308,13 +274,15 @@
   </div>
 </template>
 <script>
-import {shopcart} from 'api/request_yms'
+import {shopcart, deleteList, address} from 'api/request_yms'
 import TopNavigation from '../public/TopNavigation.vue'
 import TopBanner from '../public/TopBanner.vue'
 import search from '../public/search.vue'
 import ClassNav from '../public/ClassNav.vue'
 import BottomNav from '../public/BottomNavigation.vue'
+import qs from 'qs'
 export default {
+  name: 'demo',
   components: {
     TopNavigation,
     TopBanner,
@@ -323,13 +291,134 @@ export default {
     BottomNav
   },
   data () {
+    var address = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('地址不能为空'))
+      } else {
+        var reg = /[\u4e00-\u9fa5]/
+        if (reg.test(value) === false) {
+          return callback(new Error('请输入正确的地址'))
+        } else {
+          callback()
+        }
+      }
+    }
+    var name = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('名字不能为空'))
+      } else {
+        var reg = /[\u4e00-\u9fa5]/
+        if (reg.test(value) === false) {
+          return callback(new Error('名字必须是中文'))
+        } else {
+          callback()
+        }
+      }
+    }
+    var sex = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('名字不能为空'))
+      } else {
+        var reg = /[\u4e00-\u9fa5]/
+        if (reg.test(value) === false) {
+          return callback(new Error('名字必须是中文'))
+        } else {
+          callback()
+        }
+      }
+    }
+    var Postal = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('邮政编码不能为空'))
+      } else {
+        var reg = /\d{6}/
+        if (reg.test(value) === false) {
+          return callback(new Error('请输入真确的邮政编码'))
+        } else {
+          callback()
+        }
+      }
+    }
+    var phone = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('手机不能为空'))
+      } else {
+        var reg = /0?(13|14|15|18)[0-9]{9}/
+        if (reg.test(value) === false) {
+          return callback(new Error('请输入正确的手机号'))
+        } else {
+          callback()
+        }
+      }
+    }
+    var mailbox = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('邮箱不能为空'))
+      } else {
+        var reg = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/
+        if (reg.test(value) === false) {
+          return callback(new Error('请输入正确的邮箱'))
+        } else {
+          callback()
+        }
+      }
+    }
     return {
-      dialogVisible: false
+      dialogVisible: false,
+      ruleForm: {
+        name: '',
+        date1: '',
+        delivery: false,
+        type: [],
+        address: '',
+        Postal: '',
+        phone: '',
+        mailbox: ''
+      },
+      rules: {
+        name: [
+          { required: true, validator: name, trigger: 'blur' },
+          { min: 3, max: 5, message: '长度为 3 到 6 个字符', trigger: 'blur' }
+        ],
+        address: [
+          { required: true, validator: address, trigger: 'blur' }
+        ],
+        Postal: [
+          { required: true, validator: Postal, trigger: 'blur' },
+          { max: 6, message: '长度为 6 个字符', trigger: 'blur' }
+        ],
+        date1: [
+          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+        ],
+        phone: [
+          { required: true, validator: phone, trigger: 'blur' },
+          { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
+        ],
+        mailbox: [
+          { required: true, validator: mailbox, trigger: 'blur' },
+          // { max: 11, message: '长度为 11 个字符', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, validator: sex, trigger: 'blur' },
+        ],
+        city: [
+          { required: true, validator: name, trigger: 'blur' },
+          {}
+        ]
+      },
+      api: 'http://huangchuan.natapp1.cc/Canso/img/',
+      lists: [{
+        addName: '张德帅',
+        address: '贵州省贵阳市云岩区',
+        email: '123@qq.com',
+        sex: '男',
+        telphone: '15166699966'
+      }]
     }
   },
   computed: {
     shopc: function () {
-      console.log(this.$store.state.cart.cartLists)
+//      console.log(this.$store.state.cart.cartLists)
       return this.$store.state.cart.shopc
     },
     total: function () {
@@ -337,9 +426,19 @@ export default {
     }
   },
   mounted () {
-//    this.$store.dispatch('getCartList')
+    this.$store.dispatch('getCartList')
     shopcart((res) => {
-      this.$store.commit('changeCartLists', res.shoppingcart)
+      console.log('购物车页面接口')
+      console.log(res)
+      console.log('购物车页面接口')
+      this.$store.commit('changeCartLists', res.shoppingcart || [])
+    })
+    let data = {addId: this.$route.query.addId}
+    address(data, (res) => {
+      console.log('地址：')
+      console.log(res.address)
+      this.address = res.address
+      console.log('地址')
     })
   },
   //  computed: {
@@ -354,7 +453,33 @@ export default {
         .catch(_ => {})
     },
     handleChange (value) {
-      console.log(value);
+      console.log(value)
+    },
+//    sel: function (data) {
+//      this.citydata = data.province.value + data.city.value + data.area.value
+//      console.log(this.citydata)
+//    },
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          address({
+            'address_addName': this.ruleForm.name,
+            'address_address' : this.ruleForm.address,
+            'address_zipcode': this.ruleForm.Postal,
+            'address_phone':this.ruleForm.phone,
+            'address_email':this.ruleForm.mailbox
+          },(res) => {
+            console.log(res)
+            this.$router.push({path: '/Member/ReceivingAddress'})
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     },
     jiesuan: function () {
       let car1 = document.querySelector('#car1')
@@ -380,14 +505,21 @@ export default {
       car2.style.display = 'none'
       car3.style.display = 'block'
     },
-    deleteList (index) {
-      this.shopc.splice(index, 1)
-      this.$store.commit('changeCartLists', this.shopc)
-    },
-    addnumber (index) {
-//      this.lists.
+    deleteList: function (index) {
+      console.log(555)
+      let data = {shoppingId: this.shopc[index].shId}
+//      let shopid = this.shopc[index].shId
+      console.log(this.shopc[index].shId)
+      deleteList(data, (res) => {
+         this.shopc.splice(index, 1)
+         this.$store.commit('changeCartLists', this.shopc || [])
+//        this.$store.commit('changeCartLists', this.shopc)
+      })
     }
-  }
+  },
+//  components: {
+//    City
+//  }
 }
 </script>
 <style lang="less"  scoped>
@@ -654,6 +786,30 @@ export default {
           color: #4F4F4F;
         }
       }
+      tr {
+        width: 995px;
+        height: 24px;
+        float: left;
+        padding: 0 13px;
+        input {
+          float: left;
+        }
+        &:hover {
+          background-color: #e6e4e5;
+        }
+        span {
+          /*margin-top: -15px;*/
+          margin: 0 45px;
+          a {
+            margin: 0 11px;
+          }
+          &:hover .displayn {
+            display: block;
+            float: right;
+            color: #4F4F4F;
+          }
+        }
+      }
       .btn_add_address{
         margin: 10px 0 0 30px;
         width: 109px;
@@ -675,6 +831,9 @@ export default {
           font-size: 16px;
         }
       }
+      /deep/.el-dialog__footer{
+        margin-top: -30px;
+      }
       .creat-address{
         height: 320px;
         width: 674px;
@@ -683,54 +842,8 @@ export default {
         display: block;
         z-index: 1000;
         padding: 10px;
-        dl{
-          width: 600px;
-          padding-left: 89px;
-          position: relative;
-          color: #666;
-          line-height: 24px;
-          margin: 0 auto;
-          font-weight: normal;
-          dt{
-            line-height: 24px;
-            position: absolute;
-            left: 0px;
-            width: 83px;
-            text-align: right;
-            font-weight: normal;
-            vertical-align: baseline;
-            white-space: nowrap;
-            span{color: #eb1634;}
-          }
-          dd{
-            line-height: 24px;
-            margin-bottom: 10px;
-            box-sizing: content-box;
-            font-weight: normal;
-            input{
-              border: 1px solid #c7c7c7;
-              height: 24px;
-              line-height: 24px;
-              padding: 0 8px;
-              margin: 0;
-              outline: none;
-              font-family: inherit;
-              vertical-align: middle;
-            }
-            span{
-              color: #DB0404;
-              padding-left: 5px;
-            }
-            select{
-              border: 1px solid #c7c7c7;
-              padding: 3px;
-              vertical-align: middle;
-              line-height: inherit;
-            }
-            .text1{
-              width: 350px;
-            }
-          }
+        /deep/.el-input{
+          width: 90%;
         }
       }
     }

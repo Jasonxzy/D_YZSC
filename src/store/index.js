@@ -7,6 +7,7 @@ const state = {
   showFooter: true,
   changableNum: 0
 }
+// 导出vuex实例
 const store = new Vuex.Store({
   state,
   modules: {

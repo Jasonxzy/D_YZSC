@@ -48,7 +48,7 @@ export {
 //  collection,
 //  collectionlist,
  register,
- picturec,
+ // picturec,
  Shortmessage,
  login,
  Forgetpassword,

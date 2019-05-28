@@ -10,9 +10,9 @@
             <el-form-item label="收货人" prop="name">
               <el-input v-model="ruleForm.name" placeholder="收货人姓名"></el-input>
             </el-form-item>
-            <el-form-item label="所在区域" >
+            <!-- <el-form-item label="所在区域" >
               <City/>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item prop="address" label="详细地址">
               <el-input v-model="ruleForm.address" placeholder="请输入你的详细地址"></el-input>
             </el-form-item>
@@ -23,25 +23,25 @@
               <el-input v-model="ruleForm.phone" placeholder="请输入你的手机号"></el-input>
             </el-form-item>
             <div></div>
-            <el-form-item label="性别" prop="name" >
+            <!-- <el-form-item label="性别" prop="name" >
               <select class="select" v-model="ruleForm.sex">
                 <option>男</option>
                 <option>女</option>
               </select>
-            </el-form-item>
-            <el-form-item label="生日" required>
+            </el-form-item> -->
+            <!-- <el-form-item label="生日" required>
               <el-col :span="11">
                 <el-form-item prop="date1">
                   <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
                 </el-form-item>
               </el-col>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item prop="mailbox" label="邮箱">
               <el-input v-model="ruleForm.mailbox" placeholder="请输入你的邮政编码"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm('ruleForm')" class="fl">保存地址</el-button>
-              <el-button type="primary" @click="submitForm('ruleForm')" class="fl">取消</el-button>
+              <el-button  class="fl">取消</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -134,9 +134,7 @@ export default {
         address: '',
         Postal: '',
         phone: '',
-        mailbox: '',
-        sex:'',
-        city:''
+        mailbox: ''
       },
       rules: {
         name: [
@@ -175,23 +173,21 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
-          console.log(this.ruleForm)
+          // alert('submit!')
+          // console.log(this.ruleForm)
            address({
             'address_addName': this.ruleForm.name,
             'address_address' : this.ruleForm.address,
             'address_zipcode': this.ruleForm.Postal,
             // 'address_contacts':address_contacts,//城市
             'address_phone':this.ruleForm.phone,
-            'address_sex':this.ruleForm.name,//性别
-            'address_birthday':this.ruleForm.date1,
+            // 'address_sex':this.ruleForm.name,//性别
+            // 'address_birthday':this.ruleForm.date1,
             'address_email':this.ruleForm.mailbox
             },(res) => {
             console.log(res)
-            window.localStorage.setItem('token',res.success)
-            window.localStorage.setItem('use',JSON.stringify(res.userphon))
-            // this.$store.commit()
-            this.$router.push({path: '/'})
+            this.$router.push({path: '/Member/ReceivingAddress'})
+
           })
         } else {
           console.log('error submit!!')
