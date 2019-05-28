@@ -5,10 +5,10 @@
     </div>
     <div class="details-box">
         <div class="details-list">
-            <span v-for="i in orderspan" :key="i">{{i.name}}</span>
-            <!--<span></span>-->
-            <!--<span></span>-->
-            <!--<span></span>-->
+            <span>订单号</span>
+            <span>{{ordernum}}</span>
+            <span>订单状态</span>
+            <span>订单提交</span>
         </div>
         <div class="examine">
             <el-steps :active="0" align-center>
@@ -73,11 +73,11 @@
                           <!--&lt;!&ndash;{{i.img}}&ndash;&gt;-->
                         <!--</td>-->
                       <td>
-                        <img :src="api+'/img/'+lis[1].imgSrc">
+                        <img :src="api+'/img/'+lis">
                         <!--{{i.img}}-->
                       </td>
                         <td>
-                            <p v-for="(i,index) in orderdetail" :key="index">{{i.name}}</p>
+                            <p>{{goodsname.ginfoName}}</p>
                             <p>规格：
                                 <span v-for="(i,index) in orderspan3" :key="index">{{i.name}}</span>
                                 <!--<span>夹馅：</span>-->
@@ -85,11 +85,11 @@
                                 <!--<span>（网红款）</span>-->
                             </p>
                         </td>
-                        <td v-for="(i,index) in ordertd" :key="index">{{i.name}}</td>
-                        <!--<td>￥210.00</td>-->
-                        <!--<td>￥214.00</td>-->
-                        <!--<td>门店提取</td>-->
-                        <!--<td>北京双井店</td>-->
+                        <td>1</td>
+                        <td>{{goodsname.ginfoPrice}}</td>
+                        <td>￥214.00</td>
+                        <td>门店提取</td>
+                        <td>北京双井店</td>
                     </tr>
                 </table>
             </div>
@@ -127,12 +127,6 @@ export default {
   data () {
     return {
       api: 'http://huangchuan.natapp1.cc/Canso',
-      orderspan: [
-        {name: '订单号'},
-        {name: '15454515415'},
-        {name: '订单状态：'},
-        {name: '订单提交'}
-      ],
       orderel: [
         {name: '订单提交'},
         {name: '付款成功'},
@@ -158,11 +152,6 @@ export default {
       orderspan1: [
         {name: '重庆市沙坪坝区,'},
         {name: '西永大道西科公寓'}
-//        {name: '河北省,'},
-//        {name: '秦皇岛市,'},
-//        {name: '卢龙县,'},
-//        {name: '0JIJ0OIJOPI  OJPOIU'},
-//        {name: '14729623123'}
       ],
       orderspan2: [
         {name: '19961210 16:40'}
@@ -170,42 +159,36 @@ export default {
       imgList: [
         {img: img0}
       ],
-      orderdetail: [
-        {name: '朝羽鲜奶蛋糕'}
-      ],
       orderspan3: [
         {name: '8号'},
         {name: '夹馅： '},
         {name: '香芋+香芋'},
         {name: '（网红款）'}
       ],
-      ordertd: [
-        {name: '1'},
-        {name: '￥210.00'},
-        {name: '￥214.00'},
-        {name: '门店提取'},
-        {name: '北京双井店'}
-      ],
       accounts1: {
         name: '1'
       },
-      lis: [],
+      lis: '',
       litime: [],
       litim: '',
-      liss: []
+      ordernum: '',
+      goodsname: ''
     }
   },
   mounted () {
     orderLL((res) => {
-      console.log(res.ordertb[0].orderdetailses[0].goodsinfo.goodsimgses)
-      this.lis = res.ordertb[0].orderdetailses[0].goodsinfo.goodsimgses
       console.log(1212)
-      console.log(res.ordertb[0].orderdetailses[0])
-      this.liss = res.ordertb[0].orderdetailses
-      this.litime = res.ordertb[0]
-      let a = new Date(this.litime.OTime)
-      let b = a.getFullYear() + '年' + a.getMonth() + '月' + a.getDay() + '日' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds()
-      this.litim = b
+      console.log(res.ordertb[0].orderdetailses[0].goodsinfo.ginfoName)
+      // 获取时间并修改时间样式
+      this.litime = res.ordertb
+      for (let i = 0; i <= this.litime.length; i++) {
+        let a = new Date(this.litime[i].OTime)
+        let b = a.getFullYear() + '年' + a.getMonth() + '月' + a.getDay() + '日' + a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds()
+        this.litim = b
+        this.ordernum = this.litime[i].ONum
+        this.goodsname = this.litime[i].orderdetailses[i].goodsinfo
+        this.lis = res.ordertb[i].orderdetailses[i].goodsinfo.goodsimgses[i].imgSrc
+      }
     })
   }
 }

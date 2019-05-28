@@ -80,6 +80,15 @@ export default {
             this.$store.commit('userInfor', res.userphon)
             // this.$store.commit('userInfor', res.telphone)
             })
+            window.localStorage.setItem('token',res.userid)
+            window.localStorage.setItem('userinfo',res.userphon)
+            this.$store.commit('getuserinfo', {userinfo: res.userphon,token:res.userid})
+            this.$router.push({path: '/'})
+            if(res.success===true){
+              alert("密码正确")
+            }else{
+            alert("密码不对后用户名不对")
+            }
         } else {
           console.log('error submit!!')
           return false

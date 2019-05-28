@@ -29,10 +29,17 @@ let address= function (data, fn) {
     fn(res)
   })
 }
+let addresslist= function (data, fn) {
+  sendAxios('post', 'Canso/goods_addressaddaction', data).then((res) => {
+    fn(res)
+  })
+}
 export {
  register,
+ // picturec,
  Shortmessage,
  login,
  Forgetpassword,
  address,
+ addresslist
 }

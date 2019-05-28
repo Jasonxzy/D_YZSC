@@ -10,9 +10,9 @@
             <el-form-item label="收货人" prop="name">
               <el-input v-model="ruleForm.name" placeholder="收货人姓名"></el-input>
             </el-form-item>
-            <el-form-item label="所在区域" >
+            <!-- <el-form-item label="所在区域" >
               <City/>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item prop="address" label="详细地址">
               <el-input v-model="ruleForm.address" placeholder="请输入你的详细地址"></el-input>
             </el-form-item>
@@ -41,7 +41,7 @@
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm('ruleForm')" class="fl">保存地址</el-button>
-              <el-button type="primary" @click="submitForm('ruleForm')" class="fl">取消</el-button>
+              <el-button  class="fl">取消</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -134,9 +134,7 @@ export default {
         address: '',
         Postal: '',
         phone: '',
-        mailbox: '',
-        sex:'',
-        city:'',
+        mailbox: ''
       },
       rules: {
         name: [
@@ -165,8 +163,7 @@ export default {
         { required: true, validator: sex, trigger: 'blur' },
         ],
         city: [
-        { required: true, validator: name, trigger: 'blur' },
-        {}
+        { required: true, validator: name, trigger: 'blur' }
         ]
       }
     }
@@ -177,18 +174,18 @@ export default {
         if (valid) {
           // alert('submit!')
           // console.log(this.ruleForm)
-           address({
+          address({
             'address_addName': this.ruleForm.name,
-            'address_address' : this.ruleForm.address,
+            'address_address': this.ruleForm.address,
             'address_zipcode': this.ruleForm.Postal,
             // 'address_contacts':address_contacts,//城市
-            'address_phone':this.ruleForm.phone,
+            'address_phone': this.ruleForm.phone,
             // 'address_sex':this.ruleForm.name,//性别
             // 'address_birthday':this.ruleForm.date1,
-            'address_email':this.ruleForm.mailbox
-            },(res) => {
+            'address_email': this.ruleForm.mailbox
+          }, (res) => {
             console.log(res)
-            this. address = data.lists
+            this.$router.push({path: '/Member/ReceivingAddress'})
           })
         } else {
           console.log('error submit!!')
